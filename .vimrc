@@ -35,7 +35,7 @@ set t_Co=256  " Tell Vim we have a terminal that can display 256 colors
 set tabstop=2  " Number of spaces that a <Tab> in the file counts for
 set textwidth=80  " Stick to 80 chars lines for readability
 set visualbell  " Use visual bell instead of beeping.
-set wildignore=.git**,tmp/**,log/**,*.swp,test/reports**,public/storage**,public/cache**,public/images**  " Patterns to ignore when completing filenames
+set wildignore+=*.swp,*.log,*.png,*.gif,*.jpeg,*/.git/*,*/tmp/*,*log/*,*/test/reports/*,*/public/storage/*,*/public/cache/*,*/public/images/*  " Patterns to ignore when completing filenames
 set wildmode=longest,list:full  " Mode to use when completing filenames
 
 colorscheme desert
@@ -62,11 +62,6 @@ highlight DiffAdd ctermfg=black ctermbg=darkgreen
 highlight DiffDelete ctermfg=lightred ctermbg=darkred
 highlight DiffChange ctermfg=black ctermbg=brown
 highlight DiffText ctermfg=black ctermbg=yellow
-
-" Visual mode pressing * or # searches for the current selection
-" " Super useful! From an idea by Michael Naumann
-vnoremap <silent> * :call VisualSelection('f')<CR>
-vnoremap <silent> # :call VisualSelection('b')<CR>
 
 " Function to remove trailing whitespace from the currently opened file
 fun! <SID>StripTrailingWhitespaces()
