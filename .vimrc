@@ -125,7 +125,6 @@ nmap <leader>o :TlistToggle<CR>
 
 
 " SESSIONS
-"
 " Shortcut for saving sessions
 nmap <leader>ss :wa<CR>:mksession! ~/.vim/sessions/
 
