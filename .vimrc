@@ -139,9 +139,7 @@ nmap <leader>sr :wa<CR>:so ~/.vim/sessions/
 runtime macros/matchit.vim
 
 " Vimwiki
-let g:vimwiki_list = [
-  {'path': '~/core/projects/wiki/',
-   'path_html': '~/core/projects/wiki_html/'}]
+let g:vimwiki_list = [{'path': '~/core/projects/wiki/', 'path_html': '~/core/projects/wiki_html/'}]
 autocmd BufRead,BufNewFile *.wiki :set ft=markdown
 
 " Allow POSIX regexps in searches
