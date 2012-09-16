@@ -1,5 +1,12 @@
 # Load git completion functionality
-source ~/core/projects/macbookpro/git-completion.bash
+if [[ `uname` == 'Darwin' ]]; then
+  # Use MacVim in terminal mode instead of builtin Vim in order to get +conceal.
+  alias vim='mvim -v'
+
+  source ~/core/projects/macbookpro/git-completion.bash
+else
+  source /etc/bash_completion.d/git
+fi
 
 function parse_git_branch {
   local branch=$(__git_ps1 "%s")
@@ -28,9 +35,3 @@ alias ls='ls -ApG'
 
 # Shortcut for list mode (my default).
 alias ll='ls -l'
-
-unamestr=`uname`
-if [[ "$unamestr" == 'Darwin' ]]; then
-  # Use MacVim in terminal mode instead of builtin Vim in order to get +conceal.
-  alias vim='mvim -v'
-fi
