@@ -31,7 +31,7 @@ shopt -s histappend
 
 # Show colorized output, show all files except "." and ".." and add a slash at
 # the end of directory names
-alias ls='ls -ApG'
+alias ls='ls -ApG --color=auto'
 
 # Shortcut for list mode (my default).
 alias ll='ls -l'
