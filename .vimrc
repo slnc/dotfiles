@@ -57,6 +57,7 @@ highlight Cursor ctermbg=Green
 highlight LineNr ctermfg=DarkGrey
 highlight ColorColumn ctermbg=8
 highlight MatchParen ctermfg=DarkGrey ctermbg=black
+highlight Search ctermfg=LightGrey ctermbg=DarkGrey
 
 " Vimdiff mode
 highlight DiffAdd ctermfg=black ctermbg=darkgreen
