@@ -36,7 +36,7 @@ set t_Co=256  " Tell Vim we have a terminal that can display 256 colors
 set tabstop=2  " Number of spaces that a <Tab> in the file counts for
 set textwidth=80  " Stick to 80 chars lines for readability
 set visualbell  " Use visual bell instead of beeping.
-set wildignore=.git**,tmp/**,log/**,*.swp,test/reports**,public/storage**,public/cache**,public/images**  " Patterns to ignore when completing filenames
+set wildignore+=*.swp,*.log,*.png,*.gif,*.jpeg,*/.git/*,*/tmp/*,*/log/*,*/test/reports/*,*/public/storage/*,*/public/cache/*,*/public/images/*  " Patterns to ignore when completing filenames
 set wildmode=longest,list:full  " Mode to use when completing filenames
 
 colorscheme desert
