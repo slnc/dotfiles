@@ -12,6 +12,7 @@ endif
 set nocompatible
 set autoindent  " Copy indent from current line when starting a new line
 set background=dark  " Tell Vim that we are using a dark background
+set backspace=2
 set cc=+1  " Highlight the first column after textwidth
 set cindent  " Get the amount of indent according the C indenting rules
 set cinkeys-=0#  " Treat # as a normal character when indenting
