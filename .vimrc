@@ -12,6 +12,7 @@ endif
 set nocompatible
 set autoindent  " Copy indent from current line when starting a new line
 set background=dark  " Tell Vim that we are using a dark background
+set backspace=2  " Make sure backspace always works
 set cc=+1  " Highlight the first column after textwidth
 set cindent  " Get the amount of indent according the C indenting rules
 set cinkeys-=0#  " Treat # as a normal character when indenting
@@ -63,6 +64,11 @@ highlight DiffAdd ctermfg=black ctermbg=darkgreen
 highlight DiffDelete ctermfg=lightred ctermbg=darkred
 highlight DiffChange ctermfg=black ctermbg=brown
 highlight DiffText ctermfg=black ctermbg=yellow
+
+" Visual mode pressing * or # searches for the current selection
+" " Super useful! From an idea by Michael Naumann
+vnoremap <silent> * :call VisualSelection('f')<CR>
+vnoremap <silent> # :call VisualSelection('b')<CR>
 
 " Function to remove trailing whitespace from the currently opened file
 fun! <SID>StripTrailingWhitespaces()
