@@ -10,20 +10,24 @@ fi
 
 function parse_git_branch {
   local branch=$(__git_ps1 "%s")
-  [[ $branch ]] && echo "[$branch]"
+  [[ $branch ]] && echo " ($branch)"
 }
 
 # Don't show duplicated entries when using 'history' command.
 export HISTCONTROL=erasedups
 
+export EDITOR=vim
+
 # Store up to 50k entries in history
 export HISTSIZE=50000
+
+export HISTTIMEFORMAT="%Y%m%d %H:%M:%S "
 
 export JAVA_HOME=/Library/Java/Home
 
 # Show short bash prompt. Change the last digit of 1;34 to change colors (it
 # goes from 0 up to 7).
-export PS1='\[\033[1;34m\]\w\[\033[0m\]$(parse_git_branch)$ '
+export PS1='\t \w\[\033[1;32m\]$(parse_git_branch)\e[00m '
 
 # The history list is appended to the history file when the shell exits,
 # rather than overwriting the history file.
@@ -35,3 +39,8 @@ alias ls='ls -ApG --color=auto'
 
 # Shortcut for list mode (my default).
 alias ll='ls -l'
+
+alias cdgm="cd /srv/www/gamersmafia/current"
+alias rtest="ruby -Itest"
+
+eval `dircolors ~/dotfiles/.dir_colors`
