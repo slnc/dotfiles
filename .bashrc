@@ -11,7 +11,8 @@ if [[ `uname` == 'Darwin' ]]; then
   source ~/core/dotfiles/git-prompt.sh
   export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 else
-  source /etc/bash_completion.d/git
+  source ~/dotfiles/git-completion.bash
+  source ~/dotfiles/git-prompt.sh
 
   # Show colorized output, show all files except "." and ".." and add a slash at
   # the end of directory names
@@ -21,11 +22,6 @@ else
 
 eval `dircolors ~/dotfiles/.dir_colors`
 fi
-
-function parse_git_branch {
-  local branch=$(__git_ps1 "%s")
-  [[ $branch ]] && echo " ($branch)"
-}
 
 # Don't show duplicated entries when using 'history' command.
 export HISTCONTROL=erasedups
@@ -45,10 +41,7 @@ export JAVA_HOME=/Library/Java/Home
 # PS_MODE=1
 # Meaningful values for solarice theme: 1 to 8
 SLNC_PS1_COLOR=${SLNC_PS1_COLOR:=8}
-export PS1="\t \[\033[0;3${SLNC_PS1_COLOR}m\]\w\[\033[1;32m\]$(parse_git_branch)\[\033[0m\] "
-
-#PS_VAR_NAME="$(eval echo "COLORED_PS${COLORED_PS_MODE})"
-#export PS1=`$PS_VAR_NAME`
+export PS1="\[\033[0;3${SLNC_PS1_COLOR}m\]\t \[\033[0;38m\]\w\[\033[1;32m\]$(__git_ps1 " (%s)")\[\033[0m\] "
 
 # The history list is appended to the history file when the shell exits,
 # rather than overwriting the history file.
