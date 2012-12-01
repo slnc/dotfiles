@@ -41,7 +41,7 @@ export JAVA_HOME=/Library/Java/Home
 # PS_MODE=1
 # Meaningful values for solarice theme: 1 to 8
 SLNC_PS1_COLOR=${SLNC_PS1_COLOR:=8}
-export PS1="\[\033[0;3${SLNC_PS1_COLOR}m\]\t \[\033[0;38m\]\w\[\033[1;32m\]$(__git_ps1 " (%s)")\[\033[0m\] "
+export PS1='\[\033[0;3${SLNC_PS1_COLOR}m\]\t \[\033[0;38m\]\w\[\033[1;32m\]$(__git_ps1 " (%s)")\[\033[0m\] '
 
 # The history list is appended to the history file when the shell exits,
 # rather than overwriting the history file.
