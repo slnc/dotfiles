@@ -1,11 +1,25 @@
+export PATH=$PATH:~/bin
+
 # Load git completion functionality
 if [[ `uname` == 'Darwin' ]]; then
   # Use MacVim in terminal mode instead of builtin Vim in order to get +conceal.
   alias vim='mvim -v'
+  alias ls='ls -ApG'
+  alias ll='ls -l'
 
-  source ~/core/projects/macbookpro/git-completion.bash
+  source ~/core/dotfiles/git-completion.bash
+  source ~/core/dotfiles/git-prompt.sh
+  export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 else
   source /etc/bash_completion.d/git
+
+  # Show colorized output, show all files except "." and ".." and add a slash at
+  # the end of directory names
+  alias ls='ls -ApG --color=auto'
+
+  alias ll='ls -l'
+
+eval `dircolors ~/dotfiles/.dir_colors`
 fi
 
 function parse_git_branch {
@@ -33,14 +47,7 @@ export PS1='\t \w\[\033[1;32m\]$(parse_git_branch)\e[00m '
 # rather than overwriting the history file.
 shopt -s histappend
 
-# Show colorized output, show all files except "." and ".." and add a slash at
-# the end of directory names
-alias ls='ls -ApG --color=auto'
-
 # Shortcut for list mode (my default).
-alias ll='ls -l'
 
 alias cdgm="cd /srv/www/gamersmafia/current"
 alias rtest="ruby -Itest"
-
-eval `dircolors ~/dotfiles/.dir_colors`
