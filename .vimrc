@@ -54,8 +54,8 @@ let g:solarized_termtrans=1
 colorscheme solarized
 
 " Customize some colors
-highlight ColorColumn ctermbg=red
-au ColorScheme * highlight ColorColumn ctermbg=red
+highlight ColorColumn ctermbg=0
+au ColorScheme * highlight ColorColumn ctermbg=0
 au BufEnter * highlight ColorColumn ctermbg=0
 
 " Vimdiff mode
@@ -105,6 +105,7 @@ let g:ctrlp_dotfiles = 0
 " Enable filename completion with <comma>r
 map <Leader>r :CtrlP<CR>
 
+map <Leader>t :tabnew<CR>
 
 " TAGLIST OPTIONS
 set updatetime=1000  " 1s delay for the taglist window to update
@@ -163,3 +164,9 @@ map <leader>sn ]s
 map <leader>sp [s
 map <leader>sa zg
 map <leader>s? z=
+
+let VimuxUseNearestPane = 1
+let g:no_turbux_mappings = 1
+map <leader>ut <Plug>SendTestToTmux
+map <leader>uT <Plug>SendFocusedTestToTmux
+

@@ -31,4 +31,4 @@
   prompt = false
 
 [core]
-	excludesfile = /Users/slnc/.gitignore
+	excludesfile = ~/.gitignore

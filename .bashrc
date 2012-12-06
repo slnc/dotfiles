@@ -4,7 +4,7 @@ export PATH=$PATH:~/bin
 if [[ `uname` == 'Darwin' ]]; then
   # Use MacVim in terminal mode instead of builtin Vim in order to get +conceal.
   alias vim='mvim -v'
-  alias ls='ls -ApG'
+  alias ls='ls -AFpG'
   alias ll='ls -l'
 
   source ~/core/dotfiles/git-completion.bash
@@ -20,7 +20,30 @@ else
 
   alias ll='ls -l'
 
-eval `dircolors ~/dotfiles/.dir_colors`
+  eval `dircolors ~/dotfiles/.dir_colors`
+
+  SSH_ENV="$HOME/.ssh/environment"
+
+  function start_agent {
+       echo "Initialising new SSH agent..."
+       /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
+       echo succeeded
+       chmod 600 "${SSH_ENV}"
+       . "${SSH_ENV}" > /dev/null
+       /usr/bin/ssh-add;
+  }
+
+  # Source SSH settings, if applicable
+
+  if [ -f "${SSH_ENV}" ]; then
+       . "${SSH_ENV}" > /dev/null
+       #ps ${SSH_AGENT_PID} doesn't work under cywgin
+       ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
+           start_agent;
+       }
+  else
+       start_agent;
+  fi
 fi
 
 # Don't show duplicated entries when using 'history' command.
