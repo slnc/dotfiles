@@ -4,7 +4,7 @@ export PATH=$PATH:~/bin
 if [[ `uname` == 'Darwin' ]]; then
   # Use MacVim in terminal mode instead of builtin Vim in order to get +conceal.
   alias vim='mvim -v'
-  alias ls='ls -ApG'
+  alias ls='ls -AFpG'
   alias ll='ls -l'
 
   source ~/core/dotfiles/git-completion.bash
