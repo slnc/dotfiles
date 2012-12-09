@@ -121,9 +121,15 @@ autocmd FileType taglist setlocal norelativenumber
 
 " Redefine ColorColumn's color now because Taglist overrides right
 highlight ColorColumn ctermbg=8
-"
-" Shortcut for showing taglist window
-nmap <leader>o :TlistToggle<CR>
+
+
+if has("macunix")
+  " Don't load taglist on osx because of lack of ctags binaries
+  let g:loaded_taglist = 1
+else
+  " Shortcut for showing taglist window
+  nmap <leader>o :TlistToggle<CR>
+endif
 
 
 " SESSIONS
@@ -169,4 +175,5 @@ let VimuxUseNearestPane = 1
 let g:no_turbux_mappings = 1
 map <leader>ut <Plug>SendTestToTmux
 map <leader>uT <Plug>SendFocusedTestToTmux
+
 
