@@ -36,7 +36,7 @@ set t_Co=256  " Restrict to 16 for solarize
 set tabstop=2  " Number of spaces that a <Tab> in the file counts for
 set textwidth=80  " Stick to 80 chars lines for readability
 set visualbell  " Use visual bell instead of beeping.
-set wildignore+=*.swp,*.log,*.png,*.gif,*.jpeg,*/.git/*,*/tmp/*,*/log/*,*/test/reports/*,*/public/storage/*,*/public/cache/*,*/public/images/*  " Patterns to ignore when completing filenames
+set wildignore+=*.swp,*.log,*.png,*.gif,*.jpeg,*/.git/*,*/tmp/*,*/log/*,*/test/reports/*,*/public/storage/*,*/public/cache/*,*/public/images/*,*/wp-content/uploads/* " Patterns to ignore when completing filenames
 set wildmode=longest,list:full  " Mode to use when completing filenames
 
 autocmd FileType make setlocal noexpandtab  " Don't expand tabs in Makefiles
@@ -54,8 +54,8 @@ let g:solarized_termtrans=1
 colorscheme solarized
 
 " Customize some colors
-highlight ColorColumn ctermbg=red
-au ColorScheme * highlight ColorColumn ctermbg=red
+highlight ColorColumn ctermbg=0
+au ColorScheme * highlight ColorColumn ctermbg=0
 au BufEnter * highlight ColorColumn ctermbg=0
 
 " Vimdiff mode
@@ -105,6 +105,7 @@ let g:ctrlp_dotfiles = 0
 " Enable filename completion with <comma>r
 map <Leader>r :CtrlP<CR>
 
+map <Leader>t :tabnew<CR>
 
 " TAGLIST OPTIONS
 set updatetime=1000  " 1s delay for the taglist window to update
@@ -120,9 +121,15 @@ autocmd FileType taglist setlocal norelativenumber
 
 " Redefine ColorColumn's color now because Taglist overrides right
 highlight ColorColumn ctermbg=8
-"
-" Shortcut for showing taglist window
-nmap <leader>o :TlistToggle<CR>
+
+
+if has("macunix")
+  " Don't load taglist on osx because of lack of ctags binaries
+  let g:loaded_taglist = 1
+else
+  " Shortcut for showing taglist window
+  nmap <leader>o :TlistToggle<CR>
+endif
 
 
 " SESSIONS
@@ -163,3 +170,10 @@ map <leader>sn ]s
 map <leader>sp [s
 map <leader>sa zg
 map <leader>s? z=
+
+let VimuxUseNearestPane = 1
+let g:no_turbux_mappings = 1
+map <leader>ut <Plug>SendTestToTmux
+map <leader>uT <Plug>SendFocusedTestToTmux
+
+
