@@ -176,4 +176,4 @@ let g:no_turbux_mappings = 1
 map <leader>ut <Plug>SendTestToTmux
 map <leader>uT <Plug>SendFocusedTestToTmux
 
-
+autocmd BufUnload journal.wiki !rm /tmp/personal_journal.lock
