@@ -107,3 +107,16 @@ MAX_PWD_LENGTH=20
 
 alias cdgm="cd /srv/www/gamersmafia/current"
 alias rtest="ruby -Itest"
+
+function last_modified_file {
+  local last=`find $1 -type f -printf "%T@\0%p\0" | awk '
+       {
+           if ($0>max) {
+               max=$0;
+               getline mostrecent
+           } else
+               getline
+       }
+       END{print mostrecent}' RS='\0'`
+  ll $last
+}
