@@ -32,6 +32,14 @@ set shiftwidth=2  " Number of spaces to use for each step of (auto)indent
 set shortmess=atIoO   " Abbreviate messages
 set showcmd  " Show (partial) command in the last line of the screen
 set showmatch  " When a bracket is inserted, briefly jump to the matching one.
+
+"set statusline=%<[%n]\ %{StatusLinePath()}\ \ %h%m%r%=%-14.(%l,%c%V%)\ %P
+function! WindowNumber()
+    let str=tabpagewinnr(tabpagenr())
+    return str
+endfunction
+
+set statusline=%<\ %{WindowNumber()}\ %t\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 set t_Co=256  " Restrict to 16 for solarize
 set tabstop=2  " Number of spaces that a <Tab> in the file counts for
 set textwidth=80  " Stick to 80 chars lines for readability
@@ -69,6 +77,8 @@ highlight DiffText ctermfg=black ctermbg=yellow
 vnoremap <silent> * :call VisualSelection('f')<CR>
 vnoremap <silent> # :call VisualSelection('b')<CR>
 
+
+
 " Function to remove trailing whitespace from the currently opened file
 fun! <SID>StripTrailingWhitespaces()
     let l = line(".")
@@ -105,7 +115,7 @@ let g:ctrlp_dotfiles = 0
 " Enable filename completion with <comma>r
 map <Leader>r :CtrlP<CR>
 
-map <Leader>t :tabnew<CR>
+map <Leader>nt :tabnew<CR>
 
 " TAGLIST OPTIONS
 set updatetime=1000  " 1s delay for the taglist window to update
@@ -153,7 +163,8 @@ runtime macros/matchit.vim
 
 " Vimwiki
 let g:vimwiki_list = [{'path': '~/core/projects/wiki/', 'path_html': '~/core/projects/wiki_html/'}]
-autocmd BufRead,BufNewFile *.wiki :set ft=markdown
+" Disabling markdown because it makes things really slow
+" autocmd BufRead,BufNewFile *.wiki :set ft=markdown
 
 " Allow POSIX regexps in searches
 nnoremap / /\v
@@ -176,4 +187,52 @@ let g:no_turbux_mappings = 1
 map <leader>ut <Plug>SendTestToTmux
 map <leader>uT <Plug>SendFocusedTestToTmux
 
+" Map gofmt to ^O.  Walk through any syntax errors caught by gofmt.
+"if exists("b:did_ftplugin_go_fmt")
+"    finish
+"endif
 
+command! -buffer Fmt call s:GoFormat()
+
+function! GoFormat()
+    let view = winsaveview()
+    silent %!gofmt
+    if v:shell_error
+        let errors = []
+        for line in getline(1, line('$'))
+            let tokens = matchlist(line, '^\(.\{-}\):\(\d\+\):\(\d\+\)\s*\(.*\)')
+            if !empty(tokens)
+                call add(errors, {"filename": @%,
+                                 \"lnum":     tokens[2],
+                                 \"col":      tokens[3],
+                                 \"text":     tokens[4]})
+            endif
+        endfor
+        if empty(errors)
+            % | " Couldn't detect gofmt error format, output errors
+        endif
+        undo
+        if !empty(errors)
+            call setloclist(0, errors, 'r')
+        endif
+        echohl Error | echomsg "Gofmt returned error" | echohl None
+    endif
+    call winrestview(view)
+endfunction
+
+let b:did_ftplugin_go_fmt = 1
+
+au BufEnter *.go map <C-o> :call GoFormat()<CR>
+au BufLeave *.go unmap <C-o>
+autocmd FileType go set textwidth=200
+
+
+map <leader>1 :1wincmd w<CR>
+map <leader>2 :2wincmd w<CR>
+map <leader>3 :3wincmd w<CR>
+map <leader>4 :4wincmd w<CR>
+map <leader>5 :5wincmd w<CR>
+map <leader>6 :6wincmd w<CR>
+map <leader>7 :7wincmd w<CR>
+map <leader>8 :8wincmd w<CR>
+map <leader>9 :9wincmd w<CR>
