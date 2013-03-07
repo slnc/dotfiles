@@ -236,3 +236,5 @@ map <leader>6 :6wincmd w<CR>
 map <leader>7 :7wincmd w<CR>
 map <leader>8 :8wincmd w<CR>
 map <leader>9 :9wincmd w<CR>
+
+autocmd BufUnload journal.wiki !rm /tmp/personal_journal.lock
