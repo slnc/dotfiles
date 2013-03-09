@@ -177,3 +177,4 @@ map <leader>ut <Plug>SendTestToTmux
 map <leader>uT <Plug>SendFocusedTestToTmux
 
 autocmd BufUnload journal.wiki !rm /tmp/personal_journal.lock
+autocmd BufUnload journal_personal.wiki !rm /tmp/personal_journal.lock
