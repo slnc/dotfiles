@@ -86,6 +86,8 @@ highlight DiffText ctermfg=black ctermbg=yellow
 vnoremap <silent> * :call VisualSelection('f')<CR>
 vnoremap <silent> # :call VisualSelection('b')<CR>
 
+" Disable default shortcut to enter Ex mode.
+noremap Q <ESC>
 
 
 " Function to remove trailing whitespace from the currently opened file
@@ -247,3 +249,5 @@ map <leader>8 :8wincmd w<CR>
 map <leader>9 :9wincmd w<CR>
 
 autocmd BufUnload journal.wiki !rm /tmp/personal_journal.lock
+autocmd BufUnload journal_personal.wiki !rm /tmp/personal_journal.lock
+
