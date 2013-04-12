@@ -39,7 +39,15 @@ function! WindowNumber()
     return str
 endfunction
 
-set statusline=%<\ %{WindowNumber()}\ %t\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+" Returns true if paste mode is enabled
+function! HasPaste()
+    if &paste
+        return '[p]'
+    en
+    return ' '
+endfunction
+
+set statusline=%<\ %{WindowNumber()}\ %t\ %{HasPaste()}\%h%m%r%=%-14.(%l,%c%V%)\ %P
 set t_Co=256  " Restrict to 16 for solarize
 set tabstop=2  " Number of spaces that a <Tab> in the file counts for
 set textwidth=80  " Stick to 80 chars lines for readability
@@ -48,6 +56,7 @@ set wildignore+=*.swp,*.log,*.png,*.gif,*.jpeg,*/.git/*,*/tmp/*,*/log/*,*/test/r
 set wildmode=longest,list:full  " Mode to use when completing filenames
 
 autocmd FileType make setlocal noexpandtab  " Don't expand tabs in Makefiles
+autocmd FileType go setlocal noexpandtab
 
 " Highlight trailing whitespace
 highlight ExtraWhitespace ctermbg=red
