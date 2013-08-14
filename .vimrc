@@ -152,7 +152,7 @@ nmap <leader>sr :wa<CR>:so ~/.vim/sessions/
 runtime macros/matchit.vim
 
 " Vimwiki
-let g:vimwiki_list = [{'path': '~/core/projects/wiki/', 'path_html': '~/core/projects/wiki_html/'}]
+let g:vimwiki_list = [{'path': '~/core/projects/wiki_work/', 'path_html': '~/core/projects/wiki_work_html', 'template_path': '~/core/projects/wiki_work/templates/', 'template_default': 'default', 'template_ext': '.html'}, {'path': '~/core/projects/wiki_personal/', 'path_html': '~/core/projects/wiki_personal_html/'}]
 autocmd BufRead,BufNewFile *.wiki :set ft=markdown
 
 " Allow POSIX regexps in searches
@@ -177,3 +177,4 @@ map <leader>ut <Plug>SendTestToTmux
 map <leader>uT <Plug>SendFocusedTestToTmux
 
 autocmd BufUnload journal.wiki !rm /tmp/personal_journal.lock
+autocmd BufEnter investment_opportunities.wiki set nowrap
