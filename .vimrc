@@ -32,6 +32,22 @@ set shiftwidth=2  " Number of spaces to use for each step of (auto)indent
 set shortmess=atIoO   " Abbreviate messages
 set showcmd  " Show (partial) command in the last line of the screen
 set showmatch  " When a bracket is inserted, briefly jump to the matching one.
+
+"set statusline=%<[%n]\ %{StatusLinePath()}\ \ %h%m%r%=%-14.(%l,%c%V%)\ %P
+function! WindowNumber()
+    let str=tabpagewinnr(tabpagenr())
+    return str
+endfunction
+
+" Returns true if paste mode is enabled
+function! HasPaste()
+    if &paste
+        return '[p]'
+    en
+    return ' '
+endfunction
+
+set statusline=%<\ %{WindowNumber()}\ %t\ %{HasPaste()}\%h%m%r%=%-14.(%l,%c%V%)\ %P
 set t_Co=256  " Restrict to 16 for solarize
 set tabstop=2  " Number of spaces that a <Tab> in the file counts for
 set textwidth=80  " Stick to 80 chars lines for readability
@@ -40,6 +56,7 @@ set wildignore+=*.swp,*.log,*.png,*.gif,*.jpeg,*/.git/*,*/tmp/*,*/log/*,*/test/r
 set wildmode=longest,list:full  " Mode to use when completing filenames
 
 autocmd FileType make setlocal noexpandtab  " Don't expand tabs in Makefiles
+autocmd FileType go setlocal noexpandtab
 
 " Highlight trailing whitespace
 highlight ExtraWhitespace ctermbg=red
@@ -68,6 +85,10 @@ highlight DiffText ctermfg=black ctermbg=yellow
 " " Super useful! From an idea by Michael Naumann
 vnoremap <silent> * :call VisualSelection('f')<CR>
 vnoremap <silent> # :call VisualSelection('b')<CR>
+
+" Disable default shortcut to enter Ex mode.
+noremap Q <ESC>
+
 
 " Function to remove trailing whitespace from the currently opened file
 fun! <SID>StripTrailingWhitespaces()
@@ -105,7 +126,7 @@ let g:ctrlp_dotfiles = 0
 " Enable filename completion with <comma>r
 map <Leader>r :CtrlP<CR>
 
-map <Leader>t :tabnew<CR>
+map <Leader>nt :tabnew<CR>
 
 " TAGLIST OPTIONS
 set updatetime=1000  " 1s delay for the taglist window to update
@@ -175,6 +196,56 @@ let VimuxUseNearestPane = 1
 let g:no_turbux_mappings = 1
 map <leader>ut <Plug>SendTestToTmux
 map <leader>uT <Plug>SendFocusedTestToTmux
+
+" Map gofmt to ^O.  Walk through any syntax errors caught by gofmt.
+"if exists("b:did_ftplugin_go_fmt")
+"    finish
+"endif
+
+command! -buffer Fmt call s:GoFormat()
+
+function! GoFormat()
+    let view = winsaveview()
+    silent %!gofmt
+    if v:shell_error
+        let errors = []
+        for line in getline(1, line('$'))
+            let tokens = matchlist(line, '^\(.\{-}\):\(\d\+\):\(\d\+\)\s*\(.*\)')
+            if !empty(tokens)
+                call add(errors, {"filename": @%,
+                                 \"lnum":     tokens[2],
+                                 \"col":      tokens[3],
+                                 \"text":     tokens[4]})
+            endif
+        endfor
+        if empty(errors)
+            % | " Couldn't detect gofmt error format, output errors
+        endif
+        undo
+        if !empty(errors)
+            call setloclist(0, errors, 'r')
+        endif
+        echohl Error | echomsg "Gofmt returned error" | echohl None
+    endif
+    call winrestview(view)
+endfunction
+
+let b:did_ftplugin_go_fmt = 1
+
+au BufEnter *.go map <C-o> :call GoFormat()<CR>
+au BufLeave *.go unmap <C-o>
+autocmd FileType go set textwidth=200
+
+
+map <leader>1 :1wincmd w<CR>
+map <leader>2 :2wincmd w<CR>
+map <leader>3 :3wincmd w<CR>
+map <leader>4 :4wincmd w<CR>
+map <leader>5 :5wincmd w<CR>
+map <leader>6 :6wincmd w<CR>
+map <leader>7 :7wincmd w<CR>
+map <leader>8 :8wincmd w<CR>
+map <leader>9 :9wincmd w<CR>
 
 autocmd BufUnload journal.wiki !rm /tmp/personal_journal.lock
 autocmd BufEnter investment_opportunities.wiki set nowrap
