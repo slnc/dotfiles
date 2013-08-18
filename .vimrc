@@ -162,9 +162,9 @@ nmap <leader>sr :wa<CR>:so ~/.vim/sessions/
 runtime macros/matchit.vim
 
 " Vimwiki
-let g:vimwiki_list = [{'path': '~/core/projects/wiki/', 'path_html': '~/core/projects/wiki_html/'}]
+let g:vimwiki_list = [{'path': '~/core/projects/wiki/', 'path_html': '~/core/projects/wiki_html/'}, {'path': '~/core/projects/zhymballa/wiki/', 'path_html': '~/core/projects/zhymballa/wiki_html/', 'template_path': '~/core/projects/zhymballa/wiki/templates', 'template_default': 'default', 'template_ext': '.html', 'auto_export': 1}]
 " Disabling markdown because it makes things really slow
-" autocmd BufRead,BufNewFile *.wiki :set ft=markdown
+autocmd BufRead,BufNewFile *.wiki :set ft=markdown
 
 " Allow POSIX regexps in searches
 nnoremap / /\v
@@ -239,3 +239,8 @@ map <leader>9 :9wincmd w<CR>
 
 autocmd BufUnload journal.wiki !rm /tmp/personal_journal.lock
 autocmd BufUnload journal_personal.wiki !rm /tmp/personal_journal.lock
+
+
+" Writing mode (requires VimroomToggle plugin
+command! Prose set spell tw=80 fo=t1a norelativenumber|
+nnoremap <leader>W :Prose<CR>:VimroomToggle<CR>
