@@ -1,4 +1,6 @@
 " Enable filetype plugins
+execute pathogen#infect()
+
 filetype indent on
 filetype plugin on
 
@@ -235,7 +237,9 @@ let b:did_ftplugin_go_fmt = 1
 
 au BufEnter *.go map <C-o> :call GoFormat()<CR>
 au BufLeave *.go unmap <C-o>
-autocmd FileType go set textwidth=200
+autocmd FileType go set textwidth=80
+autocmd FileType go set tabstop=2
+autocmd FileType go set shiftwidth=2
 
 
 map <leader>1 :1wincmd w<CR>
@@ -248,6 +252,9 @@ map <leader>7 :7wincmd w<CR>
 map <leader>8 :8wincmd w<CR>
 map <leader>9 :9wincmd w<CR>
 
+map <leader>n :NERDTreeToggle<CR>
+
 autocmd BufUnload journal.wiki !rm /tmp/personal_journal.lock
 autocmd BufUnload journal_personal.wiki !rm /tmp/personal_journal.lock
 
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | en
