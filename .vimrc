@@ -1,4 +1,6 @@
 " Enable filetype plugins
+execute pathogen#infect()
+
 filetype indent on
 filetype plugin on
 
@@ -173,9 +175,8 @@ nmap <leader>sr :wa<CR>:so ~/.vim/sessions/
 runtime macros/matchit.vim
 
 " Vimwiki
-let g:vimwiki_list = [{'path': '~/core/projects/wiki_work/', 'path_html': '~/core/projects/wiki_work_html', 'template_path': '~/core/projects/wiki_work/templates/', 'template_default': 'default', 'template_ext': '.html'}, {'path': '~/core/projects/wiki_personal/', 'path_html': '~/core/projects/wiki_personal_html/'}]
-let g:vimwiki_valid_html_tags = 'span,div'
-
+let g:vimwiki_list = [{'path': '~/core/projects/wiki/', 'path_html': '~/core/projects/wiki_html/'}, {'path': '~/core/projects/zhymballa/wiki/', 'path_html': '~/core/projects/zhymballa/wiki_html/', 'template_path': '~/core/projects/zhymballa/wiki/templates', 'template_default': 'default', 'template_ext': '.html', 'auto_export': 1}]
+" Disabling markdown because it makes things really slow
 autocmd BufRead,BufNewFile *.wiki :set ft=markdown
 
 " Allow POSIX regexps in searches
@@ -236,7 +237,9 @@ let b:did_ftplugin_go_fmt = 1
 
 au BufEnter *.go map <C-o> :call GoFormat()<CR>
 au BufLeave *.go unmap <C-o>
-autocmd FileType go set textwidth=200
+autocmd FileType go set textwidth=80
+autocmd FileType go set tabstop=2
+autocmd FileType go set shiftwidth=2
 
 
 map <leader>1 :1wincmd w<CR>
@@ -249,5 +252,14 @@ map <leader>7 :7wincmd w<CR>
 map <leader>8 :8wincmd w<CR>
 map <leader>9 :9wincmd w<CR>
 
+map <leader>n :NERDTreeToggle<CR>
+
 autocmd BufUnload journal.wiki !rm /tmp/personal_journal.lock
 autocmd BufEnter investment_opportunities.wiki set nowrap
+autocmd BufUnload journal_personal.wiki !rm /tmp/personal_journal.lock
+
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | en
+
+" Writing mode (requires VimroomToggle plugin
+command! Prose set spell tw=80 fo=t1a norelativenumber|
+nnoremap <leader>W :Prose<CR>:VimroomToggle<CR>
