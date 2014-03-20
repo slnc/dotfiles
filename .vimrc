@@ -132,10 +132,10 @@ map <Leader>nt :tabnew<CR>
 set updatetime=1000  " 1s delay for the taglist window to update
 
 " Always sort method names by name
-let Tlist_Sort_Type = "name"
+" let Tlist_Sort_Type = "name"
 
 " Increase default taglist window width to 60 chars
-let Tlist_WinWidth = 60
+" let Tlist_WinWidth = 60
 
 " Don't show line numbering on taglist window
 autocmd FileType taglist setlocal norelativenumber
@@ -174,6 +174,8 @@ runtime macros/matchit.vim
 
 " Vimwiki
 let g:vimwiki_list = [{'path': '~/core/projects/wiki_work/', 'path_html': '~/core/projects/wiki_work_html', 'template_path': '~/core/projects/wiki_work/templates/', 'template_default': 'default', 'template_ext': '.html'}, {'path': '~/core/projects/wiki_personal/', 'path_html': '~/core/projects/wiki_personal_html/'}]
+let g:vimwiki_valid_html_tags = 'span,div'
+
 autocmd BufRead,BufNewFile *.wiki :set ft=markdown
 
 " Allow POSIX regexps in searches
