@@ -133,10 +133,10 @@ map <Leader>nt :tabnew<CR>
 set updatetime=1000  " 1s delay for the taglist window to update
 
 " Always sort method names by name
-let Tlist_Sort_Type = "name"
+" let Tlist_Sort_Type = "name"
 
 " Increase default taglist window width to 60 chars
-let Tlist_WinWidth = 60
+" let Tlist_WinWidth = 60
 
 " Don't show line numbering on taglist window
 autocmd FileType taglist setlocal norelativenumber
@@ -258,6 +258,7 @@ map <leader>n :NERDTreeToggle<CR>
 " Commands to create and release a lock file for my periodic "time-tracking" vim
 " popup.
 autocmd BufUnload journal.wiki !rm /tmp/personal_journal.lock
+autocmd BufEnter investment_opportunities.wiki set nowrap
 autocmd BufUnload journal_personal.wiki !rm /tmp/personal_journal.lock
 
 " Close Vim if the only open window is a NERDTree window.
