@@ -1,7 +1,9 @@
 execute pathogen#infect()
 
-filetype indent on
-filetype plugin on
+filetype indent plugin on
+
+" indent plugin overrides global .py indent settings, we re-override them here.
+au FileType python setl sw=2 ts=2
 
 syntax on  " Enable syntax highlighting
 
