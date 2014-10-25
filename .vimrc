@@ -175,7 +175,7 @@ nmap <leader>sr :wa<CR>:so ~/.vim/sessions/
 runtime macros/matchit.vim
 
 " Vimwiki
-let g:vimwiki_list = [{'path': '~/core/projects/wiki/', 'path_html': '~/core/projects/wiki_html/'}, {'path': '~/core/projects/zhymballa/wiki/', 'path_html': '~/core/projects/zhymballa/wiki_html/', 'template_path': '~/core/projects/zhymballa/wiki/templates', 'template_default': 'default', 'template_ext': '.html', 'auto_export': 1}]
+let g:vimwiki_list = [{'path': '~/core/projects/wiki/', 'path_html': '~/.wiki_html/'}, {'path': '~/core/projects/zhymballa/wiki/', 'path_html': '~/core/projects/zhymballa/wiki_html/', 'template_path': '~/core/projects/zhymballa/wiki/templates', 'template_default': 'default', 'template_ext': '.html', 'auto_export': 1}]
 " Disabling markdown because it makes things really slow
 autocmd BufRead,BufNewFile *.wiki :set ft=markdown
 
