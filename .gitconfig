@@ -14,6 +14,7 @@
   # Shows a list of branches sorted by last change. Useful when you have a lot
   # of branches with similar names and you're not sure anymore which branch is
   # the right now.
+  ca = commit -amf
   ci = commit
   co = checkout
   d = diff
