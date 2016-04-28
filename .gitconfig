@@ -14,12 +14,12 @@
   # Shows a list of branches sorted by last change. Useful when you have a lot
   # of branches with similar names and you're not sure anymore which branch is
   # the right now.
-	ca = commit -amf
-	ci = commit
-	co = checkout
-	d = diff
-	l = log -p
-	s = status
+  ca = commit -amf
+  ci = commit
+  co = checkout
+  d = diff
+  l = log -p
+  s = status
   bl = for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:short) %(refname:short)'
   dt = difftool
   hs = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
