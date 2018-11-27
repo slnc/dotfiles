@@ -126,8 +126,13 @@ let g:ctrlp_max_height = 50
 let g:ctrlp_clear_cache_on_exit = 1
 let g:ctrlp_dotfiles = 0
 
+set rtp+=~/.fzf
+
 " Enable filename completion with <comma>r
-map <Leader>r :CtrlP<CR>
+" map <Leader>r :CtrlP<CR>
+let g:fzf_layout = { 'down': '~60%' }
+let g:fzf_history_dir = '~/.local/share/fzf-history'
+map <Leader>r :FZF --reverse --inline-info<CR>
 
 map <Leader>nt :tabnew<CR>
 
