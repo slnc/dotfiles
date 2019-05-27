@@ -31,8 +31,10 @@ let g:syntastic_go_checkers = ["go"]
 " Enable filetype plugins
 execute pathogen#infect()
 
-filetype indent on
-filetype plugin on
+filetype indent plugin on
+
+" indent plugin overrides global .py indent settings, we re-override them here.
+au FileType python setl sw=2 ts=2 sts=2
 
 syntax on  " Enable syntax highlighting
 
@@ -174,10 +176,10 @@ map <Leader>nt :tabnew<CR>
 set updatetime=1000  " 1s delay for the taglist window to update
 
 " Always sort method names by name
-let Tlist_Sort_Type = "name"
+" let Tlist_Sort_Type = "name"
 
 " Increase default taglist window width to 60 chars
-let Tlist_WinWidth = 60
+" let Tlist_WinWidth = 60
 
 " Don't show line numbering on taglist window
 " autocmd FileType taglist setlocal norelativenumber
@@ -219,7 +221,7 @@ let g:vimwiki_list = [{'path': '~/core/projects/wiki/', 'path_html': '~/.wiki_ht
 " let g:vimwiki_ext2syntax = {} " otherwise vimwiki autoconceal on markdown drives me crazy for the blog
 let g:vimwiki_conceallevel = 0
 " Disabling markdown because it makes things really slow
-autocmd BufRead,BufNewFile *.wiki :set ft=markdown
+autocmd BufRead,BufNewFile *.wiki :set ft=markdown formatoptions-=tc
 
 " Allow POSIX regexps in searches
 nnoremap / /\v
@@ -280,12 +282,14 @@ endfunction
 let b:did_ftplugin_go_fmt = 1
 
 au BufEnter *.go map <C-o> :call GoFormat()<CR>
-au BufLeave *.go unmap <C-o>
+" Commenting out because it causes trouble with NERD tree. Not sure how it's
+" possible for BufLeave to run without a corresponding BufEnter
+" au BufLeave *.go unmap <C-o>
 autocmd FileType go set textwidth=80
 autocmd FileType go set tabstop=2
 autocmd FileType go set shiftwidth=2
 
-
+" Shortcuts to quickly move between vim windows.
 map <leader>1 :1wincmd w<CR>
 map <leader>2 :2wincmd w<CR>
 map <leader>3 :3wincmd w<CR>
@@ -298,9 +302,13 @@ map <leader>9 :9wincmd w<CR>
 
 map <leader>n :NERDTreeToggle<CR>
 
+" Commands to create and release a lock file for my periodic "time-tracking" vim
+" popup.
 autocmd BufUnload journal.wiki !rm /tmp/personal_journal.lock
+autocmd BufEnter investment_opportunities.wiki set nowrap
 autocmd BufUnload journal_personal.wiki !rm /tmp/personal_journal.lock
 
+" Close Vim if the only open window is a NERDTree window.
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | en
 
 " Writing mode (requires VimroomToggle plugin
