@@ -56,8 +56,6 @@ export HISTSIZE=50000
 
 export HISTTIMEFORMAT="%Y%m%d %H:%M:%S "
 
-export JAVA_HOME=/Library/Java/Home
-
 # http://superuser.com/questions/180257/bash-prompt-how-to-have-the-initials-of-directory-path
 function shorten_pwd {
     # This function ensures that the PWD string does not exceed $MAX_PWD_LENGTH characters
