@@ -11,6 +11,7 @@
 	default = matching
 
 [alias]
+	s = status
 	st = status
 	ci = commit
 	br = branch
@@ -32,3 +33,4 @@
 
 [core]
 	excludesfile = ~/.gitignore
+	autocrlf = input
