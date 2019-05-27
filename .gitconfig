@@ -11,6 +11,16 @@
 	default = matching
 
 [alias]
+	s = status
+	st = status
+	ci = commit
+	br = branch
+	co = checkout
+	df = diff
+	lg = log -p
+  hs = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+  dt = difftool
+  #
   # Shows a list of branches sorted by last change. Useful when you have a lot
   # of branches with similar names and you're not sure anymore which branch is
   # the right now.
@@ -32,3 +42,4 @@
 
 [core]
 	excludesfile = ~/.gitignore
+	autocrlf = input

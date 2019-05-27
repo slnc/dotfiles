@@ -60,6 +60,12 @@ g:vimwiki_user_htmls	vimwiki.txt	/*g:vimwiki_user_htmls*
 g:vimwiki_valid_html_tags	vimwiki.txt	/*g:vimwiki_valid_html_tags*
 g:vimwiki_w32_dir_enc	vimwiki.txt	/*g:vimwiki_w32_dir_enc*
 one	vimwiki.txt	/*one*
+turbux	turbux.txt	/*turbux*
+turbux-config	turbux.txt	/*turbux-config*
+turbux-focused	turbux.txt	/*turbux-focused*
+turbux-mappings	turbux.txt	/*turbux-mappings*
+turbux-repeating	turbux.txt	/*turbux-repeating*
+turbux.txt	turbux.txt	/*turbux.txt*
 two	vimwiki.txt	/*two*
 vimwiki	vimwiki.txt	/*vimwiki*
 vimwiki-calendar	vimwiki.txt	/*vimwiki-calendar*

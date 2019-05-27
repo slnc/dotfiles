@@ -1,4 +1,4 @@
-export PATH=$PATH:~/bin
+export PATH="$PATH:$HOME/bin"
 
 # Load git completion functionality
 if [[ `uname` == 'Darwin' ]]; then
@@ -56,6 +56,10 @@ export HISTSIZE=50000
 
 export HISTTIMEFORMAT="%Y%m%d %H:%M:%S "
 
+if [[ `uname` == 'Darwin' ]]; then
+  export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_45.jdk/Contents/Home
+fi
+
 # http://superuser.com/questions/180257/bash-prompt-how-to-have-the-initials-of-directory-path
 function shorten_pwd {
     # This function ensures that the PWD string does not exceed $MAX_PWD_LENGTH characters
@@ -93,10 +97,13 @@ function shorten_pwd {
 # Set a custom prompt color with:
 # PS_MODE=1
 # Meaningful values for solarice theme: 1 to 8
-SLNC_PS1_COLOR=${SLNC_PS1_COLOR:=8}
-# export PS1='\[\033[0;3${SLNC_PS1_COLOR}m\]\t \[\033[0;38m\]$(shorten_pwd)\[\033[1;32m\]$(__git_ps1 " (%s)")\[\033[0m\] '
-# export PS1='\[\033[0;3${SLNC_PS1_COLOR}m\]\t \[\033[0;38m\]$(shorten_pwd)\[\033[1;32m\]$(hg prompt "{status}{update}" 2>/dev/null)\[\033[0m\] '
-export PS1='\[\033[0;3${SLNC_PS1_COLOR}m\]\t \[\033[0;38m\]$(shorten_pwd)\[\033[1;32m\]\[\033[0m\] '
+if [[ `uname` == 'Darwin' ]]; then
+  SLNC_PS1_COLOR=${SLNC_PS1_COLOR:=2}
+  export PS1='\[\033[0;3${SLNC_PS1_COLOR}m\]\t \[\033[0;38m\]$(shorten_pwd)\[\033[1;32m\]$(__git_ps1 " (%s)")\[\033[0m\] '
+else
+  SLNC_PS1_COLOR=${SLNC_PS1_COLOR:=8}
+  export PS1='\[\033[0;3${SLNC_PS1_COLOR}m\]\t \[\033[0;38m\]$(shorten_pwd)\[\033[1;32m\]\[\033[0m\] '
+fi
 
 # The history list is appended to the history file when the shell exits,
 # rather than overwriting the history file.
@@ -107,6 +114,19 @@ MAX_PWD_LENGTH=20
 
 alias cdgm="cd /srv/www/gamersmafia/current"
 alias rtest="ruby -Itest"
+
+function updateblog {
+  oldpwd=`pwd`
+  cd /Users/slnc/core/projects/juans.life/blog/
+  hugo
+  rclone sync /Users/slnc/core/projects/juans.life/blog/public/ google-cloud-juanalonsonet:juans.life/
+  rclone sync /Users/slnc/core/projects/juans.life/blog/public/ google-cloud-juanalonsonet:juanalonso.net/
+  cd $oldpwd
+}
+
+function updatejutsu {
+  rclone sync --exclude=.DS_Store /Users/slnc/core/projects/Jutsu/ts/app/ google-cloud-juanalonsonet:jutsuapp.com/
+}
 
 function last_modified_file {
   local last=`find $1 -type f -printf "%T@\0%p\0" | awk '
@@ -120,3 +140,10 @@ function last_modified_file {
        END{print mostrecent}' RS='\0'`
   ll $last
 }
+export PYTHONPATH=$PYTHONPATH:/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

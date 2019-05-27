@@ -8,20 +8,32 @@ call plug#begin('~/.vim/plugged')
 " Plug 'itchyny/lightline.vim'
 Plug 'vim-syntastic/syntastic'
 Plug 'HerringtonDarkholme/yats'
-call plug#end()
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'leafgarland/typescript-vim'
+Plug 'google/vim-maktaba'
 
-execute pathogen#infect()
+if has("macunix")
+  Plug 'google/vim-codefmt'
+  Plug 'google/vim-glaive'
+  Plug 'Quramy/tsuquyomi'
+endif
+
+" Plug 'tpope/vim-vinegar'
+call plug#end()
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-" DO NOT SUBMIT not working because of imports
-" let g:syntastic_go_checkers = ['go']
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_go_checkers = ["go"]
+
+" Enable filetype plugins
 
 filetype indent plugin on
 
@@ -35,7 +47,6 @@ if &diff
   syntax off
 endif
 
-set nocompatible
 set autoindent  " Copy indent from current line when starting a new line
 set background=dark  " Tell Vim that we are using a dark background
 set backspace=2  " Make sure backspace always works
@@ -74,12 +85,16 @@ function! HasPaste()
 endfunction
 
 set statusline=%<\ %{WindowNumber()}\ %t\ %{HasPaste()}\%h%m%r%=%-14.(%l,%c%V%)\ %P
+
+
+
 set t_Co=256  " Restrict to 16 for solarize
 set tabstop=2  " Number of spaces that a <Tab> in the file counts for
 set textwidth=80  " Stick to 80 chars lines for readability
 set visualbell  " Use visual bell instead of beeping.
 set wildignore+=*.swp,*.log,*.png,*.gif,*.jpeg,*/.git/*,*/tmp/*,*/log/*,*/test/reports/*,*/public/storage/*,*/public/cache/*,*/public/images/*,*/wp-content/uploads/* " Patterns to ignore when completing filenames
 set wildmode=longest,list:full  " Mode to use when completing filenames
+set guifont=Menlo-Regular:h12
 
 autocmd FileType make setlocal noexpandtab  " Don't expand tabs in Makefiles
 autocmd FileType go setlocal noexpandtab
@@ -141,13 +156,17 @@ nnoremap <C-w>c <Nop>
 " therefore things like multiline insert work well.
 inoremap <C-c> <ESC>
 
-" CTRLP OPTIONS (PLUGIN FOR FILENAME COMPLETION)
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_cmd = 'CtrlPMixed'
-let g:ctrlp_match_window_reversed = 0
-let g:ctrlp_max_height = 50
+" CTRLP OPTIONS
 let g:ctrlp_clear_cache_on_exit = 1
+let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_dotfiles = 0
+let g:ctrlp_match_window_reversed = 0
+let g:ctrlp_mruf_relative = 1
+let g:ctrlp_max_height = 50
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript',
+                          \ 'undo', 'line', 'changes', 'mixed', 'bookmarkdir',
+                          \ 'autoignore']
 
 set rtp+=~/.fzf
 
@@ -156,6 +175,11 @@ set rtp+=~/.fzf
 let g:fzf_layout = { 'down': '~60%' }
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 map <Leader>r :FZF --reverse --inline-info<CR>
+"
+" map <Leader>r :CtrlP<CR>
+" map <Leader>e :CtrlPBookmarkDir<CR>
+
+map <Leader>h :lcd ~/core/projects/Jutsu/ts/<CR>
 
 map <Leader>nt :tabnew<CR>
 
@@ -169,7 +193,7 @@ set updatetime=1000  " 1s delay for the taglist window to update
 " let Tlist_WinWidth = 60
 
 " Don't show line numbering on taglist window
-autocmd FileType taglist setlocal norelativenumber
+" autocmd FileType taglist setlocal norelativenumber
 
 " Redefine ColorColumn's color now because Taglist overrides right
 highlight ColorColumn ctermbg=8
@@ -205,6 +229,8 @@ runtime macros/matchit.vim
 
 " Vimwiki
 let g:vimwiki_list = [{'path': '~/core/projects/wiki/', 'path_html': '~/.wiki_html/'}, {'path': '~/core/projects/zhymballa/wiki/', 'path_html': '~/core/projects/zhymballa/wiki_html/', 'template_path': '~/core/projects/zhymballa/wiki/templates', 'template_default': 'default', 'template_ext': '.html', 'auto_export': 1}]
+" let g:vimwiki_ext2syntax = {} " otherwise vimwiki autoconceal on markdown drives me crazy for the blog
+let g:vimwiki_conceallevel = 0
 " Disabling markdown because it makes things really slow
 autocmd BufRead,BufNewFile *.wiki :set ft=markdown formatoptions-=tc
 
@@ -235,6 +261,8 @@ map <leader>uT <Plug>SendFocusedTestToTmux
 "endif
 
 command! -buffer Fmt call s:GoFormat()
+
+command Fig :normal i<CR>{{% figure src="" title="" %}}<CR><CR>
 
 function! GoFormat()
     let view = winsaveview()
@@ -313,3 +341,61 @@ function! CloseHiddenBuffers()
     endif
   endfor
 endfun
+"
+" set conceallevel=0
+" let g:vim_markdown_conceal = 0
+" autocmd BufNewFile,BufRead,BufEnter,InsertEnter * set conceallevel=0
+" autocmd *.md :set ft=markdown
+" autocmd BufRead,BufNewFile,BufEnter *.md :set conceallevel=0
+"
+
+" Commonly used dirs:
+command Hdigf cd ~/core/projects/hdigf.blog/content/posts
+
+augroup autoreloadvimrc
+    au!
+    autocmd bufwritepost .vimrc source ~/.vimrc
+augroup END
+
+" let g:netrw_banner = 0
+" let g:netrw_browse_split = 2
+" let g:netrw_liststyle = 3
+" let g:netrw_winsize = 25
+" let g:netrw_altv = 1
+
+" augroup ProjectDrawer
+"   autocmd!
+"   autocmd VimEnter * :Vexplore
+" augroup END
+let g:airline_solarized_bg='dark'
+
+let g:typescript_compiler_binary = 'tsc'
+let g:typescript_compiler_options = '--lib es2015,dom'
+
+" make the QuickFix window automatically appear if :make has any errors.
+autocmd QuickFixCmdPost [^l]* nested cwindow
+autocmd QuickFixCmdPost    l* nested lwindow
+
+autocmd FileType typescript setlocal completeopt+=menu,preview
+
+set ballooneval
+autocmd FileType typescript setlocal balloonexpr=tsuquyomi#balloonexpr()
+
+let g:tsuquyomi_disable_quickfix = 1
+let g:syntastic_typescript_checkers = ['tsuquyomi']
+
+
+augroup autoformat_settings
+  autocmd FileType bzl AutoFormatBuffer buildifier
+  autocmd FileType c,cpp,proto,javascript,typescript AutoFormatBuffer clang-format
+  autocmd FileType dart AutoFormatBuffer dartfmt
+  autocmd FileType go AutoFormatBuffer gofmt
+  autocmd FileType gn AutoFormatBuffer gn
+  autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
+  autocmd FileType java AutoFormatBuffer google-java-format
+  autocmd FileType python AutoFormatBuffer yapf
+  " Alternative: autocmd FileType python AutoFormatBuffer autopep8
+augroup END
+
+
+let clang_format_executable="~/bin/clang-format"
