@@ -26,6 +26,7 @@ set autoindent  " Copy indent from current line when starting a new line
 set background=dark  " Tell Vim that we are using a dark background
 set backspace=2  " Make sure backspace always works
 set cc=+1  " Highlight the first column after textwidth
+set rtp+=~/.fzf
 set cindent  " Get the amount of indent according the C indenting rules
 set cinkeys-=0#  " Treat # as a normal character when indenting
 set expandtab  " Always replace tabs with spaces
@@ -130,13 +131,13 @@ map <leader>8 :8wincmd w<CR>
 map <leader>9 :9wincmd w<CR>
 
 map <Leader>r :FZF --reverse --inline-info<CR>
-map <Leader>h :lcd ~/core/projects/Jutsu/ts/<CR>
+map <Leader>j :lcd ~/core/projects/Jutsu/ts/<CR>
+map <Leader>h :lcd ~/core/projects/h/content/posts<CR>
 map <Leader>nt :tabnew<CR>
 
 " Custom commands
 command! -buffer Fmt call s:GoFormat()
 command! Fig :normal i<CR>{{% figure src="" title="" %}}<CR><CR>
-command! Hdigf cd ~/core/projects/hdigf.blog/content/posts
 
 function! GoFormat()
     let view = winsaveview()
