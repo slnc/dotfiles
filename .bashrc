@@ -7,8 +7,8 @@ if [[ `uname` == 'Darwin' ]]; then
   alias ls='ls -AFpG'
   alias ll='ls -l'
 
-  source ~/core/dotfiles/git-completion.bash
-  source ~/core/dotfiles/git-prompt.sh
+  source /files/settings/dotfiles/git-completion.bash
+  source /files/settings/dotfiles/git-prompt.sh
   export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 else
   source ~/dotfiles/git-completion.bash
@@ -115,12 +115,20 @@ MAX_PWD_LENGTH=20
 alias cdgm="cd /srv/www/gamersmafia/current"
 alias rtest="ruby -Itest"
 
-function updateblog {
+function updatejuanslife {
   oldpwd=`pwd`
   cd /Users/slnc/core/projects/juans.life/blog/
   hugo
   rclone sync /Users/slnc/core/projects/juans.life/blog/public/ google-cloud-juanalonsonet:juans.life/
   rclone sync /Users/slnc/core/projects/juans.life/blog/public/ google-cloud-juanalonsonet:juanalonso.net/
+  cd $oldpwd
+}
+
+function updatehdigf {
+  oldpwd=`pwd`
+  cd /files/juan/hdigf.blog/hugo_website
+  hugo
+  rclone sync /files/juan/hdigf.blog/hugo_website/public/ google-cloud-juanalonsonet:hdigf.blog/
   cd $oldpwd
 }
 
