@@ -1,6 +1,6 @@
 alias ls='ls -AFpG'
 alias ll='ls -l'
-alias cdj="cd files/juan/juanalonso.blog/hugo_website/"
+alias cdj="cd ~/files/juan/juanalonso.blog/hugo_website/"
 
 export PATH=~/bin:/$PATH
 
