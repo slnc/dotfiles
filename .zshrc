@@ -8,7 +8,7 @@ HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
 HISTSIZE=1200000
 SAVEHIST=1000000
 # https://jonasjacek.github.io/colors/
-PROMPT='%F{240}%D{%K:%M:%S} %F{172}%1~%f %# '
+PROMPT='%F{240}%D{%K:%M:%S} %F{172}%1~%f '
 
 setopt AUTO_CD
 setopt EXTENDED_HISTORY
@@ -49,6 +49,8 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' unstagedstr '!'
 zstyle ':vcs_info:*' stagedstr '+'
+
+bindkey -e  # Make ^A/^E go to beginning/end of line
 
 +vi-git-untracked(){
     if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] && \
