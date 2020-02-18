@@ -12,7 +12,7 @@ PROMPT='%F{240}%D{%K:%M:%S} %F{172}%1~%f %# '
 
 setopt AUTO_CD
 setopt EXTENDED_HISTORY
-setopt SHARE_HISTORY
+# setopt SHARE_HISTORY
 setopt APPEND_HISTORY
 setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_FIND_NO_DUPS

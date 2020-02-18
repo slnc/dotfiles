@@ -199,7 +199,7 @@ augroup configgroup
   autocmd FileType go set tabstop=2
   autocmd FileType go set textwidth=80
   autocmd FileType go setlocal noexpandtab
-  autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
+  " autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
   autocmd FileType java AutoFormatBuffer google-java-format
   autocmd FileType make setlocal noexpandtab  " Don't expand tabs in Makefiles
   autocmd FileType python AutoFormatBuffer yapf
