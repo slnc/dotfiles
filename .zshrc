@@ -51,6 +51,7 @@ zstyle ':vcs_info:*' unstagedstr '!'
 zstyle ':vcs_info:*' stagedstr '+'
 
 bindkey -e  # Make ^A/^E go to beginning/end of line
+bindkey \^U backward-kill-line
 
 +vi-git-untracked(){
     if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] && \
@@ -62,3 +63,15 @@ bindkey -e  # Make ^A/^E go to beginning/end of line
         hook_com[staged]+='T'
     fi
 }
+
+sync_hdds(){
+  current=kevin
+  next=stuart
+  rsync --exclude=.Trashes --exclude=.Trashes --exclude=.Spotlight-V100 --exclude=.DocumentRevisions-V100 --exclude=.fseventsd -avz /Volumes/${current}/ /Volumes/${next}
+  echo "Swap current & next"
+}
+
+# determines search program for fzf
+if type ag &> /dev/null; then
+    export FZF_DEFAULT_COMMAND='ag -p ~/.gitignore -g ""'
+fi

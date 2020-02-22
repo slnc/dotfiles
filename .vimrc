@@ -11,6 +11,7 @@ Plug 'HerringtonDarkholme/yats'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'google/vim-maktaba'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
 if has("macunix")
   Plug 'google/vim-codefmt'
