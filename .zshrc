@@ -4,6 +4,9 @@ alias cdj="cd ~/files/juan/juanalonso.blog/hugo_website/"
 
 export PATH=~/bin:/$PATH
 
+# https://superuser.com/questions/645599/why-is-a-percent-sign-appearing-before-each-prompt-on-zsh-in-windows/645612
+unsetopt PROMPT_SP
+
 HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
 HISTSIZE=1200000
 SAVEHIST=1000000
