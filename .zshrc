@@ -1,6 +1,9 @@
 alias ls='ls -AFpG'
 alias ll='ls -l'
 alias cdj="cd ~/files/juan/juanalonso.blog/hugo_website/"
+alias history="history 1"
+
+histsearch() { fc -lim "*$@*" 1 }
 
 export PATH=~/bin:/$PATH
 
