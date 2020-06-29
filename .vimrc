@@ -225,6 +225,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_typescript_checkers = ['tsuquyomi']
 let g:syntastic_go_checkers = []
+let g:syntastic_mode_map = { 'passive_filetypes': ['html'] }
 
 " ctrlp
 let g:ctrlp_clear_cache_on_exit = 1

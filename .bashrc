@@ -112,23 +112,24 @@ shopt -s histappend
 # Shortcut for list mode (my default).
 MAX_PWD_LENGTH=20
 
+alias cdj="cd files/juan/juanalonso.blog/hugo_website/"
 alias cdgm="cd /srv/www/gamersmafia/current"
 alias rtest="ruby -Itest"
 
-function updatejuanslife {
-  oldpwd=`pwd`
-  cd /Users/slnc/core/projects/juans.life/blog/
-  hugo
-  rclone sync /Users/slnc/core/projects/juans.life/blog/public/ google-cloud-juanalonsonet:juans.life/
-  rclone sync /Users/slnc/core/projects/juans.life/blog/public/ google-cloud-juanalonsonet:juanalonso.net/
-  cd $oldpwd
-}
+# function updateblog {
+#   oldpwd=`pwd`
+#   cd /Users/slnc/core/projects/juanalonso.blog/hugo_website/
+#   hugo
+#   rclone sync /Users/slnc/core/projects/juans.life/blog/public/ google-cloud-juanalonsonet:juans.life/
+#   rclone sync /Users/slnc/core/projects/juans.life/blog/public/ google-cloud-juanalonsonet:juanalonso.net/
+#   cd $oldpwd
+# }
 
-function updatehdigf {
+function updateblog {
   oldpwd=`pwd`
-  cd /files/juan/hdigf.blog/hugo_website
+  cd /files/juan/juanalonso.blog/hugo_website
   hugo
-  rclone sync /files/juan/hdigf.blog/hugo_website/public/ google-cloud-juanalonsonet:hdigf.blog/
+  firebase deploy
   cd $oldpwd
 }
 
