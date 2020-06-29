@@ -11,6 +11,7 @@ Plug 'HerringtonDarkholme/yats'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'google/vim-maktaba'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
 if has("macunix")
   Plug 'google/vim-codefmt'
@@ -199,7 +200,7 @@ augroup configgroup
   autocmd FileType go set tabstop=2
   autocmd FileType go set textwidth=80
   autocmd FileType go setlocal noexpandtab
-  autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
+  " autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
   autocmd FileType java AutoFormatBuffer google-java-format
   autocmd FileType make setlocal noexpandtab  " Don't expand tabs in Makefiles
   autocmd FileType python AutoFormatBuffer yapf
@@ -225,7 +226,7 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_typescript_checkers = ['tsuquyomi']
 let g:syntastic_go_checkers = []
-let g:syntastic_mode_map = { 'passive_filetypes': ['html'] }
+let g:syntastic_mode_map = { 'mode': 'passive', 'passive_filetypes': ['html'] }
 
 " ctrlp
 let g:ctrlp_clear_cache_on_exit = 1
@@ -256,3 +257,5 @@ runtime macros/matchit.vim
 let g:fzf_layout = { 'down': '~60%' }
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 set runtimepath+=~/.fzf
+
+set t_vb=
