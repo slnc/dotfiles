@@ -53,7 +53,7 @@ set tabstop=2
 set ballooneval
 set textwidth=80
 set visualbell
-set wildignore+=*.swp,*.log,*.png,*.gif,*.jpeg,*/.git/*,*/tmp/*,*/log/*,*/test/reports/*,*/public/storage/*,*/public/cache/*,*/public/images/*,*/wp-content/uploads/*
+set wildignore+=*.swp,*.log,*.png,*.gif,*.jpeg,*/.git/*,*/tmp/*,*/log/*,*/test/reports/*
 set wildmode=longest,list:full
 set guifont=Menlo-Regular:h12
 set updatetime=1000
@@ -100,7 +100,6 @@ highlight ColorColumn ctermbg=8
 let mapleader = ","
 
 " Visual mode pressing * or # searches for the current selection
-" " Super useful! From an idea by Michael Naumann
 vnoremap <silent> * :call VisualSelection('f')<CR>
 vnoremap <silent> # :call VisualSelection('b')<CR>
 
@@ -121,14 +120,6 @@ inoremap <C-c> <ESC>
 " Allow POSIX regexps in searches
 nnoremap / /\v
 cnoremap %s/ %s/\v
-
-" vim-go
-" map <C-n> :cnext<CR>
-" map <C-m> :cprevious<CR>
-" nnoremap <leader>a :cclose<CR>
-
-" autocmd FileType go nmap <leader>b  <Plug>(go-build)
-" autocmd FileType go nmap <leader>g  <Plug>(go-run)
 
 " Shortcuts to quickly move between vim windows.
 map <leader>1 :1wincmd w<CR>
@@ -233,8 +224,6 @@ let clang_format_executable="~/bin/clang-format"
 let g:go_fmt_command = "goimports"
 
 " syntastic
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_typescript_checkers = ['tsuquyomi']
@@ -257,11 +246,6 @@ let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript',
 let g:typescript_compiler_binary = 'tsc'
 let g:typescript_compiler_options = '--lib es2015,dom'
 let g:tsuquyomi_disable_quickfix = 1
-
-" vimwiki
-let g:vimwiki_list = [{'path': '~/core/projects/wiki/', 'path_html': '~/.wiki_html/'}, {'path': '~/core/projects/zhymballa/wiki/', 'path_html': '~/core/projects/zhymballa/wiki_html/', 'template_path': '~/core/projects/zhymballa/wiki/templates', 'template_default': 'default', 'template_ext': '.html', 'auto_export': 1}]
-" let g:vimwiki_ext2syntax = {} " otherwise vimwiki autoconceal on markdown drives me crazy for the blog
-let g:vimwiki_conceallevel = 0
 
 " Allows you to configure % to match more than just single characters
 runtime macros/matchit.vim

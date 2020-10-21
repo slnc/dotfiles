@@ -12,7 +12,6 @@ PROMPT='%F{240}%D{%K:%M:%S} %F{172}%1~%f '
 
 setopt AUTO_CD
 setopt EXTENDED_HISTORY
-# setopt SHARE_HISTORY
 setopt APPEND_HISTORY
 setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_FIND_NO_DUPS
@@ -25,7 +24,6 @@ setopt GLOBDOTS
 unsetopt AUTO_MENU
 unsetopt LIST_BEEP
 
-#  export LSCOLORS=gxfxbEaEBxxEhEhBaDaCaD
 export EDITOR=vim
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -67,7 +65,12 @@ bindkey \^U backward-kill-line
 sync_hdds(){
   current=bob
   next=stuart
-  rsync --exclude=.Trashes --exclude=.Trashes --exclude=.Spotlight-V100 --exclude=.DocumentRevisions-V100 --exclude=.fseventsd -avz /Volumes/${current}/ /Volumes/${next}
+  rsync --exclude=.Trashes \
+    --exclude=.Trashes \
+    --exclude=.Spotlight-V100 \
+    --exclude=.DocumentRevisions-V100 \
+    --exclude=.fseventsd \
+    -avz /Volumes/${current}/ /Volumes/${next}
   echo "Swap current & next"
 }
 
@@ -77,5 +80,5 @@ rpl() {
 
 # determines search program for fzf
 if type ag &> /dev/null; then
-    export FZF_DEFAULT_COMMAND='ag -p ~/.gitignore -g ""'
+  export FZF_DEFAULT_COMMAND='ag -p ~/.gitignore -g ""'
 fi

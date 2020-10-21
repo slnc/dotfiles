@@ -2,14 +2,6 @@
 	name = slnc
 	email = juan@juanalonso.net
 
-[color]
-	ui = auto
-	diff = auto
-	status = auto
-	branch = auto
-[push]
-	default = matching
-
 [alias]
 	s = status
 	st = status
@@ -20,7 +12,7 @@
 	lg = log -p
   hs = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
   dt = difftool
-  #
+
   # Shows a list of branches sorted by last change. Useful when you have a lot
   # of branches with similar names and you're not sure anymore which branch is
   # the right now.
@@ -40,6 +32,16 @@
 [difftool]
   prompt = false
 
+[color]
+	ui = auto
+	diff = auto
+	status = auto
+	branch = auto
+
 [core]
 	excludesfile = ~/.gitignore
 	autocrlf = input
+
+[push]
+	default = matching
+
