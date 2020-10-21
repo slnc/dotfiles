@@ -1,8 +1,14 @@
 alias ls='ls -AFpG'
 alias ll='ls -l'
 alias cdj="cd ~/files/juan/juanalonso.blog/hugo_website/"
+alias history="history 1"
+
+histsearch() { fc -lim "*$@*" 1 }
 
 export PATH=~/bin:/$PATH
+
+# https://superuser.com/questions/645599/why-is-a-percent-sign-appearing-before-each-prompt-on-zsh-in-windows/645612
+unsetopt PROMPT_SP
 
 HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
 HISTSIZE=1200000
