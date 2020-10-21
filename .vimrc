@@ -16,6 +16,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 if has("macunix")
   Plug 'google/vim-codefmt'
   Plug 'google/vim-glaive'
+  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
   Plug 'Quramy/tsuquyomi'
 endif
 
@@ -30,6 +31,7 @@ set cc=+1  " Highlight the first column after textwidth
 set rtp+=~/.fzf
 set cindent  " Get the amount of indent according the C indenting rules
 set cinkeys-=0#  " Treat # as a normal character when indenting
+set directory=$HOME/.vim/swapfiles//
 set expandtab  " Always replace tabs with spaces
 set ff=unix  " Always use unix EOLs
 set gdefault  " All matches in a line are substituted instead of one
@@ -120,6 +122,14 @@ inoremap <C-c> <ESC>
 nnoremap / /\v
 cnoremap %s/ %s/\v
 
+" vim-go
+" map <C-n> :cnext<CR>
+" map <C-m> :cprevious<CR>
+" nnoremap <leader>a :cclose<CR>
+
+" autocmd FileType go nmap <leader>b  <Plug>(go-build)
+" autocmd FileType go nmap <leader>g  <Plug>(go-run)
+
 " Shortcuts to quickly move between vim windows.
 map <leader>1 :1wincmd w<CR>
 map <leader>2 :2wincmd w<CR>
@@ -185,8 +195,8 @@ augroup configgroup
 
   autocmd BufEnter * highlight ColorColumn ctermbg=0
   autocmd BufEnter * match ExtraWhitespace /\s\+$/
-  autocmd BufEnter *.go map <C-o> :call GoFormat()<CR>
-  autocmd BufLeave *.go unmap <C-o>
+  " autocmd BufEnter *.go map <C-o> :call GoFormat()<CR>
+  " autocmd BufLeave *.go unmap <C-o>
   autocmd BufRead,BufNewFile *.wiki :set ft=markdown formatoptions-=tc
   autocmd BufWritePre * :silent call <SID>StripTrailingWhitespaces()
   autocmd ColorScheme * highlight ColorColumn ctermbg=0
@@ -219,9 +229,12 @@ augroup END
 " clang
 let clang_format_executable="~/bin/clang-format"
 
+" vim-go
+let g:go_fmt_command = "goimports"
+
 " syntastic
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_typescript_checkers = ['tsuquyomi']

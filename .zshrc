@@ -65,10 +65,14 @@ bindkey \^U backward-kill-line
 }
 
 sync_hdds(){
-  current=kevin
+  current=bob
   next=stuart
   rsync --exclude=.Trashes --exclude=.Trashes --exclude=.Spotlight-V100 --exclude=.DocumentRevisions-V100 --exclude=.fseventsd -avz /Volumes/${current}/ /Volumes/${next}
   echo "Swap current & next"
+}
+
+rpl() {
+	find . -type f -name "*.md" -exec sed -i '' "s/$1/$2/g" {} +
 }
 
 # determines search program for fzf
