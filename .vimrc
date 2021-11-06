@@ -1,21 +1,37 @@
-" Enable filetype plugins
-filetype indent on
-filetype plugin on
-
-syntax on  " Enable syntax highlighting
-
-" Disable syntax highlighting when in Vimdiff mode
-if &diff
-  syntax off
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-set nocompatible
+call plug#begin('~/.vim/plugged')
+
+Plug 'vim-syntastic/syntastic'
+Plug 'HerringtonDarkholme/yats'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'leafgarland/typescript-vim'
+Plug 'google/vim-maktaba'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+
+if has("macunix")
+  Plug 'google/vim-codefmt'
+  Plug 'google/vim-glaive'
+  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+  Plug 'Quramy/tsuquyomi'
+endif
+
+call plug#end()
+
+filetype indent plugin on
+
 set autoindent  " Copy indent from current line when starting a new line
 set background=dark  " Tell Vim that we are using a dark background
 set backspace=2  " Make sure backspace always works
 set cc=+1  " Highlight the first column after textwidth
+set rtp+=~/.fzf
 set cindent  " Get the amount of indent according the C indenting rules
 set cinkeys-=0#  " Treat # as a normal character when indenting
+set directory=$HOME/.vim/swapfiles//
 set expandtab  " Always replace tabs with spaces
 set ff=unix  " Always use unix EOLs
 set gdefault  " All matches in a line are substituted instead of one
@@ -32,56 +48,63 @@ set shiftwidth=2  " Number of spaces to use for each step of (auto)indent
 set shortmess=atIoO   " Abbreviate messages
 set showcmd  " Show (partial) command in the last line of the screen
 set showmatch  " When a bracket is inserted, briefly jump to the matching one.
-set t_Co=256  " Restrict to 16 for solarize
-set tabstop=2  " Number of spaces that a <Tab> in the file counts for
-set textwidth=80  " Stick to 80 chars lines for readability
-set visualbell  " Use visual bell instead of beeping.
-set wildignore+=*.swp,*.log,*.png,*.gif,*.jpeg,*/.git/*,*/tmp/*,*/log/*,*/test/reports/*,*/public/storage/*,*/public/cache/*,*/public/images/*,*/wp-content/uploads/* " Patterns to ignore when completing filenames
-set wildmode=longest,list:full  " Mode to use when completing filenames
+set t_Co=256
+set tabstop=2
+set ballooneval
+set textwidth=80
+set visualbell
+set wildignore+=*.swp,*.log,*.png,*.gif,*.jpeg,*/.git/*,*/tmp/*,*/log/*,*/test/reports/*
+set wildmode=longest,list:full
+set guifont=Menlo-Regular:h12
+set updatetime=1000
 
-autocmd FileType make setlocal noexpandtab  " Don't expand tabs in Makefiles
+function! WindowNumber()
+    let str=tabpagewinnr(tabpagenr())
+    return str
+endfunction
 
-" Highlight trailing whitespace
-highlight ExtraWhitespace ctermbg=red
-au ColorScheme * highlight ExtraWhitespace ctermbg=red
-au BufEnter * match ExtraWhitespace /\s\+$/
-au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-au InsertLeave * match ExtraWhiteSpace /\s\+$/
+" Returns true if paste mode is enabled
+function! HasPaste()
+    if &paste
+        return '[p]'
+    en
+    return ' '
+endfunction
 
-" solarized options
+set statusline=%<\ %{WindowNumber()}\ %t\ %{HasPaste()}\%h%m%r%=%-14.(%l,%c%V%)\ %P
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+" Colors
+syntax on
+if &diff
+  syntax off
+endif
+
 let g:solarized_termcolors=256
 let g:solarized_termtrans=1
 colorscheme solarized
 
-" Customize some colors
+highlight ExtraWhitespace ctermbg=red
 highlight ColorColumn ctermbg=0
-au ColorScheme * highlight ColorColumn ctermbg=0
-au BufEnter * highlight ColorColumn ctermbg=0
-
-" Vimdiff mode
 highlight DiffAdd ctermfg=black ctermbg=darkgreen
 highlight DiffDelete ctermfg=lightred ctermbg=darkred
 highlight DiffChange ctermfg=black ctermbg=brown
 highlight DiffText ctermfg=black ctermbg=yellow
+highlight ColorColumn ctermbg=8
+
+
+" Keyboard remappings
+" Make the comma be the leader key.
+let mapleader = ","
 
 " Visual mode pressing * or # searches for the current selection
-" " Super useful! From an idea by Michael Naumann
 vnoremap <silent> * :call VisualSelection('f')<CR>
 vnoremap <silent> # :call VisualSelection('b')<CR>
 
-" Function to remove trailing whitespace from the currently opened file
-fun! <SID>StripTrailingWhitespaces()
-    let l = line(".")
-    let c = col(".")
-    %s/\s\+$//e
-    call cursor(l, c)
-endfun
-
-" Automatically remove trailing whitespace when saving files
-autocmd BufWritePre * :silent call <SID>StripTrailingWhitespaces()
-
-" Make the comma be the leader key.
-let mapleader = ","
+" Disable default shortcut to enter Ex mode.
+noremap Q <ESC>
 
 " Whe moving up (<C-e>) or down (<C-y>) do it 3 by 3 lines instead of 1 by 1
 nnoremap <C-e> 3<C-e>
@@ -94,86 +117,142 @@ nnoremap <C-w>c <Nop>
 " therefore things like multiline insert work well.
 inoremap <C-c> <ESC>
 
-" CTRLP OPTIONS (PLUGIN FOR FILENAME COMPLETION)
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_cmd = 'CtrlPMixed'
-let g:ctrlp_match_window_reversed = 0
-let g:ctrlp_max_height = 50
-let g:ctrlp_clear_cache_on_exit = 1
-let g:ctrlp_dotfiles = 0
-
-" Enable filename completion with <comma>r
-map <Leader>r :CtrlP<CR>
-
-map <Leader>t :tabnew<CR>
-
-" TAGLIST OPTIONS
-set updatetime=1000  " 1s delay for the taglist window to update
-
-" Always sort method names by name
-let Tlist_Sort_Type = "name"
-
-" Increase default taglist window width to 60 chars
-let Tlist_WinWidth = 60
-
-" Don't show line numbering on taglist window
-autocmd FileType taglist setlocal norelativenumber
-
-" Redefine ColorColumn's color now because Taglist overrides right
-highlight ColorColumn ctermbg=8
-
-
-if has("macunix")
-  " Don't load taglist on osx because of lack of ctags binaries
-  let g:loaded_taglist = 1
-else
-  " Shortcut for showing taglist window
-  nmap <leader>o :TlistToggle<CR>
-endif
-
-
-" SESSIONS
-" Shortcut for saving sessions
-nmap <leader>ss :wa<CR>:mksession! ~/.vim/sessions/
-
-" Shortcut for loading sessions
-nmap <leader>sr :wa<CR>:so ~/.vim/sessions/
-
-" Reload .vimrc on session load to make sure .vimrc settings are always on.
-""autocmd SessionLoadPost * so ~/.vimrc
-"
-"" Show and hide the taglist window to handle an issue I have forgotten about.
-"autocmd SessionLoadPost * :TlistToggle
-"autocmd SessionLoadPost * :TlistToggle
-
-
-" PLUGINS
-" Allows you to configure % to match more than just single characters
-runtime macros/matchit.vim
-
-" Vimwiki
-let g:vimwiki_list = [{'path': '~/core/projects/wiki/', 'path_html': '~/core/projects/wiki_html/'}]
-autocmd BufRead,BufNewFile *.wiki :set ft=markdown
-
 " Allow POSIX regexps in searches
 nnoremap / /\v
 cnoremap %s/ %s/\v
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Spell checking
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Pressing ,ss will toggle and untoggle spell checking
-map <leader>ss :setlocal spell!<cr>
+" Shortcuts to quickly move between vim windows.
+map <leader>1 :1wincmd w<CR>
+map <leader>2 :2wincmd w<CR>
+map <leader>3 :3wincmd w<CR>
+map <leader>4 :4wincmd w<CR>
+map <leader>5 :5wincmd w<CR>
+map <leader>6 :6wincmd w<CR>
+map <leader>7 :7wincmd w<CR>
+map <leader>8 :8wincmd w<CR>
+map <leader>9 :9wincmd w<CR>
 
-" Shortcuts using <leader>
-map <leader>sn ]s
-map <leader>sp [s
-map <leader>sa zg
-map <leader>s? z=
+map <Leader>r :FZF --reverse --inline-info<CR>
+map <Leader>j :lcd /files/juan/Jutsu/ts/<CR>
+map <Leader>h :lcd /files/juan/hdigf.blog/hugo_website/content/posts<CR>
+map <Leader>nt :tabnew<CR>
 
-let VimuxUseNearestPane = 1
-let g:no_turbux_mappings = 1
-map <leader>ut <Plug>SendTestToTmux
-map <leader>uT <Plug>SendFocusedTestToTmux
+" Custom commands
+command! -buffer Fmt call s:GoFormat()
+command! Fig :normal i<CR>{{% figure src="" title="" %}}<CR><CR>
+
+function! GoFormat()
+    let view = winsaveview()
+    silent %!gofmt
+    if v:shell_error
+        let errors = []
+        for line in getline(1, line('$'))
+            let tokens = matchlist(line, '^\(.\{-}\):\(\d\+\):\(\d\+\)\s*\(.*\)')
+            if !empty(tokens)
+                call add(errors, {"filename": @%,
+                                 \"lnum":     tokens[2],
+                                 \"col":      tokens[3],
+                                 \"text":     tokens[4]})
+            endif
+        endfor
+        if empty(errors)
+            % | " Couldn't detect gofmt error format, output errors
+        endif
+        undo
+        if !empty(errors)
+            call setloclist(0, errors, 'r')
+        endif
+        echohl Error | echomsg "Gofmt returned error" | echohl None
+    endif
+    call winrestview(view)
+endfunction
+
+let b:did_ftplugin_go_fmt = 1
 
 
+" Function to remove trailing whitespace from the currently opened file
+fun! <SID>StripTrailingWhitespaces()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfun
+
+augroup configgroup
+  autocmd!
+  autocmd QuickFixCmdPost [^l]* nested cwindow
+  autocmd QuickFixCmdPost    l* nested lwindow
+  autocmd BufWritePost .vimrc source ~/.vimrc
+
+  autocmd BufEnter * highlight ColorColumn ctermbg=0
+  autocmd BufEnter * match ExtraWhitespace /\s\+$/
+  " autocmd BufEnter *.go map <C-o> :call GoFormat()<CR>
+  " autocmd BufLeave *.go unmap <C-o>
+  autocmd BufRead,BufNewFile *.wiki :set ft=markdown formatoptions-=tc
+  autocmd BufWritePre * :silent call <SID>StripTrailingWhitespaces()
+  autocmd ColorScheme * highlight ColorColumn ctermbg=0
+  autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red
+  autocmd FileType bzl AutoFormatBuffer buildifier
+  autocmd FileType c,cpp,proto,javascript,typescript AutoFormatBuffer clang-format
+  autocmd FileType dart AutoFormatBuffer dartfmt
+  autocmd FileType gn AutoFormatBuffer gn
+  autocmd FileType go AutoFormatBuffer gofmt
+  autocmd FileType go set shiftwidth=2
+  autocmd FileType go set tabstop=2
+  autocmd FileType go set textwidth=80
+  autocmd FileType go setlocal noexpandtab
+  " autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
+  autocmd FileType java AutoFormatBuffer google-java-format
+  autocmd FileType make setlocal noexpandtab  " Don't expand tabs in Makefiles
+  autocmd FileType python AutoFormatBuffer yapf
+  " make the QuickFix window automatically appear if :make has any errors.
+  autocmd FileType typescript setlocal balloonexpr=tsuquyomi#balloonexpr()
+  autocmd FileType typescript setlocal completeopt+=menu,preview
+  autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+  autocmd InsertLeave * match ExtraWhiteSpace /\s\+$/
+
+  " indent plugin overrides global .py indent settings, we re-override them here.
+  autocmd FileType python setl sw=2 ts=2 sts=2
+augroup END
+
+" Plugins config
+
+" clang
+let clang_format_executable="~/bin/clang-format"
+
+" vim-go
+let g:go_fmt_command = "goimports"
+
+" syntastic
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_typescript_checkers = ['tsuquyomi']
+let g:syntastic_go_checkers = []
+let g:syntastic_mode_map = { 'mode': 'passive', 'passive_filetypes': ['html'] }
+
+" ctrlp
+let g:ctrlp_clear_cache_on_exit = 1
+let g:ctrlp_cmd = 'CtrlPMixed'
+let g:ctrlp_dotfiles = 0
+let g:ctrlp_match_window_reversed = 0
+let g:ctrlp_mruf_relative = 1
+let g:ctrlp_max_height = 50
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript',
+                          \ 'undo', 'line', 'changes', 'mixed', 'bookmarkdir',
+                          \ 'autoignore']
+
+" typescript
+let g:typescript_compiler_binary = 'tsc'
+let g:typescript_compiler_options = '--lib es2015,dom'
+let g:tsuquyomi_disable_quickfix = 1
+
+" Allows you to configure % to match more than just single characters
+runtime macros/matchit.vim
+
+" fzf
+let g:fzf_layout = { 'down': '~60%' }
+let g:fzf_history_dir = '~/.local/share/fzf-history'
+set runtimepath+=~/.fzf
+
+set t_vb=

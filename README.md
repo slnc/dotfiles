@@ -1,10 +1,20 @@
-Repository with my commonly used config files.
+# Juan's dotfiles
 
-ln -s dotfiles/.gitconfig .
-ln -s dotfiles/.dir_colors .
-ln -s dotfiles/.inputrc .
-ln -s dotfiles/.tmux.conf .
-ln -s dotfiles/.vim .
-ln -s dotfiles/.vimrc .
-ln -s dotfiles/.bashrc .
-ln -s dotfiles/.Rprofile .
+## Dependencies
+
+- git
+- tmux
+- vim
+- zsh
+
+## Installation
+
+```
+targets=".git .tmux.conf .vim .vimrc .zshrc"
+
+setopt shwordsplit
+for f in $targets; do
+  ln -s $f ~
+done
+unsetopt shwordsplit
+```
