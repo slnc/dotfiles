@@ -31,7 +31,7 @@ set cc=+1  " Highlight the first column after textwidth
 set rtp+=~/.fzf
 set cindent  " Get the amount of indent according the C indenting rules
 set cinkeys-=0#  " Treat # as a normal character when indenting
-set directory=$HOME/.vim/swapfiles//
+set directory=$HOME/.vim/swapfiles/
 set expandtab  " Always replace tabs with spaces
 set ff=unix  " Always use unix EOLs
 set gdefault  " All matches in a line are substituted instead of one
