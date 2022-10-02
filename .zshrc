@@ -14,9 +14,9 @@ HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
 HISTSIZE=1200000
 SAVEHIST=1000000
 # Colors table: https://jonasjacek.github.io/colors/
-PROMPT='%F{240}%* %F{172}%1~%f '
+PROMPT='%F{6}%* %F{172}%1~%f '
 if [ $(/bin/hostname) = 'balrog' ]; then
-  PROMPT='%F{160}%* %F{172}%1~%f '
+  PROMPT='%F{6}%* %F{172}%1~%f '
 fi
 
 setopt AUTO_CD
