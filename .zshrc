@@ -87,9 +87,11 @@ sync_hdds(){
   echo "Update current & next"
 }
 
-rpl() {
-	find . -type f -name "*" -exec sed -i '' "s/$1/$2/g" {} +
-}
+if [[ `uname` == "Darwin" ]]; then
+  rpl() {
+    find . -type f -name "*" -exec sed -i '' "s/$1/$2/g" {} +
+  }
+fi
 
 # determines search program for fzf
 if type ag &> /dev/null; then
