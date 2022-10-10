@@ -1,30 +1,17 @@
 [user]
-	name = slnc
-	email = juan@juanalonso.net
+  name = slnc
+  email = juan@juanalonso.net
 
 [alias]
-	s = status
-	st = status
-	ci = commit
-	br = branch
-	co = checkout
-	df = diff
-	lg = log -p
-  hs = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-  dt = difftool
-
-  # Shows a list of branches sorted by last change. Useful when you have a lot
-  # of branches with similar names and you're not sure anymore which branch is
-  # the right now.
+  bl = for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:short) %(refname:short)'
+  br = branch
   ca = commit -amf
   ci = commit
   co = checkout
   d = diff
-  l = log -p
+  ls = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+  lp = log -p
   s = status
-  bl = for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:short) %(refname:short)'
-  dt = difftool
-  hs = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 
 [diff]
   tool = vimdiff
@@ -33,15 +20,14 @@
   prompt = false
 
 [color]
-	ui = auto
-	diff = auto
-	status = auto
-	branch = auto
+  branch = auto
+  diff = auto
+  status = auto
+  ui = auto
 
 [core]
-	excludesfile = ~/.gitignore
-	autocrlf = input
+  autocrlf = input
+  excludesfile = ~/.gitignore
 
 [push]
-	default = matching
-
+  default = matching
