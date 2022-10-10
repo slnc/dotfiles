@@ -1,5 +1,5 @@
 [user]
-  name = slnc
+  name = Juan Alonso
   email = juan@juanalonso.net
 
 [alias]
@@ -28,6 +28,8 @@
 [core]
   autocrlf = input
   excludesfile = ~/.gitignore
+  precomposeunicode = true
+  quotepath = false
 
 [push]
   default = matching
