@@ -1,6 +1,7 @@
 alias ls='ls -AFpG'
 alias ll='ls -l'
-alias cdj="cd ~/files/juan/juanalonso.blog/hugo_website/"
+alias cdj="cd ~/files/juan/juan.al/hugo_website/"
+alias rt="bin/rails test"
 alias history="history 1"
 
 histsearch() { fc -lim "*$@*" 1 }
