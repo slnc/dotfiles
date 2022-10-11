@@ -11,7 +11,7 @@ if [ $(uname) = 'Linux' ]; then
   sudo apt-get install -qq -y zsh tmux
 fi
 
-mkdir ~/files
+mkdir -p ~/files
 git clone https://github.com/slnc/dotfiles.git $DOT_FILES_DIR
 
 targets=".gitconfig .gitignore .tmux.conf .vim .vimrc .zshrc"
