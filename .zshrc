@@ -14,9 +14,12 @@ unsetopt PROMPT_SP
 HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
 HISTSIZE=1200000
 SAVEHIST=1000000
+
 # Colors table: https://jonasjacek.github.io/colors/
 if [ $(hostname) = 'rick' ]; then
   PROMPT='%F{007}%* %F{43}%1~%f '
+elif [ -f /.dockerenv ]; then  # assume GM dev docker instance
+  PROMPT='%F{28}%* %F{94}%1~%f '  # boina verde
 elif [ $(uname) = 'Linux' ]; then
   PROMPT='%F{6}%* %F{38}%1~%f '
 else  # Mac
