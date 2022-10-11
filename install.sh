@@ -8,7 +8,7 @@ set -uex
 DOT_FILES_DIR=~/files/settings/dotfiles
 
 if [ $(uname) = 'Linux' ]; then
-  apt-get install -qq -y zsh tmux
+  sudo apt-get install -qq -y zsh tmux
 fi
 
 mkdir ~/files
