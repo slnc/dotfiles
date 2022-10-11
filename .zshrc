@@ -101,3 +101,11 @@ fi
 if type ag &> /dev/null; then
   export FZF_DEFAULT_COMMAND='ag -p ~/.gitignore -g ""'
 fi
+
+
+# set directory=$HOME/.vim/swapfiles/
+if [ $(hostname) = 'rick' ]; then
+  if command -v tmux &> /dev/null && [ -n "$PROMPT" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+    exec tmux
+  fi
+fi
