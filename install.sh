@@ -1,10 +1,15 @@
 #!/usr/bin/bash
 #
 # How to install:
-# curl -L https://raw.githubusercontent.com/slnc/dotfiles/master/install.sh | sh
+# - apt-get install zsh tmux
+# - curl -L https://raw.githubusercontent.com/slnc/dotfiles/master/install.sh | sh
 
 set -uex
 DOT_FILES_DIR=~/files/settings/dotfiles
+
+if [ $(uname) = 'Linux' ]; then
+  apt-get install -qq -y zsh tmux
+fi
 
 mkdir ~/files
 git clone https://github.com/slnc/dotfiles.git $DOT_FILES_DIR
@@ -17,4 +22,6 @@ for f in $targets; do
 done
 # unsetopt shwordsplit
 
-vim +PlugInstall +qall
+vim +PlugInstall +qall  # This may leave the console broken for some reason.
+
+echo "Run: chsh -s /usr/bin/zs"
