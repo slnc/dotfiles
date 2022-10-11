@@ -16,9 +16,12 @@ HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
 HISTSIZE=1200000
 SAVEHIST=1000000
 # Colors table: https://jonasjacek.github.io/colors/
-PROMPT='%F{6}%* %F{172}%1~%f '
-if [ $(uname) = 'Linux' ]; then
+if [ $(hostname) = 'rick' ]; then
+  PROMPT='%F{007}%* %F{43}%1~%f '
+elif [ $(uname) = 'Linux' ]; then
   PROMPT='%F{6}%* %F{38}%1~%f '
+else  # Mac
+  PROMPT='%F{6}%* %F{172}%1~%f '
 fi
 
 setopt AUTO_CD
