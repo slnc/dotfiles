@@ -1,4 +1,4 @@
-#!/usr/bin/zsh
+#!/usr/bin/bash
 #
 # How to install:
 # curl -L https://raw.githubusercontent.com/slnc/dotfiles/master/install.sh | sh
