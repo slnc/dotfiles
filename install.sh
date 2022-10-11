@@ -1,7 +1,7 @@
-#!/bin/zsh
+#!/usr/bin/zsh
 #
 # How to install:
-# curl -L https://raw.githubusercontent.com/slnc/dotfiles/master/install.sh |sh
+# curl -L https://raw.githubusercontent.com/slnc/dotfiles/master/install.sh | sh
 
 
 DOT_FILES_DIR=~/files/settings/dotfiles
@@ -16,7 +16,7 @@ for f in $targets; do
   if [[ -f ~/$f ]]; then
     mv ~/$f ~/$f.bak
   fi
-  ln -s $(pwd)/$DOT_FILES_DIR/$f ~
+  ln -s $DOT_FILES_DIR/$f ~
 done
 unsetopt shwordsplit
 
