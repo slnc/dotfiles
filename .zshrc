@@ -1,7 +1,8 @@
 alias ls='ls -AFpG'
 alias ll='ls -l'
-alias cdj="cd ~/files/juan/juanalonso.blog/hugo_website/"
+alias cdblog="cd ~/files/juan/juan.al/hugo_website/content"
 alias history="history 1"
+alias sr='ssh slnc@rick'
 
 histsearch() { fc -lim "*$@*" 1 }
 
@@ -72,7 +73,8 @@ bindkey \^U backward-kill-line
 }
 
 sync_hdds(){
-  current=stuart
+  # bob, kevin, stuart
+  current=bob
   next=kevin
 
   echo "Syncing from $current to $next.."
@@ -92,6 +94,11 @@ if [[ `uname` == "Darwin" ]]; then
     find . -type f -name "*" -exec sed -i '' "s/$1/$2/g" {} +
   }
 fi
+
+prolego_start() {
+  cd /Users/juanalonso/files/juan/prolego_web
+  ./prolego
+}
 
 # determines search program for fzf
 if type ag &> /dev/null; then

@@ -10,6 +10,7 @@
   co = checkout
   d = diff
   ls = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+  hs = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
   lp = log -p
   s = status
 
