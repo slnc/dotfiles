@@ -1,6 +1,7 @@
 alias ls='ls -AFpG'
 alias ll='ls -l'
 alias cdblog="cd ~/files/juan/juan.al/hugo_website/content"
+alias rt="bin/rails test"
 alias history="history 1"
 alias sr='ssh slnc@rick'
 
@@ -16,8 +17,8 @@ HISTSIZE=1200000
 SAVEHIST=1000000
 # Colors table: https://jonasjacek.github.io/colors/
 PROMPT='%F{6}%* %F{172}%1~%f '
-if [ $(/bin/hostname) = 'balrog' ]; then
-  PROMPT='%F{6}%* %F{172}%1~%f '
+if [ $(uname) = 'Linux' ]; then
+  PROMPT='%F{6}%* %F{38}%1~%f '
 fi
 
 setopt AUTO_CD

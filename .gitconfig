@@ -9,8 +9,7 @@
   ci = commit
   co = checkout
   d = diff
-  ls = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-  hs = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+  ls = log --pretty=format:\"%h %ad | %s%d %as [%an]\" --graph --date=format:\"%Y-%m-%d %H:%M\"
   lp = log -p
   s = status
 
