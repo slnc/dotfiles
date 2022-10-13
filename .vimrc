@@ -254,4 +254,6 @@ let g:fzf_layout = { 'down': '~60%' }
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 set runtimepath+=~/.fzf
 
+let g:omni_sql_no_default_maps = 1
+
 set t_vb=
