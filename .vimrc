@@ -253,6 +253,7 @@ runtime macros/matchit.vim
 let g:fzf_layout = { 'down': '~60%' }
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 set runtimepath+=~/.fzf
+let $FZF_DEFAULT_COMMAND='find . \( -name public\/storage -o -name public\/cache -name tmp\/cache -o -name .git \) -prune -o -print'
 
 let g:omni_sql_no_default_maps = 1
 
