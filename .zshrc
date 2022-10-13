@@ -109,6 +109,9 @@ fi
 # set directory=$HOME/.vim/swapfiles/
 if [ $(hostname) = 'rick' ]; then
   if command -v tmux &> /dev/null && [ -n "$PROMPT" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-    exec tmux
+      # exec tmux a
   fi
 fi
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
+export PGUSER=postgres

@@ -52,7 +52,7 @@ set tabstop=2
 set ballooneval
 set textwidth=80
 set visualbell
-set wildignore+=*.swp,*.log,*.png,*.gif,*.jpeg,*/.git/*,*/tmp/*,*/log/*,*/test/reports/*
+set wildignore+=*.swp,*.log,*.png,*.gif,*.jpeg,*/.git/*,*/tmp/*,*/log/*,*/test/reports/*,*public/storage*
 set wildmode=longest,list:full
 set guifont=Menlo-Regular:h12
 set updatetime=1000
