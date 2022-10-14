@@ -15,6 +15,7 @@
 
 [diff]
   tool = vimdiff
+  wsErrorHighlight = all
 
 [difftool]
   prompt = false
@@ -33,3 +34,7 @@
 
 [push]
   default = matching
+[pull]
+	rebase = false
+[credential]
+	helper = store
