@@ -12,6 +12,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'leafgarland/typescript-vim'
 Plug 'google/vim-maktaba'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+let $FZF_DEFAULT_COMMAND='find . \( -name public/cache* tmp/* -name public/storage* -o -name .git \) -prune -o -print'
 
 if has("macunix")
   Plug 'google/vim-codefmt'
