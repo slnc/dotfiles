@@ -11,6 +11,7 @@ alias reset_test_db=RAILS_ENV=test rails db:reset db:fixtures:load
 alias history="history 1"
 alias sr='cch slnc@rick'
 alias bv='docker exec -it gm-dev /usr/bin/zsh'  # && tmux -CC new -A -s foo'
+alias cpd="cap production deploy"
 alias startbv='docker run -i --rm -h boinaverde --name gm-dev -p22:22 -p80:80 -p443:443 -p5432:5432 -v /Users/juanalonso/files/juan/gamersmafia/src:/var/www/gamersmafia/current -v /Users/juanalonso/files/juan/gamersmafia/prod-db/:/var/lib/postgresql -v $SSH_AUTH_SOCK:/ssh-agent -e SSH_AUTH_SOCK=/ssh-agent gm-dev-ubuntu-22-04:latest'
 
 
