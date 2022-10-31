@@ -1,1 +1,1 @@
-\set PROMPT1 '%`date +%H:%M:%S`> '
+\set PROMPT1 'pg %`hostname` %`date +%H:%M:%S`% '
