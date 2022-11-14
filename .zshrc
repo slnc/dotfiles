@@ -7,9 +7,12 @@ alias ls='ls -AFpG'
 alias ll='ls -l'
 alias cdblog="cd ~/files/juan/juan.al/hugo_website/content"
 alias rt="bin/rails test"
+alias reset_test_db="RAILS_ENV=test rails db:reset db:fixtures:load"
 alias history="history 1"
 alias sr='cch slnc@rick'
 alias bv='docker exec -it gm-dev /usr/bin/zsh'  # && tmux -CC new -A -s foo'
+alias cpd="cap production deploy"
+
 
 histsearch() { fc -lim "*$@*" 1 }
 
