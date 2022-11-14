@@ -10,8 +10,6 @@ alias rt="bin/rails test"
 alias history="history 1"
 alias sr='cch slnc@rick'
 alias bv='docker exec -it gm-dev /usr/bin/zsh'  # && tmux -CC new -A -s foo'
-alias startbv='docker run -i --rm -h boinaverde --name gm-dev -p22:22 -p80:80 -p443:443 -p5432:5432 -v /Users/juanalonso/files/juan/gamersmafia/src:/var/www/gamersmafia/current -v /Users/juanalonso/files/juan/gamersmafia/prod-db/:/var/lib/postgresql -v $SSH_AUTH_SOCK:/ssh-agent -e SSH_AUTH_SOCK=/ssh-agent gm-dev-ubuntu-22-04:latest'
-
 
 histsearch() { fc -lim "*$@*" 1 }
 
@@ -56,7 +54,7 @@ export EDITOR=vim
 
 zstyle ':completion:*' completer _expand _complete _ignored
 zstyle ':completion:*' max-errors 10
-zstyle :compinstall filename '/Users/juanalonso/.zshrc'
+zstyle :compinstall filename '~/.zshrc'
 
 autoload -Uz compinit
 compinit
@@ -104,6 +102,24 @@ sync_hdds(){
   echo "Update current & next"
 }
 
+startbv () {
+  ~/files/juan/gamersmafia/ssh-agent/run.sh -s
+  ~/files/juan/gamersmafia/ssh-agent/run.sh
+
+  cd ~/files/juan/gamersmafia/gamersmafia/src
+  echo "Run this after docker container starts: tmux -CC new -A -s foo"
+  docker run -i \
+      --rm \
+      -h boinaverde \
+      --name gm-dev \
+      -p80:80 -p443:443 \
+      -v ~/files/juan/gamersmafia/src:/var/www/gamersmafia/current \
+      -v ~/files/juan/gamersmafia/prod-db/:/var/lib/postgresql \
+      --volumes-from=ssh-agent \
+      -e SSH_AUTH_SOCK=/.ssh-agent/socket \
+      gm-dev-ubuntu-22-04:latest
+}
+
 if [[ `uname` == "Darwin" ]]; then
   rpl() {
     find . -type f -name "*" -exec sed -i '' "s/$1/$2/g" {} +
@@ -111,7 +127,7 @@ if [[ `uname` == "Darwin" ]]; then
 fi
 
 prolego_start() {
-  cd /Users/juanalonso/files/juan/prolego_web
+  cd ~/files/juan/prolego_web
   ./prolego
 }
 
