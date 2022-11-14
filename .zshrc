@@ -109,7 +109,7 @@ startbv () {
   ~/files/juan/gamersmafia/ssh-agent/run.sh -s
   ~/files/juan/gamersmafia/ssh-agent/run.sh
 
-  cd ~/files/juan/gamersmafia/gamersmafia/src
+  cd ~/files/juan/gamersmafia/src
   echo "Run this after docker container starts: tmux -CC new -A -s foo"
   docker run -i \
       --rm \
