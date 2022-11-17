@@ -47,6 +47,7 @@ setopt CORRECT
 setopt HIST_REDUCE_BLANKS
 setopt LIST_PACKED
 setopt GLOBDOTS
+setopt interactivecomments
 unsetopt AUTO_MENU
 unsetopt LIST_BEEP
 
