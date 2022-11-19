@@ -8,6 +8,7 @@ alias ll='ls -l'
 alias cdblog="cd ~/files/juan/juan.al/hugo_website/content"
 alias rt="bin/rails test"
 alias reset_test_db="RAILS_ENV=test rails db:reset db:fixtures:load"
+alias rubocop_clean="rubocop -c .rubocop-pre-commit.yml -a app config lib script test"
 alias history="history 1"
 alias sr='cch slnc@rick'
 alias bv='docker exec -it gm-dev /usr/bin/zsh'  # && tmux -CC new -A -s foo'
@@ -47,6 +48,7 @@ setopt CORRECT
 setopt HIST_REDUCE_BLANKS
 setopt LIST_PACKED
 setopt GLOBDOTS
+setopt interactivecomments
 unsetopt AUTO_MENU
 unsetopt LIST_BEEP
 
