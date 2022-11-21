@@ -7,6 +7,7 @@ alias ls='ls -AFpG'
 alias ll='ls -l'
 alias cdblog="cd ~/files/juan/juan.al/hugo_website/content"
 alias rt="bin/rails test"
+alias srt="PARALLEL_WORKERS=1 rt"  # sequential 
 alias reset_test_db="RAILS_ENV=test rails db:reset db:fixtures:load"
 alias rubocop_clean="rubocop -c .rubocop-pre-commit.yml -a app config lib script test"
 alias history="history 1"
