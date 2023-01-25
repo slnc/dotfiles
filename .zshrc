@@ -10,7 +10,8 @@ alias rt="bin/rails test"
 alias reset_test_db="RAILS_ENV=test rails db:reset db:fixtures:load"
 alias rubocop_clean="rubocop -c .rubocop-pre-commit.yml -a app config lib script test"
 alias history="history 1"
-alias sr='cch slnc@rick'
+# alias sr='cch slnc@rick'
+alias sr='cch rick'
 alias bv='docker exec -it gm-dev /usr/bin/zsh'  # && tmux -CC new -A -s foo'
 alias cpd="cap production deploy"
 
