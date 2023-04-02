@@ -16,8 +16,8 @@ alias history="history 1"
 alias sr='cch rick'
 alias bv='docker exec -it gm-dev /usr/bin/zsh'  # && tmux -CC new -A -s foo'
 alias cpd="cap production deploy"
-alias export_sprites="cd /Users/slnc/files/juan/gamersmafia/src && ./script/sprites/aseprite_export.sh"
-alias gen_sprites="cd /var/www/gamersmafia/current && echo 'Sprites.gen_all && User.find(1).user_avatar.save' | bundle exec rails c && sar"
+alias aseprite_export="cd /Users/slnc/files/juan/gamersmafia/src && ./script/sprites/aseprite_export.sh"
+alias regen_sprites="cd /var/www/gamersmafia/current && echo 'Sprites.gen_all && User.find(1).user_avatar.save' | bundle exec rails c && sar"
 
 
 histsearch() { fc -lim "*$@*" 1 }
