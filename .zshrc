@@ -23,6 +23,8 @@ alias regen_sprites="cd /var/www/gamersmafia/current && echo 'Sprites.gen_all &&
 histsearch() { fc -lim "*$@*" 1 }
 
 export PATH=~/bin:/$PATH
+export LC_CTYPE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 
 # https://superuser.com/questions/645599/why-is-a-percent-sign-appearing-before-each-prompt-on-zsh-in-windows/645612
 unsetopt PROMPT_SP
