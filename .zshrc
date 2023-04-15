@@ -18,6 +18,8 @@ alias bv='docker exec -it gm-dev /usr/bin/zsh'  # && tmux -CC new -A -s foo'
 alias cpd="cap production deploy"
 alias aseprite_export="cd /Users/slnc/files/juan/gamersmafia/src && ./script/sprites/aseprite_export.sh"
 alias regen_sprites="cd /var/www/gamersmafia/current && echo 'Sprites.gen_all && User.find(1).user_avatar.save' | bundle exec rails c && sar"
+alias bv_etc_hosts="echo 'Faction.to_etc_hosts("127.0.0.1", "dev")' | bundle exec rails c"
+alias rick_etc_hosts="echo 'Faction.to_etc_hosts("192.168.31.103", "com")' | bundle exec rails c"
 
 
 histsearch() { fc -lim "*$@*" 1 }
