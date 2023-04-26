@@ -117,6 +117,12 @@ sync_hdds(){
   echo "Update current & next"
 }
 
+buildbv () {
+  docker image prune -a
+  cd ~/files/juan/gamersmafia/src
+  docker build -t gm-dev-ubuntu-22-04 .
+}
+
 startbv () {
   ~/files/juan/gamersmafia/ssh-agent/run.sh -s
   ~/files/juan/gamersmafia/ssh-agent/run.sh
