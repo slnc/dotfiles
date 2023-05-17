@@ -16,7 +16,7 @@ alias history="history 1"
 # alias sr='cch slnc@rick'
 alias sr='cch rick'
 alias bv='docker exec -it gm-dev /usr/bin/zsh'  # && tmux -CC new -A -s foo'
-alias prolegobv='docker exec -it prolego-dev /usr/bin/zsh'  # && tmux -CC new -A -s foo'
+alias charlie='docker exec -it prolego-dev /usr/bin/zsh'  # && tmux -CC new -A -s foo'
 alias cpd="cap production deploy"
 alias aseprite_export="cd /Users/slnc/files/juan/gamersmafia/src && ./script/sprites/aseprite_export.sh"
 alias regen_sprites="cd /var/www/gamersmafia/current && echo 'Sprites.gen_all && User.find(1).user_avatar.save' | bundle exec rails c && sar"
@@ -40,6 +40,8 @@ SAVEHIST=1000000
 # Colors table: https://jonasjacek.github.io/colors/
 if [ $(hostname) = 'rick' ]; then
   PROMPT='%F{007}%* %F{43}%1~%f '
+elif [ $(hostname) = 'charlie' ]; then
+  PROMPT='%F{007}%* %F{226}%1~%f '
 elif [ -f /.dockerenv ]; then  # assume GM dev docker instance
   PROMPT='%F{28}%* %F{94}%1~%f '  # boina verde
 elif [ $(uname) = 'Linux' ]; then
@@ -124,7 +126,7 @@ buildbv () {
   docker build -t gm-dev-ubuntu-22-04 .
 }
 
-buildprolego () {
+buildcharlie () {
   # docker image prune -a -f
   cd ~/files/juan/prolego/prolego-src
   docker build -t prolego-dev-ubuntu-22-04 .
@@ -148,7 +150,7 @@ startbv () {
       gm-dev-ubuntu-22-04:latest
 }
 
-startprolego () {
+runcharlie () {
   cd ~/files/juan/prolego/prolego-src
   echo "Run this after docker container starts: tmux -CC new -A -s foo"
   docker run -i \
