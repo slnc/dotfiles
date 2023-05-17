@@ -16,6 +16,7 @@ alias history="history 1"
 # alias sr='cch slnc@rick'
 alias sr='cch rick'
 alias bv='docker exec -it gm-dev /usr/bin/zsh'  # && tmux -CC new -A -s foo'
+alias prolegobv='docker exec -it prolego-dev /usr/bin/zsh'  # && tmux -CC new -A -s foo'
 alias cpd="cap production deploy"
 alias aseprite_export="cd /Users/slnc/files/juan/gamersmafia/src && ./script/sprites/aseprite_export.sh"
 alias regen_sprites="cd /var/www/gamersmafia/current && echo 'Sprites.gen_all && User.find(1).user_avatar.save' | bundle exec rails c && sar"
@@ -118,9 +119,15 @@ sync_hdds(){
 }
 
 buildbv () {
-  docker image prune -a -f
+  # docker image prune -a -f
   cd ~/files/juan/gamersmafia/src
   docker build -t gm-dev-ubuntu-22-04 .
+}
+
+buildprolego () {
+  # docker image prune -a -f
+  cd ~/files/juan/prolego/prolego-src
+  docker build -t prolego-dev-ubuntu-22-04 .
 }
 
 startbv () {
@@ -139,6 +146,21 @@ startbv () {
       --volumes-from=ssh-agent \
       -e SSH_AUTH_SOCK=/.ssh-agent/socket \
       gm-dev-ubuntu-22-04:latest
+}
+
+startprolego () {
+  cd ~/files/juan/prolego/prolego-src
+  echo "Run this after docker container starts: tmux -CC new -A -s foo"
+  docker run -i \
+      --rm \
+      -h boinaverde \
+      --name prolego-dev \
+      -p443:443 \
+      -v ~/files/juan/prolego/prolego-src:/var/www/prolego/current \
+      -v ~/files/juan/prolego/prod-db/:/var/lib/postgresql \
+      --volumes-from=ssh-agent \
+      -e SSH_AUTH_SOCK=/.ssh-agent/socket \
+      prolego-dev-ubuntu-22-04:latest
 }
 
 if [[ `uname` == "Darwin" ]]; then
