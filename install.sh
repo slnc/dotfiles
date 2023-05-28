@@ -24,4 +24,6 @@ done
 
 vim +PlugInstall +qall  # This may leave the console broken for some reason.
 
-echo "Run: chsh -s /usr/bin/zs"
+curl -L https://iterm2.com/shell_integration/install_shell_integration.sh | bash
+
+chsh -s /usr/bin/zs
