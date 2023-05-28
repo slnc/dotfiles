@@ -15,6 +15,7 @@ alias rubocop_clean="rubocop -c .rubocop-pre-commit.yml -a app config lib script
 alias history="history 1"
 # alias sr='cch slnc@rick'
 alias sr='cch rick'
+alias sw='cch whispers'
 alias bv='docker exec -it gm-dev /usr/bin/zsh'  # && tmux -CC new -A -s foo'
 alias charlie='docker exec -it prolego-dev /usr/bin/zsh'  # && tmux -CC new -A -s foo'
 alias cpd="cap production deploy"
@@ -103,6 +104,10 @@ bindkey \^U backward-kill-line
     fi
 }
 
+sync_calibre() {
+  rsync -azv ~/files/data/calibre/ slnc@whispers:/srv/nas/slnc/calibre
+}
+
 sync_hdds(){
   # bob, kevin, stuart
   current=bob
@@ -132,7 +137,7 @@ buildcharlie () {
   docker build -t prolego-dev-ubuntu-22-04 .
 }
 
-startbv () {
+runbv () {
   ~/files/juan/gamersmafia/ssh-agent/run.sh -s
   ~/files/juan/gamersmafia/ssh-agent/run.sh
 
@@ -155,7 +160,7 @@ runcharlie () {
   echo "Run this after docker container starts: tmux -CC new -A -s foo"
   docker run -i \
       --rm \
-      -h boinaverde \
+      -h charlie \
       --name prolego-dev \
       -p443:443 \
       -v ~/files/juan/prolego/prolego-src:/var/www/prolego/current \
