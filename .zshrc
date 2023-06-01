@@ -5,7 +5,6 @@ function cch {
 alias sar='service apache2 restart'
 alias ls='ls -AFpG'
 alias ll='ls -l'
-alias runtailscaledocker='tailscaled --tun=userspace-networking --socks5-server=localhost:1055 --outbound-http-proxy-listen=localhost:1055 & && tailscale up'
 alias cdblog="cd ~/files/juan/juan.al/hugo_website/content"
 alias rt="bin/rails test"
 alias rtc='COVERAGE=true bin/rails test:all'
@@ -25,6 +24,10 @@ alias regen_sprites="cd /var/www/gamersmafia/current && echo 'Sprites.gen_all &&
 alias bv_etc_hosts="echo 'Faction.to_etc_hosts("127.0.0.1", "dev")' | bundle exec rails c"
 alias rick_etc_hosts="echo 'Faction.to_etc_hosts("192.168.31.103", "com")' | bundle exec rails c"
 
+tailscaledocker() {
+  tailscaled --tun=userspace-networking --socks5-server=localhost:1055 --outbound-http-proxy-listen=localhost:1055 &
+  tailscale up
+}
 
 histsearch() { fc -lim "*$@*" 1 }
 
@@ -131,19 +134,16 @@ sync_hdds(){
 buildbv () {
   # docker image prune -a -f
   cd ~/files/juan/gamersmafia/src
-  DOCKER_BUILDKIT=1 docker build -t gm-dev-ubuntu-22-04 --ssh default=$HOME/.ssh/id_rsa .
+  docker build -t gm-dev-ubuntu-22-04
 }
 
 buildcharlie () {
   # docker image prune -a -f
   cd ~/files/juan/prolego/prolego-src
-  DOCKER_BUILDKIT=1 docker build -t prolego-dev-ubuntu-22-04 --ssh default=$HOME/.ssh/id_rsa .
+  docker build -t prolego-dev-ubuntu-22-04
 }
 
 runbv () {
-  ~/files/juan/gamersmafia/ssh-agent/run.sh -s
-  ~/files/juan/gamersmafia/ssh-agent/run.sh
-
   cd ~/files/juan/gamersmafia/src
   echo "Run this after docker container starts: tmux -CC new -A -s foo"
   docker run -i \
@@ -153,8 +153,7 @@ runbv () {
       -p80:80 -p443:443 \
       -v ~/files/juan/gamersmafia/src:/var/www/gamersmafia/current \
       -v ~/files/juan/gamersmafia/prod-db/:/var/lib/postgresql \
-      --volumes-from=ssh-agent \
-      -e SSH_AUTH_SOCK=/.ssh-agent/socket \
+      -v ${HOME}/.ssh/id_rsa:/root/.ssh/id_rsa \
       gm-dev-ubuntu-22-04:latest
 }
 
@@ -168,8 +167,7 @@ runcharlie () {
       -p443:443 \
       -v ~/files/juan/prolego/prolego-src:/var/www/prolego/current \
       -v ~/files/juan/prolego/prod-db/:/var/lib/postgresql \
-      --volumes-from=ssh-agent \
-      -e SSH_AUTH_SOCK=/.ssh-agent/socket \
+      -v ${HOME}/.ssh/id_rsa:/root/.ssh/id_rsa \
       prolego-dev-ubuntu-22-04:latest
 }
 
