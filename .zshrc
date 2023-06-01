@@ -5,6 +5,7 @@ function cch {
 alias sar='service apache2 restart'
 alias ls='ls -AFpG'
 alias ll='ls -l'
+alias runtailscaledocker='tailscaled --tun=userspace-networking --socks5-server=localhost:1055 --outbound-http-proxy-listen=localhost:1055 & && tailscale up'
 alias cdblog="cd ~/files/juan/juan.al/hugo_website/content"
 alias rt="bin/rails test"
 alias rtc='COVERAGE=true bin/rails test:all'
@@ -130,13 +131,13 @@ sync_hdds(){
 buildbv () {
   # docker image prune -a -f
   cd ~/files/juan/gamersmafia/src
-  docker build -t gm-dev-ubuntu-22-04 .
+  DOCKER_BUILDKIT=1 docker build -t gm-dev-ubuntu-22-04 --ssh default=$HOME/.ssh/id_rsa .
 }
 
 buildcharlie () {
   # docker image prune -a -f
   cd ~/files/juan/prolego/prolego-src
-  docker build -t prolego-dev-ubuntu-22-04 .
+  DOCKER_BUILDKIT=1 docker build -t prolego-dev-ubuntu-22-04 --ssh default=$HOME/.ssh/id_rsa .
 }
 
 runbv () {
