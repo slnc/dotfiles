@@ -134,13 +134,13 @@ sync_hdds(){
 buildbv () {
   # docker image prune -a -f
   cd ~/files/juan/gamersmafia/src
-  docker build -t gm-dev-ubuntu-22-04
+  docker build -t gm-dev-ubuntu-22-04 .
 }
 
 buildcharlie () {
   # docker image prune -a -f
   cd ~/files/juan/prolego/prolego-src
-  docker build -t prolego-dev-ubuntu-22-04
+  docker build -t prolego-dev-ubuntu-22-04 .
 }
 
 runbv () {
