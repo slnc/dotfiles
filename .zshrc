@@ -3,7 +3,7 @@ function cch {
 }
 
 alias sar='service apache2 restart'
-alias ls='ls -AFpG'
+alias ls='ls -AFpG --color=always'
 alias ll='ls -l'
 alias cdblog="cd ~/files/juan/juan.al/hugo_website/content"
 alias rt="bin/rails test"
@@ -177,6 +177,8 @@ if [[ `uname` == "Darwin" ]]; then
   rpl() {
     find . -type f -name "*" -exec sed -i '' "s/$1/$2/g" {} +
   }
+else
+  eval `dircolors ~/files/settings/dotfiles/dircolors.256dark`
 fi
 
 prolego_start() {
