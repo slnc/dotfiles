@@ -3,7 +3,7 @@ function cch {
 }
 
 alias sar='service apache2 restart'
-alias ls='ls -AFpG'
+alias ls='ls -AFpG --color=always'
 alias ll='ls -l'
 alias cdblog="cd ~/files/juan/juan.al/hugo_website/content"
 alias rt="bin/rails test"
@@ -46,8 +46,10 @@ SAVEHIST=1000000
 # Colors table: https://jonasjacek.github.io/colors/
 if [ $(hostname) = 'rick' ]; then
   PROMPT='%F{007}%* %F{43}%1~%f '
-elif [ $(hostname) = 'charlie' ]; then
-  PROMPT='%F{007}%* %F{226}%1~%f '
+elif [ $(hostname) = 'nomind' ]; then
+  PROMPT='%F{033}%* %F{195}%1~%f '
+elif [ $(hostname) = 'necromancer' ]; then
+  PROMPT='%F{160}%* %F{251}%1~%k%f '
 elif [ $(hostname) = 'whispers' ]; then
   PROMPT='%F{007}%* %F{141}%1~%f '
 elif [ -f /.dockerenv ]; then  # assume GM dev docker instance
@@ -176,6 +178,8 @@ if [[ `uname` == "Darwin" ]]; then
   rpl() {
     find . -type f -name "*" -exec sed -i '' "s/$1/$2/g" {} +
   }
+else
+  eval `dircolors ~/files/settings/dotfiles/dircolors.256dark`
 fi
 
 prolego_start() {
