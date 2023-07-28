@@ -47,6 +47,9 @@ if [ $(hostname) = 'rick' ]; then
   PROMPT='%F{007}%* %F{43}%1~%f '
 elif [ $(hostname) = 'charlie' ]; then
   PROMPT='%F{007}%* %F{226}%1~%f '
+elif [ $(hostname) = 'necromancer' ]; then
+  # PROMPT='%K{16}%F{007}%* %F{7}%1~ %k%f '
+  PROMPT='%F{160}%* %F{251}%1~%k%f '
 elif [ $(hostname) = 'whispers' ]; then
   PROMPT='%F{007}%* %F{141}%1~%f '
 elif [ -f /.dockerenv ]; then  # assume GM dev docker instance
