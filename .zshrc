@@ -152,6 +152,7 @@ runbv () {
   docker run -i \
       --rm \
       -h boinaverde \
+      --shm-size=1g \
       --name gm-dev \
       -p80:80 -p443:443 \
       -v ~/files/juan/gamersmafia/src:/var/www/gamersmafia/current \
@@ -179,7 +180,9 @@ if [[ `uname` == "Darwin" ]]; then
     find . -type f -name "*" -exec sed -i '' "s/$1/$2/g" {} +
   }
 else
-  eval `dircolors ~/files/settings/dotfiles/dircolors.256dark`
+  if (( $+SHELL )); then
+    eval `dircolors ~/files/settings/dotfiles/dircolors.256dark`
+  fi
 fi
 
 prolego_start() {
