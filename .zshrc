@@ -157,7 +157,6 @@ runbv () {
       -p80:80 -p443:443 \
       -v ~/files/juan/gamersmafia/src:/var/www/gamersmafia/current \
       -v ~/files/juan/gamersmafia/prod-db/:/var/lib/postgresql \
-      -v ${HOME}/.ssh/id_rsa:/root/.ssh/id_rsa \
       gm-dev-ubuntu-22-04:latest
 }
 
@@ -171,7 +170,6 @@ runcharlie () {
       -p443:443 \
       -v ~/files/juan/prolego/prolego-src:/var/www/prolego/current \
       -v ~/files/juan/prolego/prod-db/:/var/lib/postgresql \
-      -v ${HOME}/.ssh/id_rsa:/root/.ssh/id_rsa \
       prolego-dev-ubuntu-22-04:latest
 }
 
