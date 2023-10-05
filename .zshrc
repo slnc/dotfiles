@@ -57,7 +57,19 @@ elif [ -f /.dockerenv ]; then  # assume GM dev docker instance
 elif [ $(uname) = 'Linux' ]; then
   PROMPT='%F{6}%* %F{38}%1~%f '
 else  # Mac
-  PROMPT='%F{6}%* %F{172}%1~%f '
+  if which scutil &>/dev/null && [ $? -eq 0 ]; then
+    local cn=$(scutil --get LocalHostName)
+    if [ $cn = 'mbpro2019j' ]; then
+      PROMPT='%F{6}%* %F{172}%1~%f '
+    elif [ $cn = 'mbpro23jj' ]; then
+      PROMPT='%F{45}%* %F{251}%1~%f '
+    else
+      echo "Unknown mac host, setting default prompt"
+    fi
+  else
+    echo "Unknown host type, setting default prompt"
+    PROMPT='%F{6}%* %F{172}%1~%f '
+  fi
 fi
 
 setopt AUTO_CD
@@ -78,6 +90,8 @@ unsetopt LIST_BEEP
 export EDITOR=vim
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.private_zshrc ] && source ~/.private_zshrc
+
 # The following lines were added by compinstall
 
 zstyle ':completion:*' completer _expand _complete _ignored
