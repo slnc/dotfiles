@@ -4,6 +4,7 @@ function cch {
 
 alias sar='service apache2 restart'
 alias ls='ls -AFpG --color=always'
+alias yt-dlp_macos="~/bin/yt-dlp_macos --ffmpeg-location=~/bin/ffmpeg"
 alias ll='ls -l'
 alias cdblog="cd ~/files/juan/juan.al/hugo_website/content"
 alias rt="bin/rails test"
@@ -14,9 +15,9 @@ alias reset_test_db="RAILS_ENV=test rails db:reset db:fixtures:load"
 alias rubocop_clean="rubocop -c .rubocop-pre-commit.yml -a app config lib script test"
 alias history="history 1"
 # alias sr='cch slnc@rick'
-alias sn='cch necromancer'
-alias sm='cch nomind'
-alias sw='cch whispers'
+alias sn='cch necromancer.internal'
+alias sm='cch nomind.internal'
+alias sw='cch whispers.internal'
 alias bv='docker exec -it gm-dev /usr/bin/zsh'  # && tmux -CC new -A -s foo'
 alias charlie='docker exec -it prolego-dev /usr/bin/zsh'  # && tmux -CC new -A -s foo'
 alias cpd="cap production deploy"
