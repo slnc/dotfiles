@@ -1,0 +1,8 @@
+if [[ `uname` == "Darwin" ]]; then
+  rpl() {
+    find . -type f -name "*" -exec sed -i '' "s/$1/$2/g" {} +
+  }
+else
+  command rpl
+fi
+

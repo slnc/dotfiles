@@ -1,0 +1,1 @@
+ssh -t $@ "tmux -CC new -A -s foo"

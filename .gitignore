@@ -12,3 +12,6 @@ public/cache/
 public/storage-dev/
 public/storage-test/
 tmp/
+
+zsh/.zsh_history
+zsh/.zcompdump

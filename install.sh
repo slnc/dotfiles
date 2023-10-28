@@ -14,7 +14,7 @@ fi
 mkdir -p ~/files
 git clone https://github.com/slnc/dotfiles.git $DOT_FILES_DIR
 
-targets=".gitconfig .gitignore .psqlrc .tmux.conf .vim .vimrc .zshrc"
+targets=".gitconfig .gitignore .psqlrc .tmux.conf .vim .vimrc .zshenv"
 
 # setopt shwordsplit
 for f in $targets; do

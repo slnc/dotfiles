@@ -1,0 +1,10 @@
+cd $PROLEGO_WORK_DIR
+echo "Run this after docker container starts: tmux -CC new -A -s foo"
+docker run -i \
+    --rm \
+    -h charlie \
+    --name prolego-dev \
+    -p443:443 \
+    -v $PROLEGO_WORK_DIR:/var/www/prolego/current \
+    -v ${PROLEGO_WORK_DIR}../prod-db/:/var/lib/postgresql \
+    prolego-dev-ubuntu-22-04:latest

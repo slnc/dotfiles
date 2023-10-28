@@ -1,0 +1,3 @@
+# docker image prune -a -f
+cd $PROLEGO_WORK_DIR
+docker build -t prolego-dev-ubuntu-22-04 .

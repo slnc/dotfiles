@@ -1,0 +1,3 @@
+# docker image prune -a -f
+cd $GM_WORK_DIR
+docker build -t gm-dev-ubuntu-22-04 .
