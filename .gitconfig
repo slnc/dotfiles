@@ -1,6 +1,6 @@
 [user]
   name = Juan Alonso
-  email = juan@juanalonso.net
+  email = juan@juan.al
 
 [alias]
   bl = for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:short) %(refname:short)'
@@ -35,6 +35,11 @@
 [push]
   default = matching
 [pull]
-	rebase = false
+	rebase = true
 [credential]
 	helper = store
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
