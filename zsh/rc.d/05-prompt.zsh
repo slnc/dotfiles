@@ -20,7 +20,14 @@ else  # Mac
     if [ $cn = 'mbpro2019j' ]; then
       PROMPT='%F{6}%* %F{172}%1~%f '
     elif [ $cn = 'mbpro23jj' ]; then
-      PROMPT='%F{45}%* %F{251}%1~%f '
+      autoload -Uz vcs_info
+      zstyle ':vcs_info:git:*' formats '%b'
+      zstyle ':vcs_info:git:*' actionformats '%b'
+      precmd() {
+        vcs_info
+      }
+
+      PROMPT='%F{45}%* %F{242}%1 [${vcs_info_msg_0_}] %F{251}%1~%f '
     else
       echo "Unknown mac host, setting default prompt"
     fi
