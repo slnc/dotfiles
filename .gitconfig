@@ -33,7 +33,7 @@
   quotepath = false
 
 [push]
-  default = matching
+	default = current
 [pull]
 	rebase = true
 [credential]
