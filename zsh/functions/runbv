@@ -7,5 +7,5 @@ docker run -i \
     --name gm-dev \
     -p80:80 -p443:443 \
     -v $GM_WORK_DIR:/var/www/gamersmafia/current \
-    -v ${GM_WORK_DIR}../prod-db/:/var/lib/postgresql \
+    -v ${GM_WORK_DIR}/../prod-db/:/var/lib/postgresql \
     gm-dev-ubuntu-22-04:latest

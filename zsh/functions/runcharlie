@@ -6,5 +6,5 @@ docker run -i \
     --name prolego-dev \
     -p443:443 \
     -v $PROLEGO_WORK_DIR:/var/www/prolego/current \
-    -v ${PROLEGO_WORK_DIR}../prod-db/:/var/lib/postgresql \
+    -v ${PROLEGO_WORK_DIR}/../prod-db/:/var/lib/postgresql \
     prolego-dev-ubuntu-22-04:latest
