@@ -133,9 +133,8 @@ map <leader>8 :8wincmd w<CR>
 map <leader>9 :9wincmd w<CR>
 
 map <Leader>r :FZF --reverse --inline-info<CR>
-map <Leader>j :lcd /files/juan/Jutsu/ts/<CR>
-map <Leader>h :lcd /files/juan/hdigf.blog/hugo_website/content/posts<CR>
 map <Leader>nt :tabnew<CR>
+nmap <leader>w :e ~/.worklog<CR>
 
 " Custom commands
 command! -buffer Fmt call s:GoFormat()
