@@ -55,7 +55,7 @@ set textwidth=80
 set visualbell
 set wildignore+=*.swp,*.log,*.png,*.gif,*.jpeg,*/.git/*,*/tmp/*,*/log/*,*/test/reports/*,*public/storage*
 set wildmode=longest,list:full
-set guifont=Menlo-Regular:h12
+set guifont=Menlo-Regular:h14
 set updatetime=1000
 
 function! WindowNumber()

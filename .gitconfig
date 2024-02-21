@@ -1,7 +1,3 @@
-[user]
-  name = Juan Alonso
-  email = juan@juan.al
-
 [alias]
   bl = for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:short) %(refname:short)'
   br = branch
@@ -12,6 +8,28 @@
   ls = log --pretty=format:\"%h %ad | %s%d %as [%an]\" --graph --date=format:\"%Y-%m-%d %H:%M\"
   lp = log -p
   s = status
+	fpush = push
+
+[branch]
+	sort = -committerdate
+
+[color]
+  branch = auto
+  diff = auto
+  status = auto
+  ui = auto
+
+[column]
+	branch = auto
+
+[core]
+  autocrlf = input
+  excludesfile = ~/.gitignore
+  precomposeunicode = true
+  quotepath = false
+
+[credential]
+	helper = store
 
 [diff]
   tool = vimdiff
@@ -20,26 +38,19 @@
 [difftool]
   prompt = false
 
-[color]
-  branch = auto
-  diff = auto
-  status = auto
-  ui = auto
-
-[core]
-  autocrlf = input
-  excludesfile = ~/.gitignore
-  precomposeunicode = true
-  quotepath = false
+[pull]
+	rebase = true
 
 [push]
 	default = current
-[pull]
-	rebase = true
-[credential]
-	helper = store
-[filter "lfs"]
-	process = git-lfs filter-process
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
+
+[rerere]
+	enabled = true
+	autoUpdate = true
+
+[user]
+  name = Juan Alonso
+  email = juan@juan.al
+
+[includeIf "gitdir:~/files/projects/b"]
+  path = ~/.gitconfig-b
