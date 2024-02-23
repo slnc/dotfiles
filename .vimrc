@@ -134,7 +134,7 @@ map <leader>9 :9wincmd w<CR>
 
 map <Leader>r :FZF --reverse --inline-info<CR>
 map <Leader>nt :tabnew<CR>
-nmap <leader>w :e ~/.worklog<CR>
+nmap <leader>w :e ~/.worklog.md<CR>
 
 " Custom commands
 command! -buffer Fmt call s:GoFormat()
@@ -212,6 +212,8 @@ augroup configgroup
 
   " indent plugin overrides global .py indent settings, we re-override them here.
   autocmd FileType python setl sw=2 ts=2 sts=2
+
+  autocmd BufRead,BufNewFile ~/.worklog.md setlocal norelativenumber
 augroup END
 
 " Plugins config
