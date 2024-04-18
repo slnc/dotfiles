@@ -55,7 +55,7 @@
 [user]
   name = Juan Alonso
   email = juan@juan.al
-  signingKey = ~/.ssh/id_ed25519.pub
+  signingKey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHJId+pDH8XWrST0trBUyrumd0gWt+An/Y82CcOMEo4+
 
 [includeIf "gitdir:~/files/projects/b"]
   path = ~/.gitconfig-b
