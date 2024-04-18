@@ -23,6 +23,6 @@ alias ll='ls -l'
 alias yt-dlp_macos="~/bin/yt-dlp_macos --ffmpeg-location=~/bin/ffmpeg"
 alias history="history 1"
 
-alias sn='cch nomind.internal'
-alias st='cch tempest.internal'
-alias sw='cch whispers.internal'
+alias sn='cch slnc@nomind.internal'
+alias st='cch slnc@tempest.internal'
+alias sw='cch slnc@whispers.internal'

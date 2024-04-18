@@ -9,6 +9,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'vim-syntastic/syntastic'
 Plug 'HerringtonDarkholme/yats'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tpope/vim-commentary'
 Plug 'leafgarland/typescript-vim'
 Plug 'google/vim-maktaba'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -131,6 +132,13 @@ map <leader>6 :6wincmd w<CR>
 map <leader>7 :7wincmd w<CR>
 map <leader>8 :8wincmd w<CR>
 map <leader>9 :9wincmd w<CR>
+
+" Toggle comment on selected lines. Requires iterm2 Key Binding:
+"
+"   Keyboard Shortcut: cmd+/
+"   Action: Send Text with "vim" Special Chars
+"   Text: \<C-_>
+map <C-_> gc
 
 map <Leader>r :FZF --reverse --inline-info<CR>
 map <Leader>nt :tabnew<CR>

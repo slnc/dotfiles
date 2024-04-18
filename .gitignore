@@ -2,16 +2,17 @@
 
 *.swp
 .vim/.netrwhist
-.vim/plugged/
+.vim/plugged
 .vim/plugin/unicycle.vim
-.vim/spell/
+.vim/spell
 
 # Gamersmafia
-public/storage/
-public/cache/
-public/storage-dev/
-public/storage-test/
-tmp/
+public/storage
+public/cache
+public/storage-dev
+public/storage-test
+tmp
 
 zsh/.zsh_history
 zsh/.zcompdump
+zsh/.zsh_sessions
