@@ -2212,7 +2212,7 @@
 			<key>HotKey Window Dock Click Action</key>
 			<integer>0</integer>
 			<key>HotKey Window Floats</key>
-			<true/>
+			<false/>
 			<key>HotKey Window Reopens On Activation</key>
 			<false/>
 			<key>Icon</key>
@@ -2549,7 +2549,7 @@
 			<key>Right Option Key Sends</key>
 			<integer>0</integer>
 			<key>Rows</key>
-			<integer>34</integer>
+			<integer>24</integer>
 			<key>Screen</key>
 			<integer>-2</integer>
 			<key>Scrollback Lines</key>
@@ -3990,7 +3990,7 @@
 				<real>0.51372549019607838</real>
 			</dict>
 			<key>Guid</key>
-			<string>5652860C-C0D1-40E6-81DB-6FACE8A9E395</string>
+			<string>CCB6D81E-AB12-42EE-A8F2-3FBAC9D39615</string>
 			<key>Has Hotkey</key>
 			<false/>
 			<key>Hide After Opening</key>

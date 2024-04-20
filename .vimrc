@@ -7,6 +7,7 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'vim-syntastic/syntastic'
+Plug 'tpope/vim-commentary'
 Plug 'HerringtonDarkholme/yats'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-commentary'
@@ -104,6 +105,10 @@ let mapleader = ","
 vnoremap <silent> * :call VisualSelection('f')<CR>
 vnoremap <silent> # :call VisualSelection('b')<CR>
 
+" xnoremap <D-\> gc<CR>
+" xnoremap <D-/> gc<CR>
+" xnoremap <D-_> gc<CR>
+"
 " Disable default shortcut to enter Ex mode.
 noremap Q <ESC>
 
