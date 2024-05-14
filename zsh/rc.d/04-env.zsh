@@ -42,4 +42,4 @@ export PYENV_ROOT="$HOME/.pyenv"
 eval "$(pyenv init -)"
 if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
 
-export PYTHONSTARTUP=$(dirname "$(realpath "$0")")/../../.pythonrc
+export PYTHONSTARTUP=${DOTFILES_DIR}/.pythonrc

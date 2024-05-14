@@ -6,14 +6,8 @@
 
 set -uex
 
-if [ -d "$(dirname "$(realpath "$0")")/.git" ]; then
-  # devcontainer
-  DOTFILES_DIR=$(dirname "$(realpath "$0")")
-else
-  DOTFILES_DIR=~/files/settings/dotfiles
-  mkdir -p ~/files
-  git clone https://github.com/slnc/dotfiles.git $DOTFILES_DIR
-fi
+DOTFILES_DIR=~/.dotfiles
+git clone https://github.com/slnc/dotfiles.git $DOTFILES_DIR
 
 if [ $(uname) = 'Linux' ]; then
   # sudo apt-get install -qq -y zsh tmux
