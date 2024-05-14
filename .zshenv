@@ -1,1 +1,1 @@
-ZDOTDIR=~/files/settings/dotfiles/zsh
+ZDOTDIR=$(dirname "$(realpath "$0")")/zsh

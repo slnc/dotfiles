@@ -6,7 +6,6 @@
 .vim/plugin/unicycle.vim
 .vim/spell
 
-# Gamersmafia
 public/storage
 public/cache
 public/storage-dev

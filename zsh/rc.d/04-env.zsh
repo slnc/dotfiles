@@ -37,6 +37,9 @@ fpath=(
 # Disabled because most fns are rarely-used
 autoload -U $fpath[1]/*(.:t)
 
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
-export PYTHONSTARTUP=~/files/settings/dotfiles/.pythonrc
+
+export PYTHONSTARTUP=$(dirname "$(realpath "$0")")/../../.pythonrc

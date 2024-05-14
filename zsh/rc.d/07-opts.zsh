@@ -7,6 +7,6 @@ unsetopt LIST_BEEP
 
 if [[ `uname` != "Darwin" ]]; then
   if (( $+SHELL )); then
-    eval `dircolors ~/files/settings/dotfiles/dircolors.256dark`
+    eval `dircolors $(dirname "$(realpath "$0")")/../../dircolors.256dark`
   fi
 fi
