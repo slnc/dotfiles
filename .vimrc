@@ -6,22 +6,10 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'vim-syntastic/syntastic'
-Plug 'tpope/vim-commentary'
-Plug 'HerringtonDarkholme/yats'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-commentary'
-Plug 'leafgarland/typescript-vim'
-Plug 'google/vim-maktaba'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 let $FZF_DEFAULT_COMMAND='find . \( -name public/cache* tmp/* -name public/storage* -o -name .git \) -prune -o -print'
-
-if has("macunix")
-  Plug 'google/vim-codefmt'
-  Plug 'google/vim-glaive'
-  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-  Plug 'Quramy/tsuquyomi'
-endif
 
 call plug#end()
 
