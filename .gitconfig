@@ -48,9 +48,6 @@
 [gpg]
   format = ssh
 
-# [gpg "ssh"]
-  # program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
-
 [init]
 	defaultBranch = main
 
@@ -63,8 +60,3 @@
 [rerere]
 	enabled = true
 	autoUpdate = true
-
-[user]
-  name = Juan Alonso
-  email = juan@juan.al
-  signingKey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHJId+pDH8XWrST0trBUyrumd0gWt+An/Y82CcOMEo4+

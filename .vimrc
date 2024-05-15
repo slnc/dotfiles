@@ -39,6 +39,7 @@ set shortmess=atIoO   " Abbreviate messages
 set showcmd  " Show (partial) command in the last line of the screen
 set showmatch  " When a bracket is inserted, briefly jump to the matching one.
 set t_Co=256
+set t_vb=
 set tabstop=2
 set ballooneval
 set textwidth=80
@@ -92,10 +93,6 @@ let mapleader = ","
 vnoremap <silent> * :call VisualSelection('f')<CR>
 vnoremap <silent> # :call VisualSelection('b')<CR>
 
-" xnoremap <D-\> gc<CR>
-" xnoremap <D-/> gc<CR>
-" xnoremap <D-_> gc<CR>
-"
 " Disable default shortcut to enter Ex mode.
 noremap Q <ESC>
 
@@ -136,38 +133,6 @@ map <Leader>r :FZF --reverse --inline-info<CR>
 map <Leader>nt :tabnew<CR>
 nmap <leader>w :e ~/.worklog.md<CR>
 
-" Custom commands
-command! -buffer Fmt call s:GoFormat()
-command! Fig :normal i<CR>{{% figure src="" title="" %}}<CR><CR>
-
-function! GoFormat()
-    let view = winsaveview()
-    silent %!gofmt
-    if v:shell_error
-        let errors = []
-        for line in getline(1, line('$'))
-            let tokens = matchlist(line, '^\(.\{-}\):\(\d\+\):\(\d\+\)\s*\(.*\)')
-            if !empty(tokens)
-                call add(errors, {"filename": @%,
-                                 \"lnum":     tokens[2],
-                                 \"col":      tokens[3],
-                                 \"text":     tokens[4]})
-            endif
-        endfor
-        if empty(errors)
-            % | " Couldn't detect gofmt error format, output errors
-        endif
-        undo
-        if !empty(errors)
-            call setloclist(0, errors, 'r')
-        endif
-        echohl Error | echomsg "Gofmt returned error" | echohl None
-    endif
-    call winrestview(view)
-endfunction
-
-let b:did_ftplugin_go_fmt = 1
-
 
 " Function to remove trailing whitespace from the currently opened file
 fun! <SID>StripTrailingWhitespaces()
@@ -185,8 +150,6 @@ augroup configgroup
 
   autocmd BufEnter * highlight ColorColumn ctermbg=0
   autocmd BufEnter * match ExtraWhitespace /\s\+$/
-  " autocmd BufEnter *.go map <C-o> :call GoFormat()<CR>
-  " autocmd BufLeave *.go unmap <C-o>
   autocmd BufRead,BufNewFile *.wiki :set ft=markdown formatoptions-=tc
   autocmd BufWritePre * :silent call <SID>StripTrailingWhitespaces()
   autocmd ColorScheme * highlight ColorColumn ctermbg=0
@@ -221,16 +184,6 @@ augroup END
 " clang
 let clang_format_executable="~/bin/clang-format"
 
-" vim-go
-let g:go_fmt_command = "goimports"
-
-" syntastic
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_typescript_checkers = ['tsuquyomi']
-let g:syntastic_go_checkers = []
-let g:syntastic_mode_map = { 'mode': 'passive', 'passive_filetypes': ['html'] }
-
 " ctrlp
 let g:ctrlp_clear_cache_on_exit = 1
 let g:ctrlp_cmd = 'CtrlPMixed'
@@ -259,5 +212,3 @@ let $FZF_DEFAULT_COMMAND='find . \( -name public\/storage -o -name public\/cache
 let $FZF_DEFAULT_COMMAND='ag -p ~/.gitignore -g ""'
 
 let g:omni_sql_no_default_maps = 1
-
-set t_vb=
