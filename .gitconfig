@@ -32,6 +32,12 @@
 	helper = store
 	helper = /usr/local/share/gcm-core/git-credential-manager
 
+[credential "https://dev.azure.com"]
+	useHttpPath = true
+
+[commit]
+	gpgsign = true
+
 [diff]
   tool = vimdiff
   wsErrorHighlight = all
@@ -44,6 +50,9 @@
 
 # [gpg "ssh"]
   # program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+
+[init]
+	defaultBranch = main
 
 [pull]
 	rebase = true
@@ -59,22 +68,3 @@
   name = Juan Alonso
   email = juan@juan.al
   signingKey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHJId+pDH8XWrST0trBUyrumd0gWt+An/Y82CcOMEo4+
-
-
-[includeIf "gitdir:~/files/projects/b"]
-  path = ~/.gitconfig-b
-
-[includeIf "gitdir:~/files/projects/ai-experiments"]
-  path = ~/.gitconfig-b
-
-[includeIf "gitdir:/workspaces/ai-experiments"]
-  path = ~/.gitconfig-b
-
-[credential "https://dev.azure.com"]
-	useHttpPath = true
-
-[commit]
-	gpgsign = true
-
-[init]
-	defaultBranch = main
