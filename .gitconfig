@@ -42,6 +42,9 @@
 [gpg]
   format = ssh
 
+# [gpg "ssh"]
+  # program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+
 [pull]
 	rebase = true
 
@@ -57,6 +60,7 @@
   email = juan@juan.al
   signingKey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHJId+pDH8XWrST0trBUyrumd0gWt+An/Y82CcOMEo4+
 
+
 [includeIf "gitdir:~/files/projects/b"]
   path = ~/.gitconfig-b
 
@@ -71,5 +75,6 @@
 
 [commit]
 	gpgsign = true
+
 [init]
 	defaultBranch = main

@@ -9,6 +9,6 @@
 } "$@"  # pass-through args to zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[ -f ~/.zshrc_private ] && source ~/.zshrc_private
+[ -f ~/.zshrc ] && source ~/.zshrc
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
