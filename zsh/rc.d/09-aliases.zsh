@@ -18,11 +18,7 @@ alias cpd="cap production deploy"
 alias aseprite_export="cd $GM_WORK_DIR && ./script/sprites/aseprite_export.sh"
 alias regen_sprites="cd /var/www/gamersmafia/current && echo 'Sprites.gen_all && User.find(1).user_avatar.save' | bundle exec rails c && sar"
 
-alias ls='ls -AFpG --color=always'
+alias ls='ls -AFp --color=always'
 alias ll='ls -l'
 alias yt-dlp_macos="~/bin/yt-dlp_macos --ffmpeg-location=~/bin/ffmpeg"
 alias history="history 1"
-
-alias sn='cch slnc@nomind.internal'
-alias st='cch slnc@tempest.internal'
-alias sw='cch slnc@whispers.internal'

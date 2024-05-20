@@ -8,6 +8,7 @@ git clone https://github.com/slnc/dotfiles.git ${DOTFILES_DIR}
 
 if [[ $(uname) = 'Linux' ]]; then
   curl https://pyenv.run | bash
+  sudo apt install silversearcher-ag
 else
   brew install pyenv
 fi
