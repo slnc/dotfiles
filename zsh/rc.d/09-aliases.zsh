@@ -14,11 +14,6 @@ alias charlie='docker exec -it prolego-dev /usr/bin/zsh'  # && tmux -CC new -A -
 alias bv_etc_hosts="echo 'Faction.to_etc_hosts("127.0.0.1", "dev")' | bundle exec rails c"
 alias cpd="cap production deploy"
 
-# lt
-alias aseprite_export="cd $GM_WORK_DIR && ./script/sprites/aseprite_export.sh"
-alias regen_sprites="cd /var/www/gamersmafia/current && echo 'Sprites.gen_all && User.find(1).user_avatar.save' | bundle exec rails c && sar"
-
 alias ls='ls -AFp --color=always'
 alias ll='ls -l'
-alias yt-dlp_macos="~/bin/yt-dlp_macos --ffmpeg-location=~/bin/ffmpeg"
 alias history="history 1"
