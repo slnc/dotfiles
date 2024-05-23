@@ -25,6 +25,7 @@ path=(
     $path
     ~/bin(N)
     /opt/homebrew/bin(N)
+    ~/.local/bin
 )
 
 # Add your functions to your $fpath, so you can autoload them.
