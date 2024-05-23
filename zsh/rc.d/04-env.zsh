@@ -1,26 +1,22 @@
-export LC_CTYPE=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
 export EDITOR=vim
-export PGUSER=postgres  # TODO: do only if necessary
-
-# -U ensures each entry in these is unique (that is, discards duplicates).
-export -U PATH path FPATH fpath MANPATH manpath
-export -UT INFOPATH infopath  # -T creates a "tied" pair; see below.
-
+export GIT_CONFIG_GLOBAL=~/.dotfiles/.gitconfig
+export LC_ALL=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
+export MYVIMRC="~/.dotfiles/.vimrc"
+export PGUSER=postgres
+export PSQLRC=~/.dotfiles/.psqlrc
+export PYTHONSTARTUP=${DOTFILES_DIR}/.pythonrc
+export TMUXCONF=~/.dotfiles/.tmux.conf
+export VIMINIT='source $MYVIMRC'
 export ZSH_COMPDUMP=~/.cache/.zcompdump-$HOST
 
-export PROLEGO_WORK_DIR=~/files/juan/prolego/prolego-src
-export GM_WORK_DIR=~/files/juan/gamersmafia/src
+export -U PATH path FPATH fpath MANPATH manpath
+export -UT INFOPATH infopath
 
-# determines search program for fzf
 if type ag &> /dev/null; then
   export FZF_DEFAULT_COMMAND='ag -p ~/.gitignore -g ""'
 fi
 
-# $PATH and $path (and also $FPATH and $fpath, etc.) are "tied" to each other.
-# Modifying one will also modify the other.
-# Note that each value in an array is expanded separately. Thus, we can use ~
-# for $HOME in each $path entry.
 path=(
     $path
     ~/bin(N)
@@ -28,19 +24,17 @@ path=(
     ~/.local/bin
 )
 
-# Add your functions to your $fpath, so you can autoload them.
 fpath=(
   $ZDOTDIR/functions
   $fpath
   ~/.local/zsh/site-functions
 )
 
-# Disabled because most fns are rarely-used
 autoload -U $fpath[1]/*(.:t)
 
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
-if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
-
-export PYTHONSTARTUP=${DOTFILES_DIR}/.pythonrc
+if which pyenv-virtualenv-init > /dev/null; then
+eval "$(pyenv virtualenv-init -)";
+fi

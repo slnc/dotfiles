@@ -1,10 +1,17 @@
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+let s:vim_dir = expand('~/.dotfiles/.vim')
+
+execute 'set runtimepath+=' . s:vim_dir
+execute 'set viminfofile=' . s:vim_dir . '/.viminfo'
+
+let s:plug_dir = s:vim_dir . '/autoload/plug.vim'
+
+if empty(glob(s:plug_dir))
+  silent !curl -fLo s:plug_dir --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.dotfiles/.vim/plugged')
 
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'tpope/vim-commentary'
@@ -146,7 +153,6 @@ augroup configgroup
   autocmd!
   autocmd QuickFixCmdPost [^l]* nested cwindow
   autocmd QuickFixCmdPost    l* nested lwindow
-  autocmd BufWritePost .vimrc source ~/.vimrc
 
   autocmd BufEnter * highlight ColorColumn ctermbg=0
   autocmd BufEnter * match ExtraWhitespace /\s\+$/

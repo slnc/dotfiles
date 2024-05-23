@@ -8,10 +8,10 @@
   ls = log --pretty=format:\"%h %ad | %s%d %as [%an]\" --graph --date=format:\"%Y-%m-%d %H:%M\"
   lp = log -p
   s = status
-	fpush = push
+  fpush = push
 
 [branch]
-	sort = -committerdate
+  sort = -committerdate
 
 [color]
   branch = auto
@@ -20,23 +20,23 @@
   ui = auto
 
 [column]
-	branch = auto
+  branch = auto
 
 [core]
   autocrlf = input
-  excludesfile = ~/.gitignore
+  excludesfile = ~/.dotfiles/.gitignore
   precomposeunicode = true
   quotepath = false
 
 [credential]
-	helper = store
-	helper = /usr/local/share/gcm-core/git-credential-manager
+  helper = store
+  helper = /usr/local/share/gcm-core/git-credential-manager
 
 [credential "https://dev.azure.com"]
-	useHttpPath = true
+  useHttpPath = true
 
 [commit]
-	gpgsign = true
+  gpgsign = true
 
 [diff]
   tool = vimdiff
@@ -49,14 +49,14 @@
   format = ssh
 
 [init]
-	defaultBranch = main
+  defaultBranch = main
 
 [pull]
-	rebase = true
+  rebase = true
 
 [push]
-	default = current
+  default = current
 
 [rerere]
-	enabled = true
-	autoUpdate = true
+  enabled = true
+  autoUpdate = true

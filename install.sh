@@ -13,15 +13,7 @@ else
   brew install pyenv
 fi
 
-targets=(
-  .gitconfig
-  .gitignore
-  .psqlrc
-  .tmux.conf
-  .vim
-  .vimrc
-  .zshenv
-)
+ln ~/.dotfiles/.zshenv ~/
 
 for f in "${targets[@]}"; do
   ln -s "${DOTFILES_DIR}/${f}" ~

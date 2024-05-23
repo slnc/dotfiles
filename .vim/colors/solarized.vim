@@ -145,6 +145,7 @@ let s:terms_noitalic=[
             \"iTerm.app",
             \"Apple_Terminal"
             \]
+
 if has("gui_running")
     let s:terminal_italic=1 " TODO: could refactor to not require this at all
 else

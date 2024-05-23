@@ -2,6 +2,7 @@
 
 *.swp
 .vim/.netrwhist
+.vim/.viminfo
 .vim/plugged
 .vim/plugin/unicycle.vim
 .vim/spell
