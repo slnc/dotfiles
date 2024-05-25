@@ -6,7 +6,7 @@ export MYVIMRC="~/.dotfiles/.vimrc"
 export PGUSER=postgres
 export PSQLRC=~/.dotfiles/.psqlrc
 export PYTHONSTARTUP=${DOTFILES_DIR}/.pythonrc
-export TMUXCONF=~/.dotfiles/.tmux.conf
+export TMUX_CONF=${DOTFILES_DIR}/.tmux.conf
 export VIMINIT='source $MYVIMRC'
 export ZSH_COMPDUMP=~/.cache/.zcompdump-$HOST
 
