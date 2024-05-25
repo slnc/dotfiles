@@ -11,9 +11,18 @@ autoload -Uz vcs_info
 precmd_vcs_info() { vcs_info }
 precmd_functions+=( precmd_vcs_info )
 setopt prompt_subst
-RPROMPT=\$vcs_info_msg_0_
+PS1="${PS1}\$vcs_info_msg_0_"
 zstyle ':vcs_info:git:*' formats '%b %u%c'
 zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' unstagedstr '!'
 zstyle ':vcs_info:*' stagedstr '+'
+zstyle ':vcs_info:git:*' formats '%K{16} %F{242}%b%F{162}%c%u%f%F{240} %f%k '
+zstyle ':vcs_info:*' enable git
+
++vi-git-untracked() {
+  if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] && \
+  [[ $(git ls-files --other --directory --exclude-standard | sed q | wc -l | tr -d ' ') == 1 ]] ; then
+  hook_com[unstaged]+='?%f'
+fi
+}
