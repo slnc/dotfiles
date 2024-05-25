@@ -1,1 +1,1 @@
-ssh -t $@ "tmux -CC new -A -s foo"
+ssh -t $@ 'source ~/.zshenv; source "${ZDOTDIR}/.zshrc"; tmux -f "${TMUX_CONF}" -CC new -A -s default'
