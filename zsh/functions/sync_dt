@@ -1,0 +1,4 @@
+sudo /usr/sbin/systemsetup -settimezone Europe/Madrid
+
+sudo /usr/sbin/systemsetup -setusingnetworktime off
+sudo /usr/sbin/systemsetup -setusingnetworktime on
