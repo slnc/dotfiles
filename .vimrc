@@ -185,6 +185,11 @@ augroup configgroup
   autocmd BufRead,BufNewFile ~/.worklog.md setlocal norelativenumber
 augroup END
 
+augroup gitconfig
+  autocmd!
+  autocmd BufRead,BufNewFile *.gitconfig setlocal noexpandtab tabstop=4 shiftwidth=4
+augroup END
+
 " Plugins config
 
 " clang
