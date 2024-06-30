@@ -23,14 +23,10 @@ zstyle ':vcs_info:*' enable git
 
 +vi-git-untracked() {
   if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]]; then
-    local untracked_files
-    untracked_files=$(git ls-files --other --directory --exclude-standard)
-    for file in $untracked_files; do
-      if [[ -z $(git check-ignore -v $file) ]]; then
-        hook_com[unstaged]+='?%f'
-        break
-      fi
-    done
+    local untracked_count
+    untracked_count=$(git status --porcelain 2>/dev/null | grep '^??' | wc -l)
+    if [[ $untracked_count -gt 0 ]]; then
+      hook_com[unstaged]+='?%f'
+    fi
   fi
 }
-
