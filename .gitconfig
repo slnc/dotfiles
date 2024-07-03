@@ -7,6 +7,8 @@
   d = diff
   ls = log --pretty=format:\"%h %ad | %s%d %as [%an]\" --graph --date=format:\"%Y-%m-%d %H:%M\"
   lp = log -p
+  l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  logline = l
   s = status
   fpush = push
 
