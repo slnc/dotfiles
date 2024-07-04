@@ -118,6 +118,9 @@ inoremap <C-c> <ESC>
 nnoremap / /\v
 cnoremap %s/ %s/\v
 
+" Show full file path
+nnoremap <C-g> :echo expand('%:p')<CR>
+
 " Shortcuts to quickly move between vim windows.
 map <leader>1 :1wincmd w<CR>
 map <leader>2 :2wincmd w<CR>
