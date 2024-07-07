@@ -1,1 +1,0 @@
-rsync -azv ~/files/data/calibre/ slnc@whispers:/srv/nas/slnc/calibre

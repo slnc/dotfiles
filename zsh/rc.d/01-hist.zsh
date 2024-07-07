@@ -1,9 +1,6 @@
 # Set history first to preserve it.
-
 HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
-
 SAVEHIST=$(( 100 * 1000 ))  # max entries
-
 HISTSIZE=$(( 1.2 * SAVEHIST ))  # Zsh recommended value
 
 setopt APPEND_HISTORY
