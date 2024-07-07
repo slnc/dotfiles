@@ -492,14 +492,16 @@
 			<false/>
 			<key>Foreground Color</key>
 			<dict>
+				<key>Alpha Component</key>
+				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.58823529411764708</real>
+				<real>0.72821861505508423</real>
 				<key>Color Space</key>
-				<string>sRGB</string>
+				<string>P3</string>
 				<key>Green Component</key>
-				<real>0.58039215686274515</real>
+				<real>0.72821861505508423</real>
 				<key>Red Component</key>
-				<real>0.51372549019607838</real>
+				<real>0.72821849584579468</real>
 			</dict>
 			<key>Guid</key>
 			<string>24905C83-E496-4E6C-97A9-8EF54AEE6E4D</string>
@@ -1488,14 +1490,16 @@
 			<false/>
 			<key>Foreground Color</key>
 			<dict>
+				<key>Alpha Component</key>
+				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.58823529411764708</real>
+				<real>0.72549019607843135</real>
 				<key>Color Space</key>
-				<string>sRGB</string>
+				<string>P3</string>
 				<key>Green Component</key>
-				<real>0.58039215686274515</real>
+				<real>0.72549019607843135</real>
 				<key>Red Component</key>
-				<real>0.51372549019607838</real>
+				<real>0.72549019607843135</real>
 			</dict>
 			<key>Guid</key>
 			<string>AB91DDDF-21FF-40EF-87EB-26CB20E31F2A</string>
@@ -2394,14 +2398,16 @@
 			<false/>
 			<key>Foreground Color</key>
 			<dict>
+				<key>Alpha Component</key>
+				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.58823529411764708</real>
+				<real>0.72549019607843135</real>
 				<key>Color Space</key>
-				<string>sRGB</string>
+				<string>P3</string>
 				<key>Green Component</key>
-				<real>0.58039215686274515</real>
+				<real>0.72549019607843135</real>
 				<key>Red Component</key>
-				<real>0.51372549019607838</real>
+				<real>0.72549019607843135</real>
 			</dict>
 			<key>Guid</key>
 			<string>3D5D5B93-87C9-43D3-9414-E663A5E0FCC5</string>
@@ -3298,14 +3304,16 @@
 			<false/>
 			<key>Foreground Color</key>
 			<dict>
+				<key>Alpha Component</key>
+				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.58823529411764708</real>
+				<real>0.72549019607843135</real>
 				<key>Color Space</key>
-				<string>sRGB</string>
+				<string>P3</string>
 				<key>Green Component</key>
-				<real>0.58039215686274515</real>
+				<real>0.72549019607843135</real>
 				<key>Red Component</key>
-				<real>0.51372549019607838</real>
+				<real>0.72549019607843135</real>
 			</dict>
 			<key>Guid</key>
 			<string>CCB6D81E-AB12-42EE-A8F2-3FBAC9D39615</string>
@@ -4759,7 +4767,7 @@
 		</dict>
 	</dict>
 	<key>ShowFullScreenTabBar</key>
-	<true/>
+	<false/>
 	<key>SmartPlacement</key>
 	<true/>
 	<key>Snippets</key>
@@ -4793,5 +4801,9 @@
 	<false/>
 	<key>findMode_iTerm</key>
 	<integer>0</integer>
+	<key>kCPKSelectionViewPreferredModeKey</key>
+	<integer>0</integer>
+	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
+	<false/>
 </dict>
 </plist>

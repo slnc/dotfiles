@@ -6,14 +6,19 @@ set -uex
 DOTFILES_DIR=~/.dotfiles
 git clone https://github.com/slnc/dotfiles.git ${DOTFILES_DIR}
 
-if [[ $(uname) = 'Linux' ]]; then
+if command -v apt-get &> /dev/null; then
   curl https://pyenv.run | bash
-  sudo apt install silversearcher-ag
-else
+  apt-get update && apt-get install -y silversearcher-ag
+elif command -v brew &> /dev/null; then
   brew install pyenv
+else
+  echo "Unable to determine the package manager. Please install pyenv manually."
 fi
 
-ln ~/.dotfiles/.zshenv ~/
+targets=(
+  .vimrc
+  .zshenv
+)
 
 for f in "${targets[@]}"; do
   ln -s "${DOTFILES_DIR}/${f}" ~
