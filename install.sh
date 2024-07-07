@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 #
-# - curl -L https://raw.githubusercontent.com/slnc/dotfiles/master/install.sh | sh
+# - curl -L https://raw.githubusercontent.com/slnc/dotfiles/master/install.sh | zsh
 set -uex
 
 DOTFILES_DIR=~/.dotfiles
@@ -12,7 +12,7 @@ if command -v apt-get &> /dev/null; then
 elif command -v brew &> /dev/null; then
   brew install pyenv
 else
-  echo "Unable to determine the package manager. Please install pyenv manually."
+  echo "Unable to determine the package manager. Install pyenv manually."
 fi
 
 targets=(
