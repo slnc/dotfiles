@@ -21,9 +21,6 @@
   status = auto
   ui = auto
 
-[column]
-  branch = auto
-
 [core]
   autocrlf = input
   excludesfile = ~/.dotfiles/.gitignore
