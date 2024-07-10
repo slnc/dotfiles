@@ -1,4 +1,5 @@
 export EDITOR=vim
+export LESS="--no-init --quit-if-one-screen -R"  # for git branch on devcontainers
 export GIT_CONFIG_GLOBAL=~/.dotfiles/.gitconfig
 export LC_ALL=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
