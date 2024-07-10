@@ -10,7 +10,7 @@
   l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   logline = l
   s = status
-  fpush = push
+  pushfwl = push --force-with-lease
 
 [branch]
   sort = -committerdate
