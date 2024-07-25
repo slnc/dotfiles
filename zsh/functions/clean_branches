@@ -1,0 +1,9 @@
+for b in $(git for-each-ref refs/heads --format="%(refname:short)" | grep -vE "(baserate-main|staging)"); do  # Go through each branch
+  # git cherry prefixes each commit with "+" if it's not included and "-" if it is, so check if there are no "+" lines:
+  if [[ ! $(git cherry origin/staging $b | grep "^+") ]]; then
+		if read -q "choice?Delete ${b}?"; then
+      git branch -D $branch
+    fi
+  fi
+done
+
