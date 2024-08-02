@@ -831,7 +831,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>Monaco 14</string>
+			<string>JetBrainsMonoNFM-Regular 14</string>
 			<key>Open Toolbelt</key>
 			<false/>
 			<key>Option Key Sends</key>
@@ -895,6 +895,8 @@
 			<true/>
 			<key>Shortcut</key>
 			<string></string>
+			<key>Show Offscreen Command line</key>
+			<false/>
 			<key>Show Status Bar</key>
 			<true/>
 			<key>Show Timestamps</key>
@@ -1526,7 +1528,7 @@
 			<key>HotKey Window Animates</key>
 			<true/>
 			<key>HotKey Window AutoHides</key>
-			<false/>
+			<true/>
 			<key>HotKey Window Dock Click Action</key>
 			<integer>0</integer>
 			<key>HotKey Window Floats</key>
@@ -1855,7 +1857,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>Monaco 14</string>
+			<string>JetBrainsMonoNFM-Regular 14</string>
 			<key>Open Toolbelt</key>
 			<false/>
 			<key>Option Key Sends</key>
@@ -1919,6 +1921,8 @@
 			<true/>
 			<key>Shortcut</key>
 			<string></string>
+			<key>Show Offscreen Command line</key>
+			<false/>
 			<key>Show Status Bar</key>
 			<true/>
 			<key>Show Timestamps</key>
@@ -2087,6 +2091,8 @@
 			<key>Use Italic Font</key>
 			<true/>
 			<key>Use Non-ASCII Font</key>
+			<false/>
+			<key>Use Tab Color</key>
 			<false/>
 			<key>Vertical Spacing</key>
 			<real>1</real>
@@ -2763,7 +2769,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>Monaco 14</string>
+			<string>JetBrainsMonoNFM-Regular 14</string>
 			<key>Open Toolbelt</key>
 			<false/>
 			<key>Option Key Sends</key>
@@ -2827,6 +2833,8 @@
 			<true/>
 			<key>Shortcut</key>
 			<string></string>
+			<key>Show Offscreen Command line</key>
+			<false/>
 			<key>Show Status Bar</key>
 			<true/>
 			<key>Show Timestamps</key>
@@ -2995,6 +3003,8 @@
 			<key>Use Italic Font</key>
 			<true/>
 			<key>Use Non-ASCII Font</key>
+			<false/>
+			<key>Use Tab Color</key>
 			<false/>
 			<key>Vertical Spacing</key>
 			<real>1</real>
@@ -4477,7 +4487,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>Monaco 14</string>
+			<string>JetBrainsMonoNFM-Regular 14</string>
 			<key>Open Toolbelt</key>
 			<false/>
 			<key>Option Key Sends</key>
@@ -4541,6 +4551,8 @@
 			<true/>
 			<key>Shortcut</key>
 			<string></string>
+			<key>Show Offscreen Command line</key>
+			<false/>
 			<key>Show Status Bar</key>
 			<false/>
 			<key>Show Timestamps</key>
@@ -4710,6 +4722,8 @@
 			<key>Use Italic Font</key>
 			<true/>
 			<key>Use Non-ASCII Font</key>
+			<false/>
+			<key>Use Tab Color</key>
 			<false/>
 			<key>Vertical Spacing</key>
 			<real>1</real>
