@@ -15,3 +15,4 @@ alias cpd="cap production deploy"
 alias ls='ls -AFp --color=always'
 alias ll='ls -l'
 alias history="history 1"
+alias vim=nvim  # we're doing this, baby

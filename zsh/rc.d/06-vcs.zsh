@@ -19,7 +19,7 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' unstagedstr '!'
 zstyle ':vcs_info:*' stagedstr '+'
-zstyle ':vcs_info:git:*' formats '%K{16} %F{242}%b%F{162}%c%u%f%F{240} %f%k '
+zstyle ':vcs_info:git:*' formats '%K{16} %F{242}󰘬 %b%F{162}%c%u%f%F{240} %f%k '
 zstyle ':vcs_info:*' enable git
 
 +vi-git-untracked() {
