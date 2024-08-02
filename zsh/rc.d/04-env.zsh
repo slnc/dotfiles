@@ -6,7 +6,6 @@ export LC_CTYPE=en_US.UTF-8
 export PGUSER=postgres
 export PSQLRC=~/.dotfiles/.psqlrc
 export PYTHONSTARTUP=${DOTFILES_DIR}/.pythonrc
-export TMUX_CONF=${DOTFILES_DIR}/.tmux.conf
 export ZSH_COMPDUMP=~/.cache/.zcompdump-$HOST
 
 export -U PATH path FPATH fpath MANPATH manpath
