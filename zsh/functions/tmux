@@ -1,3 +1,4 @@
 tmux() {
-  command tmux -f "$TMUX_CONF" "$@"
+  command tmux 
+  # -f "$TMUX_CONF" "$@"
 }
