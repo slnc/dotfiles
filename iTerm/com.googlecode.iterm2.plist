@@ -58,6 +58,32 @@
 			<key>Version</key>
 			<integer>1</integer>
 		</dict>
+		<key>0x6a-0x140000-0x26</key>
+		<dict>
+			<key>Action</key>
+			<integer>30</integer>
+			<key>Apply Mode</key>
+			<integer>0</integer>
+			<key>Escaping</key>
+			<integer>2</integer>
+			<key>Text</key>
+			<string></string>
+			<key>Version</key>
+			<integer>2</integer>
+		</dict>
+		<key>0x6b-0x140000-0x28</key>
+		<dict>
+			<key>Action</key>
+			<integer>31</integer>
+			<key>Apply Mode</key>
+			<integer>0</integer>
+			<key>Escaping</key>
+			<integer>2</integer>
+			<key>Text</key>
+			<string></string>
+			<key>Version</key>
+			<integer>2</integer>
+		</dict>
 		<key>0x7c-0x120000-0x2a</key>
 		<dict>
 			<key>Action</key>
@@ -394,7 +420,9 @@
 			<key>Background Image Is Tiled</key>
 			<false/>
 			<key>Background Image Location</key>
-			<string></string>
+			<string>/Users/slnc/files/settings/wallpaper_nature/mik-plants.jpg</string>
+			<key>Background Image Mode</key>
+			<integer>1</integer>
 			<key>Badge Color</key>
 			<dict>
 				<key>Alpha Component</key>
@@ -409,7 +437,7 @@
 				<integer>1</integer>
 			</dict>
 			<key>Blend</key>
-			<real>0.40459621263586953</real>
+			<real>0.090615446671195574</real>
 			<key>Blink Allowed</key>
 			<false/>
 			<key>Blinking Cursor</key>
@@ -515,6 +543,8 @@
 			<integer>0</integer>
 			<key>Initial Text</key>
 			<string></string>
+			<key>Initial Use Transparency</key>
+			<true/>
 			<key>Jobs to Ignore</key>
 			<array>
 				<string>rlogin</string>
@@ -898,7 +928,7 @@
 			<key>Show Offscreen Command line</key>
 			<false/>
 			<key>Show Status Bar</key>
-			<true/>
+			<false/>
 			<key>Show Timestamps</key>
 			<integer>2</integer>
 			<key>Silence Bell</key>
@@ -1165,7 +1195,7 @@
 			<key>Title Components</key>
 			<integer>258</integer>
 			<key>Transparency</key>
-			<integer>0</integer>
+			<real>0.0</real>
 			<key>Triggers</key>
 			<array/>
 			<key>Unlimited Scrollback</key>
