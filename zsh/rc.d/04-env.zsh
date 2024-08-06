@@ -20,6 +20,7 @@ path=(
     $path
     ~/bin
     ~/bin/nvim/bin
+    ~/.dotfiles/.local/bin
     /opt/homebrew/bin(N)
     ~/.local/bin
 )

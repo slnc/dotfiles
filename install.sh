@@ -3,7 +3,10 @@
 set -uex
 
 DOTFILES_DIR=~/.dotfiles
-git clone https://github.com/slnc/dotfiles.git "${DOTFILES_DIR}"
+PROJECTS_DIR=~/files/projects
+mkdir -p ${PROJECTS_DIR}
+git clone https://github.com/slnc/dotfiles.git "${PROJECTS_DIR}/${DOTFILES_DIR}"
+ln -s "${PROJECTS_DIR}/${DOTFILES_DIR}" "${DOTFILES_DIR}"
 
 if command -v apt-get > /dev/null 2>&1; then
   curl https://pyenv.run | bash
@@ -25,5 +28,5 @@ done
 ln -s ~/.dotfiles/nvim ~/.config/
 
 vim +PlugInstall +qall
-curl -L https://iterm2.com/shell_integration/install_shell_integration.sh | bash
+# curl -L https://iterm2.com/shell_integration/install_shell_integration.sh | bash
 chsh -s /bin/zsh
