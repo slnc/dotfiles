@@ -10,7 +10,7 @@ ln -s "${PROJECTS_DIR}/${DOTFILES_DIR}" "${DOTFILES_DIR}"
 
 if command -v apt-get > /dev/null 2>&1; then
   curl https://pyenv.run | bash
-  sudo apt-get update && apt-get install -y zsh vim ripgrep tmux cmake gettext dh-cmake fzf
+  sudo apt-get update && sudo apt-get install -y zsh vim ripgrep tmux cmake gettext dh-cmake fzf
   echo "install neovim from source"
   echo "git clone https://github.com/neovim/neovim"
   echo "cd neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo"
