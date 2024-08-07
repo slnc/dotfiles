@@ -21,7 +21,7 @@ else
   echo "Unable to determine the package manager. Install pyenv manually."
 fi
 
-for f in ".vimrc .zshenv .tmux.conf"; do
+for f in .zshenv .tmux.conf; do
   ln -s "${DOTFILES_DIR}/${f}" ~
 done
 
