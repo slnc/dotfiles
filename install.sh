@@ -10,7 +10,7 @@ ln -s "${PROJECTS_DIR}/${DOTFILES_DIR}" "${DOTFILES_DIR}"
 
 if command -v apt-get > /dev/null 2>&1; then
   curl https://pyenv.run | bash
-  apt-get update && apt-get install -y zsh vim ripgrep tmux cmake gettext dh-cmake fzf
+  sudo apt-get update && apt-get install -y zsh vim ripgrep tmux cmake gettext dh-cmake fzf
   echo "install neovim from source"
   echo "git clone https://github.com/neovim/neovim"
   echo "cd neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo"
@@ -29,4 +29,4 @@ ln -s ~/.dotfiles/nvim ~/.config/
 
 # vim +PlugInstall +qall
 # curl -L https://iterm2.com/shell_integration/install_shell_integration.sh | bash
-chsh -s /bin/zsh
+sudo chsh -s /bin/zsh
