@@ -21,12 +21,12 @@ else
   echo "Unable to determine the package manager. Install pyenv manually."
 fi
 
-for f in ".vimrc .zshenv"; do
+for f in ".vimrc .zshenv .tmux.conf"; do
   ln -s "${DOTFILES_DIR}/${f}" ~
 done
 
 ln -s ~/.dotfiles/nvim ~/.config/
 
-vim +PlugInstall +qall
+# vim +PlugInstall +qall
 # curl -L https://iterm2.com/shell_integration/install_shell_integration.sh | bash
 chsh -s /bin/zsh
