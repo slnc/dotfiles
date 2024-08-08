@@ -93,6 +93,10 @@ lspconfig.lua_ls.setup {
                     indent_size = "2",
                 }
             },
+            diagnostics = {
+                -- Get the language server to recognize the `vim` global
+                globals = { 'vim' },
+            },
         },
     },
 }
