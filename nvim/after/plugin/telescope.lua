@@ -23,21 +23,21 @@ require('telescope').setup {
                         hidden = true
                 },
                 grep_string = {
-                        additional_args = { "--hidden" }
+                        additional_args = { "--hidden", "--smart-case" }
                 },
                 live_grep = {
-                        additional_args = { "--hidden" }
+                        additional_args = { "--hidden", "--smart-case" }
                 },
         },
 }
 
 local builtin = require('telescope.builtin')
 local find_cmd = { 'rg', '--files', '--hidden', '-g', '!.git' }
-vim.keymap.set('n', '<leader>pf',
+vim.keymap.set('n', '<leader>ff',
         function() builtin.find_files({ find_command = find_cmd }) end, {})
-vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
+vim.keymap.set("n", "<leader>lv", builtin.live_grep, {})
 vim.keymap.set('n', '<C-p>', builtin.git_files, {})
-vim.keymap.set('n', '<leader>ps', function()
+vim.keymap.set('n', '<leader>gs', function()
         builtin.grep_string({ search = vim.fn.input("Grep > ") });
 end, { desc = "grep_string" })
 -- require("telescope.builtin").find_files { find_command = { "rg", "--hidden" } }
