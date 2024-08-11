@@ -1,7 +1,9 @@
-# slnc's dotfiles
+# slnc's .dotfiles
 
-Install into ~/files/projects, symlinked to ~/.dotfiles with:
+## Installation
 
 ```sh
 curl -L https://raw.githubusercontent.com/slnc/dotfiles/master/install.sh | sh
 ```
+
+This will install into `~/files/projects`, symlinked to `~/.dotfiles`.
