@@ -6,4 +6,5 @@
 curl -L https://raw.githubusercontent.com/slnc/dotfiles/master/install.sh | sh
 ```
 
-This will install into `~/files/projects`, symlinked to `~/.dotfiles`.
+This will install them to `~/files/projects/.dotfiles`, which is where I have
+all my projects.

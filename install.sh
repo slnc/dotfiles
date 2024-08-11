@@ -7,7 +7,7 @@ git clone https://github.com/slnc/dotfiles.git "${DST_DIR}"
 ln -s "${DST_DIR}" ~/.dotfiles
 
 if command -v apt > /dev/null 2>&1; then
-  sudo apt-get install git ripgrep tmux zsh 
+  sudo apt-get install -q -yy git ripgrep tmux zsh 
   curl https://pyenv.run | bash
 elif command -v brew > /dev/null 2>&1; then
   brew install fzf git pyenv ripgrep tmux
