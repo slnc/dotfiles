@@ -17,11 +17,12 @@ if type ag &> /dev/null; then
 fi
 
 path=(
+    /opt/homebrew/bin(N)
     $path
     ~/bin
     ~/bin/nvim/bin
     ~/.dotfiles/.local/bin
-    /opt/homebrew/bin(N)
+    /usr/local/lib/ruby/gems/3.3.0/bin(N)
     ~/.local/bin
 )
 
@@ -39,3 +40,5 @@ eval "$(pyenv init -)"
 if which pyenv-virtualenv-init > /dev/null; then
 eval "$(pyenv virtualenv-init -)";
 fi
+
+eval "$(rbenv init - --no-rehash zsh)"

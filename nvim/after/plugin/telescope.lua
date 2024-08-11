@@ -23,10 +23,10 @@ require('telescope').setup {
                         hidden = true
                 },
                 grep_string = {
-                        additional_args = { "--hidden", "--smart-case" }
+                        additional_args = { "--hidden", "--smart-case", "-f", "!.git" }
                 },
                 live_grep = {
-                        additional_args = { "--hidden", "--smart-case" }
+                        additional_args = { "--hidden", "--smart-case", "-f", "!.git" }
                 },
         },
 }
