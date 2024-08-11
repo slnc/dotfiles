@@ -1,11 +1,10 @@
 #!/bin/sh
 set -uex
 
-DOTFILES_DIR=~/.dotfiles
-PROJECTS_DIR=~/files/projects
-mkdir -p ${PROJECTS_DIR}
-git clone https://github.com/slnc/dotfiles.git "${PROJECTS_DIR}/${DOTFILES_DIR}"
-ln -s "${PROJECTS_DIR}/${DOTFILES_DIR}" "${DOTFILES_DIR}"
+DST_DIR=~/files/projects/.dotfiles
+mkdir -p "${DST_DIR}"
+git clone https://github.com/slnc/dotfiles.git "${DST_DIR}"
+ln -s "${DST_DIR}" ~/.dotfiles
 
 if command -v apt > /dev/null 2>&1; then
   sudo apt git install ripgrep tmux zsh 
@@ -17,11 +16,11 @@ else
 fi
 
 for f in .zshenv .tmux.conf; do
-  ln -s "${DOTFILES_DIR}/${f}" ~/
+  ln -s "${DST_DIR}/${f}" ~/
 done
 
 mkdir -p ~/.config
-ln -s ~/.dotfiles/nvim ~/.config/
+ln -s "${DST_DIR}/nvim" ~/.config/
 
 sudo chsh -s /bin/zsh
 echo "Remember to run install_neovim.sh"
