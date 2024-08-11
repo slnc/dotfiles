@@ -38,7 +38,9 @@ export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 if which pyenv-virtualenv-init > /dev/null; then
-eval "$(pyenv virtualenv-init -)";
+  eval "$(pyenv virtualenv-init -)";
 fi
 
-eval "$(rbenv init - --no-rehash zsh)"
+if which rbenv > /dev/null; then
+  eval "$(rbenv init - --no-rehash zsh)"
+fi
