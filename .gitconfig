@@ -64,6 +64,6 @@
 [push]
 	default = current
 
-[rerere]
-	enabled = true
-	autoUpdate = true
+# [rerere]
+# 	enabled = true
+# 	autoUpdate = true

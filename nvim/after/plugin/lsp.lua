@@ -37,7 +37,8 @@ end)
 -- https://lsp-zero.netlify.app/v3.x/language-server-configuration.html#enable-format-on-save
 lsp.on_attach(function(client, bufnr)
     lsp.default_keymaps({ buffer = bufnr })
-    lsp.buffer_autoformat()
+    -- DO NOT SUBMIT fix max line length
+    -- lsp.buffer_autoformat()
 end)
 
 -- lsp.format_on_save({
