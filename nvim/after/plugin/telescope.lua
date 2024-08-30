@@ -35,6 +35,7 @@ local builtin = require('telescope.builtin')
 local find_cmd = { 'rg', '--files', '--hidden', '-g', '!.git' }
 vim.keymap.set('n', '<leader>f',
         function() builtin.find_files({ find_command = find_cmd }) end, {})
+vim.keymap.set("n", "<leader>of", builtin.oldfiles, {})
 vim.keymap.set("n", "<leader>lg", builtin.live_grep, {})
 vim.keymap.set('n', '<C-p>', builtin.git_files, {})
 vim.keymap.set('n', '<leader>gs', function()
