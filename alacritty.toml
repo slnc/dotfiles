@@ -1,0 +1,5 @@
+live_config_reload = true
+
+[font]
+size = 10.0
+normal = { family = "DroidSansM Nerd Font Mono", style = "Regular" }

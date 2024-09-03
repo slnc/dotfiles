@@ -72,9 +72,9 @@ end)
 -- if n LSPs active, order is non-deterministic:
 -- https://lsp-zero.netlify.app/v3.x/language-server-configuration.html#enable-format-on-save
 lsp.on_attach(function(client, bufnr)
-    lsp.default_keymaps({ buffer = bufnr })
-    -- DO NOT SUBMIT fix max line length
-    -- lsp.buffer_autoformat()
+  lsp.default_keymaps({ buffer = bufnr })
+  -- DO NOT SUBMIT fix max line length
+  -- lsp.buffer_autoformat()
 end)
 
 lsp.format_on_save({
@@ -84,9 +84,9 @@ lsp.format_on_save({
   },
   servers = {
     ['lua_ls'] = { 'lua' },
-    ['tsserver'] = { 'javascript', 'typescript' },
+    -- ['tsserver'] = { 'javascript', 'typescript' },
     -- Add other servers and filetypes as needed
-    ['solidity_ls'] = {}, -- This disables formatting for Solidity
+    -- ['solidity_ls'] = {}, -- This disables formatting for Solidity
   }
 })
 
@@ -96,10 +96,10 @@ require('mason').setup({})
 require('mason-lspconfig').setup({
   ensure_installed = {
     'lua_ls',
-    'tsserver',
-    'solidity_ls',
-    'dockerls',
-    'eslint',
+    -- 'tsserver',
+    -- 'solidity_ls',
+    -- 'dockerls',
+    -- 'eslint',
   },
   handlers = {
     function(server_name)
