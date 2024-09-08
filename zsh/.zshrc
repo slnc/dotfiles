@@ -11,4 +11,4 @@
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.zshrc ] && source ~/.zshrc
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
+# antigen bundle jeffreytse/zsh-vi-mode

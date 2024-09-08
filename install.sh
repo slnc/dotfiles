@@ -1,10 +1,6 @@
 #!/bin/sh
 set -uex
 
-DST_DIR=~/files/projects/.dotfiles
-mkdir -p "${DST_DIR}"
-git clone https://github.com/slnc/dotfiles.git "${DST_DIR}"
-ln -s "${DST_DIR}" ~/.dotfiles
 
 if command -v apt > /dev/null 2>&1; then
   sudo apt-get install -q -yy git ripgrep tmux zsh 
@@ -14,6 +10,11 @@ elif command -v brew > /dev/null 2>&1; then
 else
   echo "Unsupported OS"
 fi
+
+DST_DIR=~/files/projects/.dotfiles
+mkdir -p "${DST_DIR}"
+git clone https://github.com/slnc/dotfiles.git "${DST_DIR}"
+ln -s "${DST_DIR}" ~/.dotfiles
 
 for f in .tmux.conf .zshenv; do
   ln -s "${DST_DIR}/${f}" ~/

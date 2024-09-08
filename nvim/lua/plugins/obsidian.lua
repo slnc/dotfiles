@@ -21,6 +21,7 @@ return {
     ui = {
       enable = false
     },
+    disable_frontmatter = true,
     workspaces = {
       {
         name = "dnd",
