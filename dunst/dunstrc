@@ -128,10 +128,15 @@
 #    summary = "*script*"
 #    script = dunst_test.sh
 
-#[ignore]
-#    # This notification will not be displayed
-#    summary = "foobar"
-#    format = ""
+[ignore-espanso]
+    # This notification will not be displayed
+    appname = espanso
+    format = ""
+
+[ignore-network-manager]
+    # This notification will not be displayed
+    summary = "Connection Established"
+    format = ""
 
 #[history-ignore]
 #    # This notification will not be saved in history

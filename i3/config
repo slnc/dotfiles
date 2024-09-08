@@ -8,6 +8,10 @@
 # i3 config file (v4)
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
+exec --no-startup-id xrandr --output HDMI-2 --auto --same-as eDP-1
+
+# Use this to disable laptop screen:
+# exec --no-startup-id xrandr --output HDMI-1 --primary --auto --output eDP-1 --off
 
 set $mod Mod4
 
@@ -22,7 +26,7 @@ font pango:monospace 8
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex --autostart --environment i3
-exec --no-startup-id "setxkbmap -model pc105 -layout us,es -option grp:alt_shift_toggle"
+exec --no-startup-id setxkbmap -model pc105 -layout us,es -option grp:alt_shift_toggle
 
 set $wallpaper ~/files/settings/wallpaper.png
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
