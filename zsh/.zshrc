@@ -10,5 +10,3 @@
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.zshrc ] && source ~/.zshrc
-
-# antigen bundle jeffreytse/zsh-vi-mode
