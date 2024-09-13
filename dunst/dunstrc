@@ -1,10 +1,10 @@
+# /etc/xdg/dunst/dunstrc
 [global]
-    # /etc/xdg/dunst/dunstrc
     separator_height = 2
     padding = 12
     horizontal_padding = 12
 
-    frame_width = 2  
+    frame_width = 2
 
     # Defines color of the frame around the notification window.
     frame_color = "#000000"
@@ -133,9 +133,12 @@
     appname = espanso
     format = ""
 
-[ignore-network-manager]
-    # This notification will not be displayed
+[ignore-network-manager1]
     summary = "Connection Established"
+    format = ""
+
+[ignore-network-manager2]
+    summary = "Disconnected - you are now offline"
     format = ""
 
 #[history-ignore]

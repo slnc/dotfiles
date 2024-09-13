@@ -7,11 +7,11 @@
 
 # i3 config file (v4)
 #
-# Please see https://i3wm.org/docs/userguide.html for a complete reference!
-exec --no-startup-id xrandr --output HDMI-2 --auto --same-as eDP-1
+# exec --no-startup-id xrandr --output HDMI-2 --mode 2560x1440 --right-of-eDP-1
+# --same-as eDP-1
 
-# Use this to disable laptop screen:
-# exec --no-startup-id xrandr --output HDMI-1 --primary --auto --output eDP-1 --off
+# (Downstairs) Disabled laptop screen, monitor @ 2K
+exec --no-startup-id xrandr --output HDMI-2 --mode 2560x1440 --primary --auto --output eDP-1 --off
 
 set $mod Mod4
 
