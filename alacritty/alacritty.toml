@@ -1,6 +1,5 @@
 import = [
   "~/.config/alacritty/hosts/current.toml"
-  # "~/.config/alacritty/catppuccin-mocha.toml"
 ]
 
 [font]
@@ -28,8 +27,8 @@ import = [
 
 [colors.normal]
   black = "#163540"
-  red = "#ca4238"
-  green = "#88982d"
+  red = "#f54e4e"
+  green = "#8dba2d"
   yellow = "#ae8a2c"
   blue = "#4689cc"
   magenta = "#c24380"
