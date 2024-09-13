@@ -10,3 +10,7 @@
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.zshrc ] && source ~/.zshrc
+
+if command -v tmux >/dev/null 2>&1 && [[ $- =~ i ]] && [[ -z "$TMUX" ]] && [[ -n "$SSH_TTY" ]]; then
+  tmux attach -s default || tmux new -s default
+fi
