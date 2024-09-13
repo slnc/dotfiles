@@ -1,0 +1,46 @@
+import = [
+  # "~/.config/alacritty/catppuccin-macchiato.toml"
+  # "~/.config/alacritty/catppuccin-mocha.toml"
+]
+
+[env]
+  term = "xterm-direct"
+
+[font]
+  size = 14.0
+  normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
+
+[window]
+  decorations = "Buttonless"
+
+[window.padding]
+  x = 10
+  y = 10
+
+[colors]
+  draw_bold_text_with_bright_colors = true
+
+[colors.primary]
+  foreground = "#b9b9b9"
+  background = "#012B36"
+  bright_foreground = "#95a0a0"
+
+[colors.normal]
+  black = "#163540"
+  red = "#ca4238"
+  green = "#88982d"
+  yellow = "#ae8a2c"
+  blue = "#4689cc"
+  magenta = "#c24380"
+  cyan = "#519e97"
+  white = "#ece8d6"
+
+[colors.dim]
+  black = "#0d2a34"
+  red = "#bc5329"
+  green = "#5c6d74"
+  yellow = "#697a81"
+  blue = "#869395"
+  magenta = "#6c70be"
+  cyan = "#95a0a0"
+  white = "#fbf6e4"

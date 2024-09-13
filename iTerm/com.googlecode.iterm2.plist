@@ -514,6 +514,8 @@
 			<true/>
 			<key>Draw Powerline Glyphs</key>
 			<false/>
+			<key>Faint Text Alpha</key>
+			<real>0.49818103718307782</real>
 			<key>Flashing Bell</key>
 			<false/>
 			<key>Foreground Color</key>

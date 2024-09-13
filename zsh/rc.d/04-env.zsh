@@ -1,3 +1,4 @@
+export COLORTERM=truecolor
 export EDITOR=nvim
 export LESS="--no-init --quit-if-one-screen -R"  # for git branch on devcontainers
 export GIT_CONFIG_GLOBAL=~/.dotfiles/.gitconfig
