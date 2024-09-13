@@ -1,14 +1,15 @@
 import = [
-  # "~/.config/alacritty/catppuccin-macchiato.toml"
+  "~/.config/alacritty/hosts/current.toml"
   # "~/.config/alacritty/catppuccin-mocha.toml"
 ]
 
+[font]
+  normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
+  # set per-host
+  # size = 14.0
+
 [env]
   term = "xterm-direct"
-
-[font]
-  size = 14.0
-  normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
 
 [window]
   decorations = "Buttonless"
@@ -44,3 +45,4 @@ import = [
   magenta = "#6c70be"
   cyan = "#95a0a0"
   white = "#fbf6e4"
+

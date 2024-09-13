@@ -3,7 +3,7 @@ set -uex
 
 
 if command -v apt > /dev/null 2>&1; then
-  sudo apt-get install -q -yy git ripgrep tmux zsh 
+  sudo apt-get install -q -yy git ripgrep tmux zsh
   curl https://pyenv.run | bash
 elif command -v brew > /dev/null 2>&1; then
   brew install fzf git pyenv ripgrep tmux
@@ -26,3 +26,4 @@ ln -s "${DST_DIR}/nvim" ~/.config/
 sudo chsh -s /bin/zsh
 
 echo "Remember to run install_neovim.sh"
+echo "Remember to ln -s ~/.config/alacritty/hosts/`hostname`.toml ~/.config/alacritty/hosts/current.toml"
