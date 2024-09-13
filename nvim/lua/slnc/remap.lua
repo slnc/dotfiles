@@ -54,10 +54,19 @@ vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename)
 -- end, bufoptsWithDesc("Rename symbol"))
 --
 
+vim.api.nvim_set_hl(0, "ExtraWhitespace", { ctermbg = "darkred", bg = "darkred" })
+vim.api.nvim_create_autocmd("BufWinEnter", {
+  pattern = "*",
+  callback = function()
+    vim.fn.matchadd("ExtraWhitespace", [[\s\+$]])
+  end,
+})
+
+
 vim.api.nvim_create_autocmd('FileType', {
   group = vim.api.nvim_create_augroup('trim_whitespaces', { clear = true }),
   desc = 'Trim trailing white spaces',
-  pattern = 'bash,c,cpp,lua,java,go,php,javascript,make,python,rust,perl,sql,markdown',
+  pattern = '*',
   callback = function()
     vim.api.nvim_create_autocmd('BufWritePre', {
       pattern = '<buffer>',
