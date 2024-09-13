@@ -455,6 +455,8 @@
 				<key>Red Component</key>
 				<real>0.57647058823529407</real>
 			</dict>
+			<key>Brighten Bold Text</key>
+			<true/>
 			<key>Character Encoding</key>
 			<integer>4</integer>
 			<key>Close Sessions On End</key>
@@ -463,6 +465,8 @@
 			<integer>108</integer>
 			<key>Command</key>
 			<string>/usr/bin/zsh</string>
+			<key>Cursor Boost</key>
+			<real>0.0</real>
 			<key>Cursor Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -515,7 +519,7 @@
 			<key>Draw Powerline Glyphs</key>
 			<false/>
 			<key>Faint Text Alpha</key>
-			<real>0.49818103718307782</real>
+			<real>0.50015373949734665</real>
 			<key>Flashing Bell</key>
 			<false/>
 			<key>Foreground Color</key>
@@ -523,13 +527,13 @@
 				<key>Alpha Component</key>
 				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.72821861505508423</real>
+				<real>0.72549019607843135</real>
 				<key>Color Space</key>
 				<string>P3</string>
 				<key>Green Component</key>
-				<real>0.72821861505508423</real>
+				<real>0.72549019607843135</real>
 				<key>Red Component</key>
-				<real>0.72821849584579468</real>
+				<real>0.72549019607843135</real>
 			</dict>
 			<key>Guid</key>
 			<string>24905C83-E496-4E6C-97A9-8EF54AEE6E4D</string>
@@ -851,7 +855,7 @@
 			<key>Log Directory</key>
 			<string></string>
 			<key>Minimum Contrast</key>
-			<integer>0</integer>
+			<real>0.0</real>
 			<key>Mouse Reporting</key>
 			<true/>
 			<key>Name</key>
@@ -1210,6 +1214,8 @@
 			<true/>
 			<key>Use Non-ASCII Font</key>
 			<false/>
+			<key>Use Selected Text Color</key>
+			<true/>
 			<key>Use Tab Color</key>
 			<false/>
 			<key>Vertical Spacing</key>
