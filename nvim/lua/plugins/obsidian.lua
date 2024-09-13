@@ -1,5 +1,5 @@
 local hostname = io.popen("hostname"):read("*l")
-local should_be_lazy = hostname ~= "mbpro2019" and hostname ~= "bindan"
+local should_be_lazy = hostname ~= "mbpro2019" and hostname ~= "codex" and hostname ~= "bindan"
 
 return {
   "epwalsh/obsidian.nvim",
