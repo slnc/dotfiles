@@ -61,10 +61,10 @@ lsp.on_attach(function(client, bufnr)
   }
 
   -- Apply formatting options to specific file types
-  if vim.bo[bufnr].filetype == "solidity" then
-    format_options.formatOptions.tabSize = 4
-    format_options.formatOptions.printWidth = 120 -- Set line length to 120
-  end
+  -- if vim.bo[bufnr].filetype == "solidity" then
+  --   format_options.formatOptions.tabSize = 4
+  --   format_options.formatOptions.printWidth = 120 -- Set line length to 120
+  -- end
 
   -- lsp.buffer_autoformat(format_options)
 end)
@@ -85,8 +85,6 @@ lsp.format_on_save({
   servers = {
     ['lua_ls'] = { 'lua' },
     -- ['tsserver'] = { 'javascript', 'typescript' },
-    -- Add other servers and filetypes as needed
-    -- ['solidity_ls'] = {}, -- This disables formatting for Solidity
   }
 })
 
@@ -97,7 +95,6 @@ require('mason-lspconfig').setup({
   ensure_installed = {
     'lua_ls',
     -- 'tsserver',
-    -- 'solidity_ls',
     -- 'dockerls',
     -- 'eslint',
   },
@@ -125,26 +122,6 @@ lspconfig.pylsp.setup {
 
 -- https://github.com/radleylewis/nvim/blob/c2f43182c705cf2e7a0e2c109616866a382a8399/lua/plugins/nvim-lspconfig.lua#L12
 -- local on_attach = require("util.lsp").on_attach
-local cmp_nvim_lsp = require("cmp_nvim_lsp")
-local capabilities = cmp_nvim_lsp.default_capabilities()
-
-lspconfig.solidity_ls.setup({
-  capabilities = capabilities,
-  -- on_attach = on_attach,
-  filetypes = { "solidity" },
-  root_dir = lspconfig.util.root_pattern("hardhat.config.*", ".git"),
-  on_attach = function(client, bufnr)
-    client.server_capabilities.documentFormattingProvider = false
-    client.server_capabilities.documentRangeFormattingProvider = false
-  end,
-  settings = {
-    solidity = {
-      formatter = {
-        lineLength = 120
-      }
-    }
-  }
-})
 
 lspconfig.lua_ls.setup {
   settings = {
