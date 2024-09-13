@@ -281,4 +281,6 @@ for_window [class="gnome-calculator"]                       floating enable
 for_window [class="Todoist"]                       floating enable
 for_window [class="1Password"]                       floating enable
 
+gaps outer -2
 gaps top 32
+gaps inner 2
