@@ -12,9 +12,10 @@ alias reset_test_db="RAILS_ENV=test rails db:reset db:fixtures:load"
 
 alias cpd="cap production deploy"
 
+alias h='fc -lt "%b %d %H:%M:%S"'
 alias ls='ls -AFp --color=always'
 alias ll='ls -l'
-alias history="history 1"
+alias history="h"
 alias vim=nvim
 alias vi=nvim
 alias v=nvim
