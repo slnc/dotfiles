@@ -1,7 +1,8 @@
 export COLORTERM=truecolor
 export EDITOR=nvim
 export LESS="--no-init --quit-if-one-screen -R"  # for git branch on devcontainers
-export GIT_CONFIG_GLOBAL=~/.dotfiles/.gitconfig
+# Don't rely on this, too many things break (gitstatus, tmux)
+# export GIT_CONFIG_GLOBAL=~/.dotfiles/.gitconfig
 export LC_ALL=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 # export TMUX_CONF=${DOTFILES_DIR}/.tmux.conf

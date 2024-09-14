@@ -16,7 +16,7 @@ alias h='fc -lt "%b %d %H:%M:%S"'
 alias ls='ls -AFp --color=always'
 alias ll='ls -l'
 alias history="h"
-alias vim="echo 'no, just type v"
+alias vim="echo 'no, just type v'"
 alias vi=nvim
 alias v=nvim
 alias sus='sudo systemctl suspend'
