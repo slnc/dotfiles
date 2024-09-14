@@ -19,3 +19,4 @@ alias history="h"
 alias vim=nvim
 alias vi=nvim
 alias v=nvim
+alias sus='sudo systemctl suspend'
