@@ -81,3 +81,37 @@ vim.api.nvim_create_autocmd('FileType', {
     })
   end,
 })
+
+-- Map 'nn' to the create_note function
+vim.keymap.set('n', '<leader>nn', function()
+  local options = {
+    "1. juan.al",
+    "2. slnc.net",
+    "3. juanalonso.net",
+    "4. juan.yoga"
+  }
+
+  -- Show the menu and get the selected option
+  local selected = vim.fn.inputlist(vim.list_extend({ "Select a domain:" }, options))
+
+  if selected == 0 then
+    print("No option selected. Exiting.")
+    return
+  end
+
+  local domain = options[selected]
+
+  local title = vim.fn.input("Title: ")
+
+  if title == "" then
+    print("No title entered. Exiting.")
+    return
+  end
+
+  local file_path = string.format("Work/%s/Notes/%s.md", domain, title)
+  vim.fn.system(string.format("touch '%s'", file_path))
+
+  vim.cmd("edit " .. file_path)
+
+  -- print("File created: " .. file_path)
+end, { noremap = true, silent = true })
