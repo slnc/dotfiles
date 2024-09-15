@@ -82,6 +82,31 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    vim.opt_local.wrap = true
+  end
+})
+
+
+vim.keymap.set('n', '<leader>nu', function()
+  local title = vim.fn.input("Title: ")
+
+  if title == "" then
+    print("No title entered. Exiting.")
+    return
+  end
+
+  local file_path = string.format("_unsorted/%s.md", title)
+  vim.fn.system(string.format("touch '%s'", file_path))
+
+  vim.cmd("edit " .. file_path)
+
+  -- print("File created: " .. file_path)
+end, { noremap = true, silent = true })
+
+
 -- Map 'nn' to the create_note function
 vim.keymap.set('n', '<leader>nn', function()
   local options = {
@@ -92,6 +117,7 @@ vim.keymap.set('n', '<leader>nn', function()
   }
 
   -- Show the menu and get the selected option
+  -- TODO: migrate to floating windows https://neovim.io/doc/user/api.html
   local selected = vim.fn.inputlist(vim.list_extend({ "Select a domain:" }, options))
 
   if selected == 0 then
@@ -115,3 +141,69 @@ vim.keymap.set('n', '<leader>nn', function()
 
   -- print("File created: " .. file_path)
 end, { noremap = true, silent = true })
+
+
+
+local function update_md_preamble()
+  local file_path = vim.fn.expand('%:p')
+  local file_name = vim.fn.expand('%:t:r')
+
+  local home_dir = vim.loop.os_homedir()
+  file_path = "~" .. file_path:sub(#home_dir + 1)
+
+  -- Check if the file is in the specified paths
+  local allowed_paths = {
+    -- Add your allowed paths here, e.g.:
+    ["~/files/projects/obsidian/main/Work/slnc.net/Notes"] = true,
+    ["~/files/projects/obsidian/main/Work/juanalonso.net/Notes"] = true,
+    ["~/files/projects/obsidian/main/Work/juan.al/Misc"] = true,
+    ["~/files/projects/obsidian/main/Work/juan.yoga/Notes"] = true,
+  }
+
+  local dir_path = file_path:match("(.*/)")
+  if not allowed_paths[dir_path:sub(1, -2)] then -- non-blog .md
+    return
+  end
+
+  local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+  local preamble_start, preamble_end = 0, 0
+
+  for i, line in ipairs(lines) do
+    if line == "---" then
+      if preamble_start == 0 then
+        preamble_start = i
+      else
+        preamble_end = i; break
+      end
+    end
+  end
+
+  if preamble_start == 0 or preamble_end == 0 then return end
+
+  local preamble = {}
+  local current_time = os.date("%Y-%m-%dT%H:%M:%S+0200")
+
+  for i = preamble_start + 1, preamble_end - 1 do
+    local key, value = lines[i]:match("^(%w+):%s*(.*)$")
+    if key then
+      if key == "title" then
+        value = file_name
+      elseif key == "lastmod" then
+        value = current_time
+        -- elseif key == "summary" then
+        --   summary = value
+      elseif key == "url" then
+        value = "/" .. string.lower(file_name):gsub("%s+", "-") .. "/"
+      end
+      preamble[i - preamble_start] = string.format("%s: %s", key, value)
+    end
+  end
+  table.insert(preamble, "---")
+
+  vim.api.nvim_buf_set_lines(0, preamble_start, preamble_end, false, preamble)
+end
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.md",
+  callback = update_md_preamble
+})
