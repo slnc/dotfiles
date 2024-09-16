@@ -32,3 +32,7 @@ curl -sfL https://direnv.net/install.sh | bash
 
 echo "Remember to run install_neovim.sh"
 echo "Remember to ln -s ~/.config/alacritty/hosts/`hostname`.toml ~/.config/alacritty/hosts/current.toml"
+
+# TODO: cleanup this, optimize for "does it all by default", but separate into
+# linux_driver, linux_srv, mac
+ln -s ~/.dotfiles/polybar ~/.config
