@@ -207,3 +207,19 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*.md",
   callback = update_md_preamble
 })
+
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = "markdown",
+--   callback = function()
+--     vim.opt_local.textwidth = 0
+--     vim.opt_local.wrapmargin = 0
+--     vim.opt_local.wrap = true
+--     vim.opt_local.linebreak = true
+--     vim.opt_local.columns = 80
+--   end
+-- })
+
+vim.keymap.set('n', '<leader>tod', function()
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<leader>om", true, false, true), 'n', false)
+  vim.cmd('ObsidianToday')
+end, { noremap = true, silent = true })

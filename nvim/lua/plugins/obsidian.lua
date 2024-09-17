@@ -1,5 +1,8 @@
 local hostname = io.popen("hostname"):read("*l")
-local should_be_lazy = hostname ~= "mbpro2019j" and hostname ~= "codex" and hostname ~= "bindan"
+local should_be_lazy = hostname ~= "mbpro2019j.local" and hostname ~= "mbpro2019j" and hostname ~= "codex" and
+    hostname ~= "bindan"
+
+local current_year = os.date("%Y")
 
 return {
   "epwalsh/obsidian.nvim",
@@ -40,7 +43,11 @@ return {
       },
     },
 
-    -- see below for full list of options 👇
+    daily_notes = {
+      folder = string.format("Bins/Logs/%s/daily", current_year),
+      date_format = "%Y-%m-%d",
+    },
+
     checkboxes = {
       [" "] = { char = "󰄱", hl_group = "ObsidianTodo" },
       ["x"] = { char = "", hl_group = "ObsidianDone" },
