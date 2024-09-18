@@ -1,13 +1,21 @@
 local hostname = io.popen("hostname"):read("*l")
-local should_be_lazy = hostname ~= "mbpro2019j.local" and hostname ~= "mbpro2019j" and hostname ~= "codex" and
-    hostname ~= "bindan"
+local drivers = {
+  ["mbpro2019j.local"] = true,
+  ["mbpro2019j"] = true,
+  ["codex"] = true,
+  ["bindan"] = true,
+}
+
+if not drivers[hostname] then
+  return {}
+end
 
 local current_year = os.date("%Y")
 
 return {
   "epwalsh/obsidian.nvim",
   version = "*", -- recommended, use latest release instead of latest commit
-  lazy = should_be_lazy,
+  lazy = "false",
   ft = "markdown",
   -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
   -- event = {
