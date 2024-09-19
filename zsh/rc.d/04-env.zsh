@@ -20,12 +20,12 @@ fi
 
 path=(
     /opt/homebrew/bin(N)
-    $path
     ~/bin
     ~/bin/nvim/bin
     ~/.dotfiles/.local/bin
     /usr/local/lib/ruby/gems/3.3.0/bin(N)
     ~/.local/bin
+    $path
 )
 
 fpath=(

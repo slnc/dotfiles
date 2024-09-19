@@ -25,5 +25,8 @@ ln -s "${DST_DIR}/nvim" ~/.config/
 
 sudo chsh -s /bin/zsh
 
+export bin_path=~/.local/bin
+curl -sfL https://direnv.net/install.sh | bash
+
 echo "Remember to run install_neovim.sh"
 echo "Remember to ln -s ~/.config/alacritty/hosts/`hostname`.toml ~/.config/alacritty/hosts/current.toml"
