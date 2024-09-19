@@ -29,7 +29,7 @@ font pango:monospace 8
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id setxkbmap -model pc105 -layout us,es -option grp:alt_shift_toggle
 
-set $wallpaper ~/files/settings/wallpaper.png
+set $wallpaper ~/files/wallpapers/today.png
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
 
@@ -37,7 +37,10 @@ set $wallpaper ~/files/settings/wallpaper.png
 # screen before suspend. Use loginctl lock-session to lock your screen.
 # set $lock_img convert $wallpaper RGB:- | i3lock --raw $(identify $wallpaper | awk '{printf $3}'):rgb --image /dev/stdin
 
-set $lock i3lock --image ~/files/settings/wallpaper-1080.png
+# class                 border  backgr. text    indicator child_border
+# client.focused          #ff0000 #285576 #ffffff #2e9ef4   #285577
+
+set $lock i3lock --image ~/files/wallpapers/today.png
 
 exec --no-startup-id xss-lock --transfer-sleep-lock -- $lock --nofork
 exec --no-startup-id feh --bg-scale --zoom fill $wallpaper
@@ -283,4 +286,4 @@ for_window [class="1Password"]                       floating enable
 
 gaps outer -2
 gaps top 32
-gaps inner 2
+gaps inner 3
