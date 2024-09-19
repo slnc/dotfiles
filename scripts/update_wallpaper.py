@@ -8,7 +8,7 @@ from pathlib import Path
 from PIL import Image
 
 def get_images(directory):
-    image_extensions = {'.png', '.jpg', '.jpeg', '.gif', '.bmp', '.tiff'}
+    image_extensions = {'.png', '.jpg', '.jpeg'}
     return [f for f in os.listdir(directory) if Path(f).suffix.lower() in image_extensions]
 
 def read_history(history_file):

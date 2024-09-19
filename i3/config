@@ -55,10 +55,6 @@ exec ~/.dotfiles/i3/scripts/middle-click-trackpad-as-left-click
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
-# bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-# bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-# bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-# bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -222,6 +218,7 @@ hide_edge_borders smart
 exec slack
 exec alacritty
 exec obsidian
+exec subsonic
 
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
@@ -234,6 +231,7 @@ assign [class="Alacritty"] 2
 assign [class="Slack"] 3
 assign [class="Whatsapp"] 3
 assign [class="discord"] 3
+assign [class="subsonic"] 9
 
 assign [class="obsidian"] 4
 
@@ -270,6 +268,11 @@ set $volumestep 5
 bindsym XF86AudioRaiseVolume exec --no-startup-id $volumepath/volume -an -t $statuscmd -u $statussig up $volumestep
 bindsym XF86AudioLowerVolume exec --no-startup-id $volumepath/volume -an -t $statuscmd -u $statussig down $volumestep
 bindsym XF86AudioMute        exec --no-startup-id $volumepath/volume -an -t $statuscmd -u $statussig mute
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
 
 bindsym Print exec "flameshot gui"
 
