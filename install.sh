@@ -25,6 +25,8 @@ ln -s "${DST_DIR}/nvim" ~/.config/
 
 sudo chsh -s /bin/zsh
 
+# TODO: replace w/ XDG var?
+mkdir -p ~/.local/bin
 export bin_path=~/.local/bin
 curl -sfL https://direnv.net/install.sh | bash
 
