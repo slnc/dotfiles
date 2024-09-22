@@ -217,8 +217,9 @@ hide_edge_borders smart
 
 # exec google-chrome
 # exec whatsapp-for-linux
-exec slack
+# exec slack
 exec alacritty
+exec firefox
 exec obsidian
 exec subsonic
 exec anki
@@ -228,7 +229,7 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 exec --no-startup-id picom -b
 assign [class="Google-chrome"] 1
-assign [class="Firefox"] 1
+assign [class="firefox"] 1
 
 assign [class="Alacritty"] 2
 
