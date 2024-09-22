@@ -30,6 +30,7 @@ font pango:monospace 8
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id setxkbmap -model pc105 -layout us,es -option grp:alt_shift_toggle
 
+
 set $wallpaper ~/files/wallpapers/today.png
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
@@ -43,9 +44,7 @@ set $wallpaper ~/files/wallpapers/today.png
 
 set $lock i3lock --image ~/files/wallpapers/today.png
 
-exec --no-startup-id xss-lock --transfer-sleep-lock -- $lock --nofork
-
-exec --no-startup-id feh --bg-scale --zoom fill $wallpaper
+exec --no-startup-id xss-lock --transfer-sleep-lock -- $lock --nofork; feh --bg-scale --zoom fill $wallpaper
 
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
@@ -222,6 +221,8 @@ exec slack
 exec alacritty
 exec obsidian
 exec subsonic
+exec anki
+exec todoist
 
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
@@ -287,8 +288,8 @@ for_window [window_type="dialog"]                       floating enable
 for_window [window_type="menu"]                         floating enable
 
 for_window [class="gnome-calculator"]                       floating enable
-for_window [class="Todoist"]                       floating enable
-for_window [class="1Password"]                       floating enable
+# for_window [class="Todoist"]                       floating enable
+# for_window [class="1Password"]                       floating enable
 
 gaps outer -2
 gaps top 32
