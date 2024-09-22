@@ -1,9 +1,10 @@
-# TODO: clean this up
 import argparse
-
+import json
+import os
 import os
 import random
-import json
+import subprocess
+
 from pathlib import Path
 from PIL import Image
 
@@ -43,6 +44,10 @@ def convert_and_resize_image(input_path, output_path, size=(3840, 2160)):
         img.save(output_path, format='PNG')
 
 
+def restart_feh():
+    subprocess.run(['pkill', '-f', 'feh'])
+    subprocess.run(['feh', '--bg-scale', '--zoom', 'fill', '~/files/wallpapers/today.png'])
+
 def main(directory, history_file):
     directory = os.path.abspath(directory)
 
@@ -63,12 +68,7 @@ def main(directory, history_file):
 
     chosen_image_path = os.path.join(directory, chosen_image)
     convert_and_resize_image(chosen_image_path, final_image_path)
-
-    # symlink_path = os.path.join(directory, 'today.png')
-    # print(symlink_path)
-    # if os.path.exists(symlink_path):
-    #     os.remove(symlink_path)
-    # os.symlink(os.path.join(directory, chosen_image), symlink_path)
+    restart_feh()
 
     history.add(chosen_image)
     write_history(history_file, history)

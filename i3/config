@@ -12,6 +12,7 @@
 
 # (Downstairs) Disabled laptop screen, monitor @ 2K
 # exec --no-startup-id xrandr --output HDMI-2 --mode 2560x1440 --primary --auto --output eDP-1 --off
+# rerun feh if you execute this
 exec --no-startup-id dunst &
 
 set $mod Mod4
@@ -43,6 +44,7 @@ set $wallpaper ~/files/wallpapers/today.png
 set $lock i3lock --image ~/files/wallpapers/today.png
 
 exec --no-startup-id xss-lock --transfer-sleep-lock -- $lock --nofork
+
 exec --no-startup-id feh --bg-scale --zoom fill $wallpaper
 
 
