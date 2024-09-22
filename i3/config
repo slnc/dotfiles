@@ -41,6 +41,8 @@ set $wallpaper ~/files/wallpapers/today.png
 
 # class                 border  backgr. text    indicator child_border
 # client.focused          #ff0000 #285576 #ffffff #2e9ef4   #285577
+for_window [class="^.*"] border pixel 2
+client.focused          #ff0000 #ff0000  #ff0000  #ff0000    #aa0000
 
 set $lock i3lock --image ~/files/wallpapers/today.png
 
