@@ -11,8 +11,8 @@
 # --same-as eDP-1
 
 # (Downstairs) Disabled laptop screen, monitor @ 2K
-# DO NOT SUBMIT:
 # exec --no-startup-id xrandr --output HDMI-2 --mode 2560x1440 --primary --auto --output eDP-1 --off
+exec --no-startup-id dunst &
 
 set $mod Mod4
 
