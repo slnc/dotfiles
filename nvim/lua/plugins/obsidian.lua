@@ -1,16 +1,14 @@
 local hostname = io.popen("hostname"):read("*l")
 local drivers = {
-  ["mbpro2019j.local"] = true,
-  ["mbpro2019j"] = true,
   ["codex"] = true,
-  ["bindan"] = true,
+  ["mbpro2019j"] = true,
+  ["mbpro2019j.local"] = true,
+  ["phobos"] = true,
 }
 
 if not drivers[hostname] then
   return {}
 end
-
-local current_year = os.date("%Y")
 
 return {
   "epwalsh/obsidian.nvim",
@@ -26,10 +24,7 @@ return {
   --   "BufNewFile path/to/my-vault/*.md",
   -- },
   dependencies = {
-    -- Required.
     "nvim-lua/plenary.nvim",
-
-    -- see below for full list of optional dependencies 👇
   },
   opts = {
     ui = {
@@ -42,17 +37,17 @@ return {
         path = "~/files/projects/obsidian/dnd",
       },
       {
-        name = "main",
-        path = "~/files/projects/obsidian/main",
-      },
-      {
         name = "ljbrain",
         path = "~/files/projects/obsidian/ljbrain",
+      },
+      {
+        name = "main",
+        path = "~/files/projects/obsidian/main",
       },
     },
 
     daily_notes = {
-      folder = string.format("Bins/Logs/%s/daily", current_year),
+      folder = string.format("Bins/Logs/%s/daily", os.date("%Y")),
       date_format = "%Y-%m-%d",
     },
 

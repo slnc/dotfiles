@@ -21,8 +21,8 @@ end
 vim.keymap.set('n', "<leader>t", ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 
 vim.keymap.set('n', "<leader>om", function()
-  vim.cmd('silent ObsidianWorkspace main')
   vim.cmd('silent cd ~/files/projects/obsidian/main')
+  vim.cmd('silent ObsidianWorkspace main')
 end, { noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename)
@@ -220,6 +220,8 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 -- })
 
 vim.keymap.set('n', '<leader>tod', function()
+  local current_year = os.date("%Y")
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<leader>om", true, false, true), 'n', false)
-  vim.cmd('ObsidianToday')
+  local fp = string.format("~/files/projects/obsidian/main/Bins/Logs/%s/daily/%s.md", current_year, os.date("%Y-%m-%d"))
+  vim.cmd(string.format('e %s', fp))
 end, { noremap = true, silent = true })
