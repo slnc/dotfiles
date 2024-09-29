@@ -136,6 +136,11 @@
     appname = "NetworkManager Applet"
     timeout = 5
 
+[firefox-loes]
+    summary = "Loes van Mierlo"
+    timeout = 600
+    urgency = high
+
 
 #[history-ignore]
 #    # This notification will not be saved in history
