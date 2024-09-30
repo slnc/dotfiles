@@ -22,6 +22,8 @@ done
 
 mkdir -p ~/.config
 ln -s "${DST_DIR}/nvim" ~/.config/
+ln -s "${DST_DIR}/.pylintrc" ~/.config/
+
 
 sudo chsh -s /bin/zsh
 
