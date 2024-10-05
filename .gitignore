@@ -1,5 +1,8 @@
 .DS_Store
 
+.env
+.venv
+
 *.swp
 .vim/.netrwhist
 .vim/.viminfo

@@ -107,16 +107,14 @@ vim.keymap.set('n', '<leader>nu', function()
 end, { noremap = true, silent = true })
 
 
--- Map 'nn' to the create_note function
 vim.keymap.set('n', '<leader>nn', function()
-  local options = {
-    "1. juan.al",
-    "2. slnc.net",
-    "3. juanalonso.net",
-    "4. juan.yoga"
-  }
+  local blogs = os.getenv("MY_BLOGS")
+  local options = {}
 
-  -- Show the menu and get the selected option
+  for i in blogs:gmatch("%S+") do
+    table.insert(options, string.format("%d. %s", #options + 1, i))
+  end
+
   -- TODO: migrate to floating windows https://neovim.io/doc/user/api.html
   local selected = vim.fn.inputlist(vim.list_extend({ "Select a domain:" }, options))
 
@@ -125,10 +123,9 @@ vim.keymap.set('n', '<leader>nn', function()
     return
   end
 
-  local domain = options[selected]
+  local domain = options[selected]:match("%d+%.%s(.+)")
 
   local title = vim.fn.input("Title: ")
-
   if title == "" then
     print("No title entered. Exiting.")
     return
@@ -154,10 +151,10 @@ local function update_md_preamble()
   -- Check if the file is in the specified paths
   local allowed_paths = {
     -- Add your allowed paths here, e.g.:
-    ["~/files/projects/obsidian/main/Work/slnc.net/Notes"] = true,
-    ["~/files/projects/obsidian/main/Work/juanalonso.net/Notes"] = true,
-    ["~/files/projects/obsidian/main/Work/juan.al/Misc"] = true,
-    ["~/files/projects/obsidian/main/Work/juan.yoga/Notes"] = true,
+    ["~/files/projects/obsidian/main/Work/slnc.net/notes"] = true,
+    ["~/files/projects/obsidian/main/Work/juanalonso.net/notes"] = true,
+    ["~/files/projects/obsidian/main/Work/juan.al"] = true,
+    ["~/files/projects/obsidian/main/Work/juan.yoga/notes"] = true,
   }
 
   local dir_path = file_path:match("(.*/)")
@@ -225,3 +222,15 @@ vim.keymap.set('n', '<leader>tod', function()
   local fp = string.format("~/files/projects/obsidian/main/Bins/Logs/%s/daily/%s.md", current_year, os.date("%Y-%m-%d"))
   vim.cmd(string.format('e %s', fp))
 end, { noremap = true, silent = true })
+
+local function confirm_and_delete_buffer()
+end
+
+vim.keymap.set('n', '<leader>df', function()
+  local confirm = vim.fn.confirm("Delete buffer and file?", "&Yes\n&No", 2)
+
+  if confirm == 1 then
+    os.remove(vim.fn.expand "%")
+    vim.api.nvim_buf_delete(0, { force = true })
+  end
+end)
