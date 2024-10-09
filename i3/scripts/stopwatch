@@ -1,0 +1,67 @@
+#!/bin/bash
+DIR=/dev/shm/polybar-stop-watch
+mkdir -p "$DIR"
+STATUS_FILE=$DIR/status
+touch $STATUS_FILE
+: "${STATUS:=$(<$STATUS_FILE)}" "${STATUS:=reset}"
+START_FILE=$DIR/start
+touch $START_FILE
+: "${START:=$(<$START_FILE)}" "${START:=$(date +%s)}"
+STOP_FILE=$DIR/stop
+touch $STOP_FILE
+: "${STOP:=$(<$STOP_FILE)}" "${STOP:=$(date +%s)}"
+
+HISTORY_FILE=~/.local/state/stopwatch_history
+mkdir -p "$(dirname "$HISTORY_FILE")"
+
+log_action() {
+    local action=$1
+    echo "$(date '+%a %b %e %I:%M:%S %p %Z %Y') $action" >> "$HISTORY_FILE"
+}
+
+handle_click() {
+    if [[ $STATUS = running ]]; then
+        STATUS=stopped
+        date +%s >$STOP_FILE
+        log_action "Stop"
+    else
+        STATUS=running
+        CUR=$(date +%s)
+        START=$((CUR - STOP + START))
+        echo "$START" >$START_FILE
+        STOP=$CUR
+        echo "$STOP" >$STOP_FILE
+        log_action "Start"
+    fi
+}
+
+handle_reset() {
+    STATUS=reset
+    echo >$START_FILE
+    echo >$STOP_FILE
+    log_action "Reset"
+}
+
+if [[ $1 = click ]]; then
+    handle_click
+elif [[ $1 = reset ]]; then
+    handle_reset
+fi
+
+echo $STATUS >$STATUS_FILE
+if [[ $STATUS = reset ]]; then
+    echo
+    exit 0
+fi
+if [[ $STATUS = running ]]; then
+    STOP=$(date +%s)
+    echo "$STOP" >$STOP_FILE
+fi
+
+TIME=$(date -u --date=@$((STOP - START)) '+%H:%M:%S')
+
+if [[ $STATUS = running ]]; then
+    echo "%{F-}$TIME"  # Default color
+else
+    echo "%{F#888888}$TIME%{F-}"  # Grey color
+fi

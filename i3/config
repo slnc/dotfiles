@@ -31,7 +31,7 @@ exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id setxkbmap -model pc105 -layout us,es -option grp:alt_shift_toggle
 
 
-set $wallpaper ~/files/wallpapers/today.png
+set $wallpaper $HOME/files/wallpapers/today.png
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
 
@@ -44,7 +44,7 @@ set $wallpaper ~/files/wallpapers/today.png
 for_window [class="^.*"] border pixel 2
 client.focused          #ff0000 #ff0000  #ff0000  #ff0000    #aa0000
 
-set $lock i3lock --image ~/files/wallpapers/today.png
+set $lock i3lock --image $HOME/files/wallpapers/today.png
 
 exec --no-startup-id xss-lock --transfer-sleep-lock -- $lock --nofork; feh --bg-scale --zoom fill $wallpaper
 
@@ -53,7 +53,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- $lock --nofork; feh --bg-
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 # exec --no-startup-id nm-applet
 
-exec ~/.dotfiles/i3/scripts/middle-click-trackpad-as-left-click
+exec $HOME/.dotfiles/i3/scripts/middle-click-trackpad-as-left-click
 
 
 # Use pactl to adjust volume in PulseAudio.
@@ -207,6 +207,11 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+# Start/Stop stopwatch
+bindsym Pause exec $HOME/.config/i3/scripts/stopwatch click
+# Reset stopwatch
+bindsym Shift+Pause exec $HOME/.config/i3/scripts/stopwatch reset
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 # bar {
@@ -239,8 +244,12 @@ assign [class="Slack"] 3
 assign [class="Whatsapp"] 3
 assign [class="discord"] 3
 assign [class="subsonic"] 9
+assign [class="todoist"] 9
 
 assign [class="obsidian"] 4
+assign [class="install4j-jclient-Launcher"] 7
+assign [class="obs"] 8
+
 
 assign [class="Anki"] 5
 # Review the lines below and append to ~/.config/i3/config
@@ -248,7 +257,7 @@ assign [class="Anki"] 5
 ## Volume control
 
 # Path to volume control, without trailing slash
-set $volumepath ~/.config/i3/i3-volume
+set $volumepath $HOME/.config/i3/i3-volume
 
 # Command for the status line
 #   ie: i3blocks, i3status
