@@ -124,9 +124,8 @@ lspconfig.pylsp.setup {
   settings = {
     pylsp = {
       plugins = {
-        pycodestyle = { enabled = true }, -- temp
-        flake8 = { enabled = true },      -- temp
-        pylint = { enabled = true },      -- temp
+        flake8 = { enabled = true },
+        pylint = { enabled = true },
         rope_completion = { enabled = true },
       }
     }

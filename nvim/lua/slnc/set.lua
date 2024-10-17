@@ -48,3 +48,10 @@ vim.opt.colorcolumn = "81"
 vim.opt.visualbell = true
 
 vim.opt.winbar = "%m %f"
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "python",
+  callback = function()
+    vim.opt_local.colorcolumn = "100"
+  end,
+})

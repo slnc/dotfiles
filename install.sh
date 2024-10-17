@@ -38,3 +38,6 @@ echo "Remember to ln -s ~/.config/alacritty/hosts/`hostname`.toml ~/.config/alac
 # TODO: cleanup this, optimize for "does it all by default", but separate into
 # linux_driver, linux_srv, mac
 ln -s ~/.dotfiles/polybar ~/.config
+ln -s ~/.dotfiles/.pylintrc ~/.config/pylintrc
+ln -s ~/.dotfiles/pycodestyle ~/.config
+ln -s ~/.dotfiles/flake8 ~/.config
