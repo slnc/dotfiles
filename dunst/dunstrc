@@ -124,6 +124,10 @@
     appname = espanso
     format = ""
 
+[ignore-flameshot-1]
+    appname = "flameshot"
+    format = ""
+
 [ignore-network-manager1]
     summary = "Connection Established"
     format = ""
