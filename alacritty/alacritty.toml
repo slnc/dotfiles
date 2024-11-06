@@ -45,3 +45,14 @@ import = [
   cyan = "#95a0a0"
   white = "#fbf6e4"
 
+
+# Key bindings
+[[keyboard.bindings]]
+key = "Equals"
+mods = "Control"
+action = "None"
+
+[[keyboard.bindings]]
+key = "Minus"
+mods = "Control"
+action = "None"
