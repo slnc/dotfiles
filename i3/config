@@ -261,7 +261,7 @@ assign [class="TradingView"] 7
 assign [class="obs"] 8
 
 
-assign [class="Anki"] 5
+# assign [class="Anki"] 5
 # Review the lines below and append to ~/.config/i3/config
 
 ## Volume control
