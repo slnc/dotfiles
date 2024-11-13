@@ -238,6 +238,7 @@ exec firefox
 exec obsidian
 exec subsonic
 exec anki
+exec discord
 exec todoist
 
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
