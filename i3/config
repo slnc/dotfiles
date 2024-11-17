@@ -234,12 +234,11 @@ hide_edge_borders smart
 # exec whatsapp-for-linux
 # exec slack
 exec alacritty
-exec firefox
+exec google-chrome
 exec obsidian
-exec subsonic
+exec deadbeef
 exec anki
 exec discord
-exec todoist
 
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
