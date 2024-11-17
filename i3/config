@@ -72,11 +72,11 @@ tiling_drag modifier titlebar
 
 # start a terminal
 bindsym $mod+Return exec alacritty
-bindsym $mod+q exec qalculate-gtk
+bindsym $mod+Shift+q exec qalculate-gtk
 bindsym XF86Calculator exec qalculate-gtk
 
 # kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+q kill
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec --no-startup-id dmenu_run
@@ -252,8 +252,7 @@ assign [class="Alacritty"] 2
 assign [class="Slack"] 3
 assign [class="Whatsapp"] 3
 assign [class="discord"] 3
-assign [class="subsonic"] 9
-# assign [class="todoist"] 9
+
 
 assign [class="obsidian"] 4
 assign [class="install4j-jclient-Launcher"] 7
@@ -261,6 +260,7 @@ assign [class="TradingView"] 7
 
 assign [class="obs"] 8
 
+assign [class="Deadbeef"] 9
 
 # assign [class="Anki"] 5
 # Review the lines below and append to ~/.config/i3/config
