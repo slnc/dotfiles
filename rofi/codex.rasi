@@ -1,0 +1,5 @@
+@import "base.rasi"
+
+configuration {
+  font: "JetBrainsMono Nerd Font 16";
+}

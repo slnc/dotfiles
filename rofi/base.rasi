@@ -163,7 +163,7 @@ font: "JetBrainsMono Nerd Font 24";
     alternate-urgent-background: var(lightbg);
     lightbg:                     rgba ( 73, 73, 92, 100 % );
     background-color:            transparent;
-    border-color:                var(foreground);
+    border-color:                rgba(0, 0, 0, 100%);
     normal-background:           var(background);
     selected-urgent-background:  var(red);
     alternate-active-background: var(lightbg);
