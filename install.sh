@@ -41,3 +41,5 @@ ln -s ~/.dotfiles/polybar ~/.config
 ln -s ~/.dotfiles/.pylintrc ~/.config/pylintrc
 ln -s ~/.dotfiles/pycodestyle ~/.config
 ln -s ~/.dotfiles/flake8 ~/.config
+ln -s ~/.dotfiles/rofi ~/.config
+cd ~/.dotfiles/rofi && ln -s `hostname`.rasi config.rasi && cd -

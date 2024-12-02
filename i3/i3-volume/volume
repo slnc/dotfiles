@@ -890,6 +890,12 @@ define_amixer_functions() {
         local -r card=$1
         local -r step=${2:=-5}
 
+
+        if amixer_is_muted "$card"; then
+            amixer_toggle_mute "$card"
+            sleep 0.1
+        fi
+
         amixer_set_volume "${step}%+" "$card"
     }
 
@@ -1061,17 +1067,32 @@ exec_command() {
     case "$COMMAND" in
         up|raise|increase)
             case "$#" in 1) ;; *) usage ;; esac
-            increase_volume "$1" "$MAX_VOLUME"
+            if is_muted; then
+                toggle_mute && sleep 0.1  # Small delay to ensure unmute completes
+            fi
+            increase_volume "$1"
             ;;
         down|lower|decrease)
             case "$#" in 1) ;; *) usage ;; esac
+            # First unmute if muted, then decrease volume
+            if is_muted; then
+                toggle_mute && sleep 0.1  # Small delay to ensure unmute completes
+            fi
             decrease_volume "$1"
             ;;
         set)
             case "$#" in 1) ;; *) usage ;; esac
             case "$1" in
-                +*) increase_volume "${1:1}" "$MAX_VOLUME" ;;
-                -*) decrease_volume "${1:1}" ;;
+                +*)
+                    if is_muted; then
+                        toggle_mute && sleep 0.1
+                    fi
+                    increase_volume "${1:1}" "$MAX_VOLUME" ;;
+                -*)
+                    if is_muted; then
+                        toggle_mute && sleep 0.1
+                    fi
+                    decrease_volume "${1:1}" ;;
                 *) set_volume "$1" "$MAX_VOLUME" ;;
             esac
             ;;
