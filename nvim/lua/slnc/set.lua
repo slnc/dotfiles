@@ -49,6 +49,8 @@ vim.opt.visualbell = true
 
 vim.opt.winbar = "%m %f"
 
+vim.opt.clipboard = "unnamedplus"
+
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "python",
   callback = function()
