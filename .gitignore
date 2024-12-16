@@ -3,6 +3,9 @@
 .env
 .venv
 
+__pycache__
+
+*.pyc
 *.swp
 .vim/.netrwhist
 .vim/.viminfo
