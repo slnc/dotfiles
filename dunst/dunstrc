@@ -153,7 +153,7 @@
     #
 [chrome_calendar]
     appname = "Google Chrome"
-    format = "<b>%s</b>"
+    format = "<b>%s</b>\n%b"
     icon_position = off
 
 #[history-ignore]
