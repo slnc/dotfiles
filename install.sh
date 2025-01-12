@@ -41,6 +41,14 @@ echo "Remember to ln -s ~/.config/polybar/`hostname`.ini ~/.config/alacritty/con
 ln -s ~/.dotfiles/polybar ~/.config
 ln -s ~/.dotfiles/.pylintrc ~/.config/pylintrc
 ln -s ~/.dotfiles/pycodestyle ~/.config
+ln -s ~/.dotfiles/nvim ~/.config
+ln -s ~/.dotfiles/picom ~/.config
 ln -s ~/.dotfiles/flake8 ~/.config
 ln -s ~/.dotfiles/rofi ~/.config
 cd ~/.dotfiles/rofi && ln -s `hostname`.rasi config.rasi && cd -
+
+
+mkdir -p ~/.config/tmux/plugins/catppuccin
+git clone -b v2.1.2 https://github.com/catppuccin/tmux.git ~/.config/tmux/plugins/catppuccin/tmux
+
+echo "Add the following line to your tmux.conf file: run ~/.config/tmux/plugins/catppuccin/tmux/catppuccin.tmux."
