@@ -3,7 +3,7 @@ set -uex
 
 
 if command -v apt > /dev/null 2>&1; then
-  sudo apt-get install -q -yy git ripgrep tmux zsh
+  sudo apt-get install -q -yy git ripgrep tmux zsh polybar rofi dunst
   curl https://pyenv.run | bash
 elif command -v brew > /dev/null 2>&1; then
   brew install fzf git pyenv ripgrep tmux
@@ -34,6 +34,7 @@ curl -sfL https://direnv.net/install.sh | bash
 
 echo "Remember to run install_neovim.sh"
 echo "Remember to ln -s ~/.config/alacritty/hosts/`hostname`.toml ~/.config/alacritty/hosts/current.toml"
+echo "Remember to ln -s ~/.config/polybar/`hostname`.ini ~/.config/alacritty/config.ini"
 
 # TODO: cleanup this, optimize for "does it all by default", but separate into
 # linux_driver, linux_srv, mac
