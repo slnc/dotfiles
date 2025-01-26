@@ -131,7 +131,7 @@ vim.keymap.set('n', '<leader>nn', function()
     return
   end
 
-  local file_path = string.format("Work/%s/Notes/%s.md", domain, title)
+  local file_path = string.format("Projects/%s/Notes/%s.md", domain, title)
   vim.fn.system(string.format("touch '%s'", file_path))
 
   vim.cmd("edit " .. file_path)
