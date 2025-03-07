@@ -49,7 +49,8 @@ vim.opt.visualbell = true
 
 vim.opt.winbar = "%m %f"
 
-vim.opt.clipboard = "unnamedplus"
+# Clipboard / copy-paste
+# vim.opt.clipboard = "unnamedplus"
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "python",
