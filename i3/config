@@ -71,7 +71,9 @@ tiling_drag modifier titlebar
 
 # start a terminal
 bindsym $mod+Return exec alacritty
-bindsym $mod+c exec qalculate-gtk
+# bindsym $mod+c exec qalculate-gtk
+bindsym $mod+c exec "if pgrep -x qalculate-gtk > /dev/null; then killall qalculate-gtk; else qalculate-gtk; fi"
+# bindsym $mod+c exec "if xdotool search --onlyvisible --classname qalculate-gtk; then xdotool search --classname qalculate-gtk windowunmap; else if xdotool search --classname qalculate-gtk; then xdotool search --classname qalculate-gtk windowmap; else qalculate-gtk; fi; fi"
 bindsym XF86Calculator exec qalculate-gtk
 
 # kill focused window
@@ -230,7 +232,7 @@ default_border pixel 1
 hide_edge_borders smart
 
 exec alacritty
-exec anki
+# exec anki
 exec deadbeef
 exec discord
 exec google-chrome
