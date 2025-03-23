@@ -57,7 +57,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- $lock --nofork; feh --bg-
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 # exec --no-startup-id nm-applet
 
-exec $HOME/.dotfiles/i3/scripts/middle-click-trackpad-as-left-click
+exec --no-statup-id $HOME/.dotfiles/i3/scripts/middle-click-trackpad-as-left-click
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -233,7 +233,7 @@ hide_edge_borders smart
 
 exec alacritty
 # exec anki
-exec deadbeef
+exec /opt/deadbeef/bin/deadbeef
 exec discord
 exec google-chrome
 exec obsidian
@@ -243,7 +243,7 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 exec --no-startup-id picom -b
 
-exec xinput set-button-map 9 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
+exec --no-startup-id sleep 5 && xinput set-button-map 9 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
 
 assign [class="Google-chrome"] 1
 assign [class="firefox"] 1

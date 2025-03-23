@@ -93,13 +93,15 @@ run_cmd() {
 chosen="$(run_rofi)"
 case ${chosen} in
     $shutdown)
-		systemctl poweroff
+      deadbeef --quit
+      systemctl poweroff
         ;;
     $reboot)
-		systemctl reboot
+      deadbeef --quit
+      systemctl reboot
         ;;
     $hibernate)
-		systemctl hibernate
+      systemctl hibernate
         ;;
     $lock)
 		if [[ -x '/usr/bin/i3lock-fancy' ]]; then
@@ -109,9 +111,19 @@ case ${chosen} in
 		fi
         ;;
     $suspend)
-		systemctl suspend
+      deadbeef --quit
+      systemctl suspend
         ;;
     $logout)
-		i3-msg exit
+      # Terminate deadbeef gracefully to avoid Log window show up at startup
+      # DEADBEEF_PID=$(pgrep -x deadbeef)
+      # if [ -n "$DEADBEEF_PID" ]; then
+      #     kill -15 $DEADBEEF_PID
+      #     while kill -0 $DEADBEEF_PID 2>/dev/null; do
+      #         sleep 0.25
+      #     done
+      # fi
+      deadbeef --quit
+      i3-msg exit
         ;;
 esac
