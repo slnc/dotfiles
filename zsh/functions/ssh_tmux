@@ -1,1 +1,1 @@
-ssh -t $@ 'source ~/.zshenv; source "${ZDOTDIR}/.zshrc"; tmux new -A -s default'
+ssh -A -t $@ 'source ~/.zshenv; source "${ZDOTDIR}/.zshrc"; tmux new -A -s default'
