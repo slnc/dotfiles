@@ -84,7 +84,7 @@ lsp.format_on_save({
   },
   servers = {
     ['lua_ls'] = { 'lua' },
-    ['python-lsp-server'] = { 'python' },
+    ['pylsp'] = { 'python' },
     -- ['tsserver'] = { 'javascript', 'typescript' },
   }
 })
@@ -94,6 +94,7 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
   desc = "Auto-format Python files after saving",
   callback = function()
     local fileName = vim.api.nvim_buf_get_name(0)
+    vim.cmd(":silent !autoflake --remove-all-unused-imports --remove-unused-variables -i " .. fileName)
     vim.cmd(":silent !black --preview -q " .. fileName)
     vim.cmd(":silent !isort --profile black --float-to-top -q " .. fileName)
   end,
@@ -107,6 +108,7 @@ require('mason').setup({})
 require('mason-lspconfig').setup({
   ensure_installed = {
     'lua_ls',
+    'pylsp',
     -- 'tsserver',
     -- 'dockerls',
     -- 'eslint',
@@ -124,7 +126,13 @@ lspconfig.pylsp.setup {
   settings = {
     pylsp = {
       plugins = {
-        flake8 = { enabled = true },
+        flake8 = {
+          enabled = true,
+          maxLineLength = 120,
+        },
+        pycodestyle = {
+          maxLineLength = 120,
+        },
         pylint = { enabled = true },
         rope_completion = { enabled = true },
       }
