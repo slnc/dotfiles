@@ -13,6 +13,9 @@
 # (Downstairs) Disabled laptop screen, monitor @ 2K
 # exec --no-startup-id xrandr --output HDMI-2 --mode 2560x1440 --primary --auto --output eDP-1 --off
 # rerun feh if you execute this
+#
+# Current Dual display setup
+# xrandr --output HDMI-0 --primary --mode 3840x2160 --output HDMI-1 --mode 2560x1440 --left-of HDMI-0
 exec --no-startup-id dunst &
 
 set $mod Mod4
@@ -158,6 +161,8 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
+workspace $ws10 output HDMI-1
+
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
@@ -235,6 +240,7 @@ exec alacritty
 # exec anki
 exec /opt/deadbeef/bin/deadbeef
 exec discord
+exec signal-desktop
 exec google-chrome
 exec obsidian
 # exec telegram-desktop
@@ -245,12 +251,15 @@ exec --no-startup-id picom -b
 
 exec --no-startup-id sleep 5 && xinput set-button-map 9 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20
 
+# xprop | grep WM_CLASS | awk '{ print $4 }'
+
 assign [class="Google-chrome"] 1
 assign [class="firefox"] 1
 
 assign [class="Alacritty"] 2
 
 assign [class="Slack"] 3
+assign [class="Signal"] 3
 assign [class="Whatsapp"] 3
 assign [class="TelegramDesktop"] 3
 assign [class="discord"] 3
