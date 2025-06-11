@@ -72,6 +72,12 @@ vim.api.nvim_create_autocmd('FileType', {
       pattern = '<buffer>',
       -- Trim trailing whitespaces
       callback = function()
+        -- Skip if file path contains "espanso"
+        local filepath = vim.api.nvim_buf_get_name(0)
+        if string.find(filepath, "espanso") then
+          return
+        end
+
         -- Save cursor position to restore later
         local curpos = vim.api.nvim_win_get_cursor(0)
         -- Search and replace trailing whitespaces
