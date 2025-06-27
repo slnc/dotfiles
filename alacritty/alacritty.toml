@@ -1,3 +1,6 @@
+import = [
+  "~/.config/alacritty/hosts/current.toml"
+]
 
 [font]
   normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
@@ -54,7 +57,3 @@ key = "Minus"
 mods = "Control"
 action = "None"
 
-[general]
-import = [
-  "~/.config/alacritty/hosts/current.toml"
-]
