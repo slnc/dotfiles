@@ -36,6 +36,7 @@ exec --no-startup-id dex --autostart --environment i3
 bindsym $mod+o exec --no-startup-id setxkbmap us
 bindsym $mod+p exec --no-startup-id setxkbmap es
 
+exec --no-startup-id [ "$(hostname)" = "whispers" ] && setxkbmap -option altwin:swap_alt_win
 
 set $wallpaper $HOME/files/wallpapers/today.png
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
@@ -305,6 +306,10 @@ set $volumestep 5
 #set $alsacard 1
 
 # append "-c $alsacard" without quotes to override default card
+
+bindsym $mod+shift+p exec --no-startup-id $volumepath/volume -t $statuscmd -u $statussig up $volumestep
+bindsym $mod+shift+o exec --no-startup-id $volumepath/volume -t $statuscmd -u $statussig down $volumestep
+
 bindsym XF86AudioRaiseVolume exec --no-startup-id $volumepath/volume -t $statuscmd -u $statussig up $volumestep
 bindsym XF86AudioLowerVolume exec --no-startup-id $volumepath/volume -t $statuscmd -u $statussig down $volumestep
 bindsym XF86AudioMute        exec --no-startup-id $volumepath/volume -t $statuscmd -u $statussig mute
