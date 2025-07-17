@@ -3,6 +3,7 @@
 setopt AUTO_CD
 
 # RoR
+alias diff='diff --color=always --side-by-side'
 alias sar='service apache2 restart'
 alias rt="bin/rails test"
 alias rtc='COVERAGE=true bin/rails test:all'
