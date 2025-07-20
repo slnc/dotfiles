@@ -9,6 +9,13 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 -- " therefore things like multiline insert work well.
 vim.api.nvim_set_keymap('i', '<C-c>', '<ESC>', { noremap = true, silent = true })
 
+-- vim.api.nvim_add_user_command("CopyRelPath", "call setreg('+', expand('%'))", {})
+vim.keymap.set('n', '<leader>cr', function()
+  local filepath = vim.fn.expand('%')
+  vim.fn.setreg('*', filepath)
+  vim.fn.setreg('+', filepath)
+end, { noremap = true, silent = true })
+
 -- show full file path instead of relative
 vim.keymap.set('n', '<C-g>', '1<C-g>', { noremap = true, silent = true })
 
