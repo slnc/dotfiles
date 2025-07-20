@@ -23,10 +23,10 @@ vim.opt.incsearch      = true
 
 vim.opt.termguicolors  = true
 
-vim.opt.laststatus     = 2
-vim.opt.statusline     = [[ %1*%{winnr()} %*%< %f %h%m%r%=%l,%c%V (%P) ]]
--- vim.opt.laststatus     = 0
--- vim.opt.statusline     = " " -- [[ %1*%{winnr()} %*%< %f %h%m%r%=%l,%c%V (%P) ]]
+vim.opt.laststatus     = 0
+-- vim.opt.laststatus     = 2
+-- vim.opt.statusline     = [[ %1*%{winnr()} %*%< %f %h%m%r%=%l,%c%V (%P) ]]
+vim.opt.statusline     = " "
 
 vim.opt.listchars      = {
   tab = '>·',
@@ -48,10 +48,12 @@ vim.opt.updatetime = 1000
 vim.opt.colorcolumn = "81"
 vim.opt.visualbell = true
 
--- vim.opt.winbar = "%m %f"
+vim.opt.winbar = " %{winnr()} %< %f %h%m%r%=%l,%c%V (%P)"
 
 -- Clipboard / copy-paste
-vim.opt.clipboard = "unnamedplus"
+-- vim.opt.clipboard = "unnamedplus"
+-- Copy to system clipboar only on yanking, not cutting or replacing
+vim.keymap.set({ 'n', 'v' }, 'y', '"+y', { noremap = true })
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "python",
