@@ -25,6 +25,9 @@ for i = 1, 9 do
   end, { noremap = true, silent = true })
 end
 
+vim.keymap.set('n', "<C-j>", '<cmd>cnext<CR>')
+vim.keymap.set('n', "<C-k>", '<cmd>cprev<CR>')
+
 vim.keymap.set('n', "<leader>t", ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 
 vim.keymap.set('n', "<leader>om", function()

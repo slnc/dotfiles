@@ -126,15 +126,16 @@ lspconfig.pylsp.setup {
   settings = {
     pylsp = {
       plugins = {
-        flake8 = {
-          enabled = true,
-          maxLineLength = 120,
-        },
-        pycodestyle = {
-          maxLineLength = 120,
-        },
+        -- one of these commented out plugins is very slow
+        -- flake8 = {
+        --   enabled = true,
+        --   maxLineLength = 120,
+        -- },
+        -- pycodestyle = {
+        --   maxLineLength = 140,
+        -- },
         pylint = { enabled = true },
-        rope_completion = { enabled = true },
+        -- rope_completion = { enabled = true },
       }
     }
   }
@@ -163,3 +164,15 @@ lspconfig.lua_ls.setup {
     },
   },
 }
+
+lspconfig.gopls.setup({
+  settings = {
+    gopls = {
+      analyses = {
+        unusedparams = true,
+      },
+      staticcheck = true,
+      gofumpt = true,
+    },
+  },
+})
