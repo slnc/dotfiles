@@ -9,6 +9,15 @@ vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 -- " therefore things like multiline insert work well.
 vim.api.nvim_set_keymap('i', '<C-c>', '<ESC>', { noremap = true, silent = true })
 
+vim.keymap.set('n', '<leader>df', function()
+  local confirm = vim.fn.confirm("Delete buffer and file?", "&Yes\n&No", 2)
+
+  if confirm == 1 then
+    os.remove(vim.fn.expand "%")
+    vim.api.nvim_buf_delete(0, { force = true })
+  end
+end)
+
 -- vim.api.nvim_add_user_command("CopyRelPath", "call setreg('+', expand('%'))", {})
 vim.keymap.set('n', '<leader>cr', function()
   local filepath = vim.fn.expand('%')
