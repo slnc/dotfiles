@@ -5,6 +5,9 @@ function ColorMyPencils(color)
         -- 0 global space, every window
         vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
         vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+        
+        -- Quickfix highlighting
+        vim.api.nvim_set_hl(0, "QuickFixLine", { bg = "black", fg = "orange" })
 end
 
 --
