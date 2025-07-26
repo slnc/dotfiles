@@ -42,6 +42,15 @@ vim.keymap.set('n', '<C-Right>', ':vertical resize +5<CR>', { silent = true })
 
 vim.keymap.set('n', "<C-j>", '<cmd>cnext<CR>')
 vim.keymap.set('n', "<C-k>", '<cmd>cprev<CR>')
+vim.keymap.set('n', "<C-L>", function()
+  for _, win in pairs(vim.fn.getwininfo()) do
+    if win.quickfix == 1 then
+      vim.cmd('cclose')
+      return
+    end
+  end
+  vim.cmd('copen')
+end)
 
 vim.keymap.set('n', "<leader>t", ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 
