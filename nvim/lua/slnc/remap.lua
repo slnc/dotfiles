@@ -287,3 +287,28 @@ vim.keymap.set('n', '<leader>S', '<cmd>lua require("spectre").toggle()<CR>', {
 -- vim.keymap.set('n', '<leader>sp', '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
 --     desc = "Search on current file"
 -- })
+--
+--
+vim.keymap.set("n", "<leader>ct", function()
+  local ts_utils = require("nvim-treesitter.ts_utils")
+  local node = ts_utils.get_node_at_cursor()
+  local func_name = nil
+
+  while node do
+    if node:type() == "function_declaration" then
+      local name_node = node:field("name")[1]
+      func_name = vim.treesitter.get_node_text(name_node, 0)
+      break
+    end
+    node = node:parent()
+  end
+
+  if not func_name or not func_name:match("^Test") then return end
+
+  local file = vim.api.nvim_buf_get_name(0)
+  if not file:match("_test%.go$") then return end
+
+  local pkg = vim.fn.fnamemodify(file, ":h:.")
+  local cmd = string.format("DEBUG=1 ENV_FILE=.env.test go test -run ^%s$ ./%s/...", func_name, pkg)
+  vim.fn.setreg("+", cmd)
+end, { desc = "Copy go test command for current Test function" })
