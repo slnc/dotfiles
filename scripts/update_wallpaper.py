@@ -51,6 +51,28 @@ def convert_and_resize_image(input_path, output_path, size=(3840, 2160)):
 
 def restart_feh():
     subprocess.run(["pkill", "-f", "feh"])
+    
+    # Get the current display from environment or detect it
+    display = os.environ.get("DISPLAY")
+    if not display:
+        # Try to find an active X display
+        try:
+            result = subprocess.run(["ps", "aux"], capture_output=True, text=True)
+            for line in result.stdout.split('\n'):
+                if 'Xorg' in line or 'X ' in line:
+                    if ':0' in line:
+                        display = ":0"
+                        break
+                    elif ':1' in line:
+                        display = ":1"
+                        break
+        except:
+            display = ":0"  # fallback
+    
+    if not display:
+        display = ":0"
+    
+    env = {**os.environ, "DISPLAY": display}
     subprocess.run(
         [
             "feh",
@@ -59,7 +81,7 @@ def restart_feh():
             "fill",
             os.path.expanduser("~/files/wallpapers/today.png"),
         ],
-        env={"DISPLAY": ":1", **os.environ},
+        env=env,
         check=True,
     )
 

@@ -1,5 +1,5 @@
 [font]
-  size = 10.0
+  size = 11.0
 
 [colors.primary]
   # TODO: this isn't working because colors.primary is defined on alacritty.toml.
