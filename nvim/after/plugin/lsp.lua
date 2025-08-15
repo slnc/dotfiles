@@ -104,23 +104,43 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 
 
 -- here you can setup the language servers
+
 require('mason').setup({})
-require('mason-lspconfig').setup({
-  ensure_installed = {
-    'lua_ls',
-    'pylsp',
-    -- 'tsserver',
-    -- 'dockerls',
-    -- 'eslint',
-  },
-  handlers = {
-    function(server_name)
-      require('lspconfig')[server_name].setup({})
-    end,
-  },
-})
 
 local lspconfig = require('lspconfig')
+
+-- I prefer to configure this myself
+-- require('mason-lspconfig').setup({
+--   ensure_installed = {
+--     'lua_ls',
+--     'pylsp',
+--     -- 'tsserver',
+--     -- 'dockerls',
+--     -- 'eslint',
+--   },
+--   handlers = {
+--     function(server_name)
+--       require('lspconfig')[server_name].setup({})
+--     end,
+--
+--     ["pylsp"] = function()
+--       lspconfig.pylsp.setup {
+--         -- All your custom settings are now here!
+--         settings = {
+--           pylsp = {
+--             plugins = {
+--               pycodestyle = {
+--                 maxLineLength = 140,
+--               },
+--               pylint = { enabled = true },
+--             }
+--           }
+--         }
+--       }
+--     end,
+--   },
+-- })
+
 lspconfig.pylsp.setup {
   filetypes = { "python" },
   settings = {
@@ -131,9 +151,9 @@ lspconfig.pylsp.setup {
         --   enabled = true,
         --   maxLineLength = 120,
         -- },
-        -- pycodestyle = {
-        --   maxLineLength = 140,
-        -- },
+        pycodestyle = {
+          maxLineLength = 140,
+        },
         pylint = { enabled = true },
         -- rope_completion = { enabled = true },
       }
