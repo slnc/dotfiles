@@ -17,7 +17,7 @@ function ColorMyPencils(color)
   vim.api.nvim_set_hl(0, "LspInlayHint", { fg = "#ff0000" })
 
 
-  vim.api.nvim_set_hl(0, "DiagnosticVirtualTextWarn", { fg = "#fca31c", bg = "#2e1c00" })
+  vim.api.nvim_set_hl(0, "DiagnosticVirtualTextWarn", { fg = "#cf8619", bg = "#2e1c00" })
   -- vim.api.nvim_set_hl(0, "DiagnosticError", { fg = "#FF0000", bg = "NONE" })
   -- vim.api.nvim_set_hl(0, "DiagnosticWarn", { fg = "#FFA500", bg = "NONE" })
   -- vim.api.nvim_set_hl(0, "DiagnosticInfo", { fg = "#0000FF", bg = "NONE" })
