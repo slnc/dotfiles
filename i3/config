@@ -163,7 +163,8 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
-# workspace $ws10 output HDMI-1
+workspace $ws6 output HDMI-1
+workspace $ws10 output HDMI-1
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -188,6 +189,9 @@ bindsym $mod+Shift+7 move container to workspace number $ws7; workspace number $
 bindsym $mod+Shift+8 move container to workspace number $ws8; workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9; workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10; workspace number $ws10
+
+bindsym $mod+Control+Shift+h move workspace to output left
+bindsym $mod+Control+Shift+l move workspace to output right
 
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
