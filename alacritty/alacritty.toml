@@ -1,4 +1,4 @@
-general.import = [
+import = [
   "~/.config/alacritty/hosts/current.toml"
 ]
 
