@@ -16,6 +16,16 @@
 #
 # Current Dual display setup
 # xrandr --output HDMI-0 --primary --mode 3840x2160 --output HDMI-1 --mode 2560x1440 --left-of HDMI-0
+#
+# whispers:
+# xrandr --output HDMI-0 --primary --mode 3840x2160 --scale 1x1 --output HDMI-1 --mode 2560x1440 --scale 1.5x1.5 --left-of HDMI-0
+
+# neeed to manually bump up resolution of HDMI-1 but, best workaround I could find.
+# xrandr --fb 8960x4320 \
+#          --output HDMI-0 --primary --mode 3840x2160 --scale 1x1 --pos 5120x0 \
+#          --output HDMI-1 --mode 2560x1440 --scale 2x2 --pos 0x0
+
+
 exec --no-startup-id dunst &
 
 set $mod Mod4
