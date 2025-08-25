@@ -7,7 +7,10 @@
 	d = diff --ignore-space-at-eol
 	ls = log --pretty=format:\"%h %ad | %s%d %as [%an]\" --graph --date=format:\"%Y-%m-%d %H:%M\"
 	lp = log -p
-	l = log --graph --pretty=format:'%C(blue)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ai) %C(bold blue)<%an>%Creset %C(cyan)%p%Creset' --abbrev-commit
+  ; team
+  ; l = log --graph --pretty=format:'%C(blue)%h%Creset %Cgreen%ad -%C(yellow)%d%Creset %s %C(bold blue)<%an>%Creset %C(cyan)%p%Creset' --abbrev-commit --date=format:\"%Y-%m-%d %H:%M\"
+  ; solo
+	l = log --graph --pretty=format:'%C(blue)%h%Creset %Cgreen%ad%C(yellow)%d%Creset %s' --abbrev-commit --date=format:\"%Y-%m-%d %H:%M\"
 	s = status
 	pushfwl = push --force-with-lease
 	unstage = reset HEAD --
