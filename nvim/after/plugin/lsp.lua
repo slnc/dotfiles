@@ -72,13 +72,6 @@ lsp.on_attach(function(client, bufnr)
   -- lsp.buffer_autoformat(format_options)
 end)
 
--- if n LSPs active, order is non-deterministic:
--- https://lsp-zero.netlify.app/v3.x/language-server-configuration.html#enable-format-on-save
-lsp.on_attach(function(client, bufnr)
-  lsp.default_keymaps({ buffer = bufnr })
-  -- DO NOT SUBMIT fix max line length
-  -- lsp.buffer_autoformat()
-end)
 
 lsp.format_on_save({
   format_opts = {
@@ -89,7 +82,7 @@ lsp.format_on_save({
     ['lua_ls'] = { 'lua' },
     ['pylsp'] = { 'python' },
     -- ['gopls'] = { 'go' },
-    -- ['tsserver'] = { 'javascript', 'typescript' },
+    ['ts_ls'] = { 'javascript', 'typescript' },
   }
 })
 
@@ -199,7 +192,7 @@ lspconfig.gopls.setup({
       staticcheck = true,
       gofumpt = true,
       ["ui.inlayhint.hints"] = {
-        compositeLiteralFields = true,
+        -- compositeLiteralFields = true,
         constantValues = true,
         -- parameterNames = true,
         functionTypeParameters = true,
@@ -207,3 +200,10 @@ lspconfig.gopls.setup({
     },
   },
 })
+
+lspconfig.ts_ls.setup({
+  filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
+})
+
+-- Initialize lsp-zero
+lsp.setup()
