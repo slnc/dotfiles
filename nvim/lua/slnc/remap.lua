@@ -52,7 +52,16 @@ vim.keymap.set('n', "<C-L>", function()
   vim.cmd('copen')
 end)
 
-vim.keymap.set('n', "<leader>t", ':NvimTreeToggle<CR>', { noremap = true, silent = true })
+-- vim.keymap.set('n', "<leader>t", ':NvimTreeToggle<CR>', { noremap = true, silent = true })
+-- NvimTreeFindFile
+vim.keymap.set('n', '<leader>t', function()
+  local nvim_tree = require('nvim-tree.api')
+  if nvim_tree.tree.is_visible() then
+    nvim_tree.tree.close()
+  else
+    vim.cmd('NvimTreeFindFile')
+  end
+end, { noremap = true, silent = true })
 
 vim.keymap.set('n', "<leader>om", function()
   vim.cmd('silent cd ~/files/projects/obsidian/main')

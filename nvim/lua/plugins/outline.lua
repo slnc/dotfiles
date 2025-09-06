@@ -6,7 +6,9 @@ return {
       { desc = "Toggle Outline" })
 
     require("outline").setup {
-      -- symbols.filter = { 'String', 'Variable', exclude=true }
+      symbols = {
+        filter = { 'String', 'Variable', 'Module', exclude = true }
+      }
     }
   end,
 }

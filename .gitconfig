@@ -1,6 +1,6 @@
 [alias]
-	bl = for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:short) %(refname:short)'
-	br = branch
+	br = for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:short) %(refname:short)'
+  # br = branch -vv --sort=-committerdate
 	ca = commit -amf
 	ci = commit
 	co = checkout
