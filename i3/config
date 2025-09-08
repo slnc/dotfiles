@@ -46,7 +46,7 @@ exec --no-startup-id dex --autostart --environment i3
 bindsym $mod+o exec --no-startup-id setxkbmap us
 bindsym $mod+p exec --no-startup-id setxkbmap es
 
-exec --no-startup-id [ "$(hostname)" = "whispers" ] && setxkbmap -option altwin:swap_alt_win
+# exec --no-startup-id [ "$(hostname)" = "whispers" ] && setxkbmap -option altwin:swap_alt_win
 
 set $wallpaper $HOME/files/wallpapers/today.png
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
