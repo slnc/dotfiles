@@ -42,12 +42,6 @@ font pango:monospace 8
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex --autostart --environment i3
 
-# exec --no-startup-id setxkbmap -model pc105 -layout us,es -option grp:alt_shift_toggle
-bindsym $mod+o exec --no-startup-id setxkbmap us
-bindsym $mod+p exec --no-startup-id setxkbmap es
-
-# exec --no-startup-id [ "$(hostname)" = "whispers" ] && setxkbmap -option altwin:swap_alt_win
-
 set $wallpaper $HOME/files/wallpapers/today.png
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
@@ -64,16 +58,9 @@ client.focused          #ff0000 #ff0000  #ff0000  #ff0000    #aa0000
 
 set $lock i3lock --image $HOME/files/wallpapers/today.png
 
-# Old version
-# exec --no-startup-id xss-lock --transfer-sleep-lock -- $lock --nofork; feh --bg-scale --zoom fill $wallpaper; setxkbmap -model pc105 -layout us,es -option grp:alt_shift_toggle
-#
-# Latest version that worked on p but not fully on w
-# exec --no-startup-id xss-lock --transfer-sleep-lock -- $lock --nofork; feh --bg-fill $wallpaper; setxkbmap -model pc105 -layout us,es -option grp:alt_shift_toggle
-
 exec --no-startup-id xss-lock --transfer-sleep-lock -- $lock --nofork
 exec --no-startup-id feh --bg-fill $wallpaper
-exec --no-startup-id setxkbmap -model pc105 -layout us,es -option grp:alt_shift_toggle -option altwin:swap_alt_win
-
+exec_always --no-startup-id "setxkbmap -layout us,es -option grp:caps_toggle,altwin:swap_alt_win; xmodmap ~/.Xmodmap"
 
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
