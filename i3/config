@@ -64,8 +64,16 @@ client.focused          #ff0000 #ff0000  #ff0000  #ff0000    #aa0000
 
 set $lock i3lock --image $HOME/files/wallpapers/today.png
 
+# Old version
 # exec --no-startup-id xss-lock --transfer-sleep-lock -- $lock --nofork; feh --bg-scale --zoom fill $wallpaper; setxkbmap -model pc105 -layout us,es -option grp:alt_shift_toggle
-exec --no-startup-id xss-lock --transfer-sleep-lock -- $lock --nofork; feh --bg-fill $wallpaper; setxkbmap -model pc105 -layout us,es -option grp:alt_shift_toggle
+#
+# Latest version that worked on p but not fully on w
+# exec --no-startup-id xss-lock --transfer-sleep-lock -- $lock --nofork; feh --bg-fill $wallpaper; setxkbmap -model pc105 -layout us,es -option grp:alt_shift_toggle
+
+exec --no-startup-id xss-lock --transfer-sleep-lock -- $lock --nofork
+exec --no-startup-id feh --bg-fill $wallpaper
+exec --no-startup-id setxkbmap -model pc105 -layout us,es -option grp:alt_shift_toggle -option altwin:swap_alt_win
+
 
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
