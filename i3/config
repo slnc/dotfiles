@@ -42,6 +42,9 @@ font pango:monospace 8
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex --autostart --environment i3
 
+exec --no-startup-id xmodmap ~/.Xmodmap
+
+
 set $wallpaper $HOME/files/wallpapers/today.png
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
@@ -60,7 +63,10 @@ set $lock i3lock --image $HOME/files/wallpapers/today.png
 
 exec --no-startup-id xss-lock --transfer-sleep-lock -- $lock --nofork
 exec --no-startup-id feh --bg-fill $wallpaper
-exec_always --no-startup-id "setxkbmap -layout us,es -option grp:caps_toggle,altwin:swap_alt_win; xmodmap ~/.Xmodmap"
+exec_always --no-startup-id "setxkbmap -layout us,es -option grp:caps_toggle,altwin:swap_alt_win"
+exec_always --no-startup-id [ "$(hostname)" = "whispers" ] && sleep 0.2 && xmodmap ~/.Xmodmap
+
+#kexec_always --no-startup-id "setxkbmap -layout us,es -option grp:caps_toggle,altwin:swap_alt_win"
 
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
