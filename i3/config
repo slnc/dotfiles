@@ -63,11 +63,15 @@ set $lock i3lock --image $HOME/files/wallpapers/today.png
 
 exec --no-startup-id xss-lock --transfer-sleep-lock -- $lock --nofork
 exec --no-startup-id feh --bg-fill $wallpaper
+
+# TODO: find out why I can't get this to work on whispers (and only on whispers) just with setxkbmap.
+# Until then, leave the duplicated entries, this is what a race condition looks
+# like (and the systems where this isn't needed have a much faster cpu, but
+# also don't need .Xmodmap which doesn't make sense...)
 exec_always --no-startup-id "setxkbmap -layout us,es -option grp:caps_toggle,altwin:swap_alt_win"
 exec_always --no-startup-id [ "$(hostname)" = "whispers" ] && sleep 0.2 && xmodmap ~/.Xmodmap
-
-#kexec_always --no-startup-id "setxkbmap -layout us,es -option grp:caps_toggle,altwin:swap_alt_win"
-
+exec_always --no-startup-id "sleep 2 && setxkbmap -layout us,es -option grp:caps_toggle,altwin:swap_alt_win"
+exec_always --no-startup-id [ "$(hostname)" = "whispers" ] && sleep 2.5 && xmodmap ~/.Xmodmap
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
