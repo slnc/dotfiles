@@ -63,10 +63,6 @@ vim.keymap.set('n', '<leader>t', function()
   end
 end, { noremap = true, silent = true })
 
-vim.keymap.set('n', "<leader>om", function()
-  vim.cmd('silent cd ~/files/projects/obsidian/main')
-  vim.cmd('silent ObsidianWorkspace main')
-end, { noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename)
 
@@ -157,77 +153,6 @@ vim.keymap.set('n', '<leader>nn', function()
   vim.cmd("edit " .. file_path)
 
   -- print("File created: " .. file_path)
-end, { noremap = true, silent = true })
-
-
-
-local function update_md_preamble()
-  local file_path = vim.fn.expand('%:p')
-  local file_name = vim.fn.expand('%:t:r')
-
-  local home_dir = vim.loop.os_homedir()
-  file_path = "~" .. file_path:sub(#home_dir + 1)
-
-  -- Check if the file is in the specified paths
-  local allowed_paths = {
-    -- Add your allowed paths here, e.g.:
-    ["~/files/projects/obsidian/main/Work/slnc.net/notes"] = true,
-    ["~/files/projects/obsidian/main/Work/juanalonso.net/notes"] = true,
-    ["~/files/projects/obsidian/main/Work/juan.al"] = true,
-    ["~/files/projects/obsidian/main/Work/juan.yoga/notes"] = true,
-  }
-
-  local dir_path = file_path:match("(.*/)")
-  if not allowed_paths[dir_path:sub(1, -2)] then -- non-blog .md
-    return
-  end
-
-  local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-  local preamble_start, preamble_end = 0, 0
-
-  for i, line in ipairs(lines) do
-    if line == "---" then
-      if preamble_start == 0 then
-        preamble_start = i
-      else
-        preamble_end = i; break
-      end
-    end
-  end
-
-  if preamble_start == 0 or preamble_end == 0 then return end
-
-  local preamble = {}
-  local current_time = os.date("%Y-%m-%dT%H:%M:%S+0200")
-
-  for i = preamble_start + 1, preamble_end - 1 do
-    local key, value = lines[i]:match("^(%w+):%s*(.*)$")
-    if key then
-      if key == "title" then
-        value = file_name
-      elseif key == "lastmod" then
-        value = current_time
-      elseif key == "url" then
-        value = "/" .. string.lower(file_name):gsub("%s+", "-") .. "/"
-      end
-      preamble[i - preamble_start] = string.format("%s: %s", key, value)
-    end
-  end
-  table.insert(preamble, "---")
-
-  vim.api.nvim_buf_set_lines(0, preamble_start, preamble_end, false, preamble)
-end
-
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*.md",
-  callback = update_md_preamble
-})
-
-vim.keymap.set('n', '<leader>tod', function()
-  local current_year = os.date("%Y")
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<leader>om", true, false, true), 'n', false)
-  local fp = string.format("~/files/projects/obsidian/main/Bins/Logs/%s/daily/%s.md", current_year, os.date("%Y-%m-%d"))
-  vim.cmd(string.format('e %s', fp))
 end, { noremap = true, silent = true })
 
 local function confirm_and_delete_buffer()
