@@ -1,11 +1,5 @@
 local lsp = require('lsp-zero')
 
--- lsp.ensure_installed("recommended")
---
--- lsp.ensure_installed({
--- })
---
-
 local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({
@@ -21,9 +15,6 @@ vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, { desc = "vim
 vim.keymap.set("n", "gr", function() vim.lsp.buf.references() end, { desc = "vim.lsp.buf.references()", nowait = true })
 
 lsp.on_attach(function(client, bufnr)
-  -- see :help lsp-zero-keybindings
-  -- to learn the available actions
-  -- lsp.default_keymaps({buffer = bufnr})
   local opts = { buffer = bufnr, remap = false }
   vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
   vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
@@ -62,14 +53,6 @@ lsp.on_attach(function(client, bufnr)
     documentFormattingProvider = true,
     documentRangeFormattingProvider = true,
   }
-
-  -- Apply formatting options to specific file types
-  -- if vim.bo[bufnr].filetype == "solidity" then
-  --   format_options.formatOptions.tabSize = 4
-  --   format_options.formatOptions.printWidth = 120 -- Set line length to 120
-  -- end
-
-  -- lsp.buffer_autoformat(format_options)
 end)
 
 
@@ -99,44 +82,9 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 })
 
 
-
--- here you can setup the language servers
-
 require('mason').setup({})
 
 local lspconfig = require('lspconfig')
-
--- I prefer to configure this myself
--- require('mason-lspconfig').setup({
---   ensure_installed = {
---     'lua_ls',
---     'pylsp',
---     -- 'tsserver',
---     -- 'dockerls',
---     -- 'eslint',
---   },
---   handlers = {
---     function(server_name)
---       require('lspconfig')[server_name].setup({})
---     end,
---
---     ["pylsp"] = function()
---       lspconfig.pylsp.setup {
---         -- All your custom settings are now here!
---         settings = {
---           pylsp = {
---             plugins = {
---               pycodestyle = {
---                 maxLineLength = 140,
---               },
---               pylint = { enabled = true },
---             }
---           }
---         }
---       }
---     end,
---   },
--- })
 
 lspconfig.pylsp.setup {
   filetypes = { "python" },
@@ -158,16 +106,11 @@ lspconfig.pylsp.setup {
   }
 }
 
--- https://github.com/radleylewis/nvim/blob/c2f43182c705cf2e7a0e2c109616866a382a8399/lua/plugins/nvim-lspconfig.lua#L12
--- local on_attach = require("util.lsp").on_attach
-
 lspconfig.lua_ls.setup {
   settings = {
     Lua = {
       format = {
         enable = true,
-        -- Put format options here
-        -- NOTE: the value should be String!
         -- DO NOT SUBMIT: not effective
         defaultConfig = {
           indent_style = "space",
@@ -175,7 +118,6 @@ lspconfig.lua_ls.setup {
         }
       },
       diagnostics = {
-        -- Get the language server to recognize the `vim` global
         globals = { 'vim' },
       },
     },
@@ -192,9 +134,7 @@ lspconfig.gopls.setup({
       staticcheck = true,
       gofumpt = true,
       ["ui.inlayhint.hints"] = {
-        -- compositeLiteralFields = true,
         constantValues = true,
-        -- parameterNames = true,
         functionTypeParameters = true,
       },
     },
@@ -202,8 +142,14 @@ lspconfig.gopls.setup({
 })
 
 lspconfig.ts_ls.setup({
-  filetypes = { "javascript", "javascriptreact", "javascript.jsx", "typescript", "typescriptreact", "typescript.tsx" }
+  filetypes = {
+    "javascript",
+    "javascript.jsx",
+    "javascriptreact",
+    "typescript",
+    "typescript.tsx",
+    "typescriptreact",
+  }
 })
 
--- Initialize lsp-zero
 lsp.setup()

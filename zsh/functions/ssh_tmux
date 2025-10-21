@@ -1,2 +1,10 @@
+<<<<<<< HEAD
 ssh -A -t "$@" 'source ~/.zshenv; source "${ZDOTDIR}/.zshrc"; last=$(tmux display-message -p "#{session_name}" 2>/dev/null || true); tmux attach -t "$last" 2>/dev/null || tmux attach -t "$(tmux ls -F "#{session_name}" 2>/dev/null | tail -n1)" 2>/dev/null || tmux new -A -s default'
 
+||||||| parent of 6275b58 (ch: cleanup nvim config)
+ssh -A -t $@ 'source ~/.zshenv; source "${ZDOTDIR}/.zshrc"; tmux new -A -s default'
+=======
+# ssh -A -t $@ 'source ~/.zshenv; source "${ZDOTDIR}/.zshrc"; tmux new -A -s default'
+# ssh -A -t "$@" 'source ~/.zshenv; source "${ZDOTDIR}/.zshrc"; tmux attach-session -t "$(tmux ls -F "#{session_name}" 2>/dev/null | head -n1)" 2>/dev/null || tmux new -A -s default'
+ssh -A -t "$@" 'source ~/.zshenv; touch /tmp/new_ssh_tmux; source "${ZDOTDIR}/.zshrc"; last=$(tmux display-message -p "#{session_name}" 2>/dev/null || true); tmux attach -t "$last" 2>/dev/null || tmux attach -t "$(tmux ls -F "#{session_name}" 2>/dev/null | tail -n1)" 2>/dev/null || tmux new -A -s default'
+>>>>>>> 6275b58 (ch: cleanup nvim config)

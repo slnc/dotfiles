@@ -24,8 +24,6 @@ vim.opt.incsearch      = true
 vim.opt.termguicolors  = true
 
 vim.opt.laststatus     = 0
--- vim.opt.laststatus     = 2
--- vim.opt.statusline     = [[ %1*%{winnr()} %*%< %f %h%m%r%=%l,%c%V (%P) ]]
 vim.opt.statusline     = " "
 
 vim.opt.listchars      = {
@@ -51,9 +49,7 @@ vim.opt.visualbell = true
 vim.opt.winbar = " %{winnr()} %< %f %h%m%r%=%l,%c%V (%P)"
 
 -- Clipboard / copy-paste
--- vim.opt.clipboard = "unnamedplus"
--- Copy to system clipboar only on yanking, not cutting or replacing
-vim.keymap.set({ 'n', 'v' }, 'y', '"+y', { noremap = true })
+vim.opt.clipboard = "unnamedplus"
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "python",
@@ -73,14 +69,6 @@ local function flicker_current_line()
   end, 350)
 end
 
-
--- local function flicker_current_line()
---   vim.wo.cursorline = true
---   vim.defer_fn(function()
---     vim.wo.cursorline = false
---   end, 350)
--- end
---
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter", "WinEnter" }, {
   callback = flicker_current_line,
 })

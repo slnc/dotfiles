@@ -1,0 +1,26 @@
+local main_branch=${1:-main}
+
+echo "Checking branches merged into $main_branch...\n"
+
+for branch in $(git for-each-ref refs/heads --format="%(refname:short)" | grep -v "^${main_branch}$"); do
+  # git cherry shows "+" for commits not in main, "-" for commits already in main
+  if [[ ! $(git cherry "origin/${main_branch}" "$branch" | grep "^+") ]]; then
+    if read -q "choice?Delete local branch ${branch}? (y/n) "; then
+      echo ""
+      git branch -D "$branch" && echo "Deleted local: $branch"
+
+      if git ls-remote --exit-code --heads origin "$branch" &>/dev/null; then
+        if read -q "choice?Delete remote branch ${branch}? (y/n) "; then
+          echo ""
+          git push origin --delete "$branch" && echo "Deleted remote: $branch"
+        else
+          echo ""
+        fi
+      fi
+    else
+      echo ""
+    fi
+  fi
+done
+
+echo "\nDone!"

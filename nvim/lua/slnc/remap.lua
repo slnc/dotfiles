@@ -70,33 +70,6 @@ end, { noremap = true, silent = true })
 
 vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename)
 
--- https://blog.viktomas.com/graph/neovim-lsp-rename-normal-mode-keymaps/
--- vim.keymap.set("n", "<leader>r", function()
---   -- when rename opens the prompt, this autocommand will trigger
---   -- it will "press" CTRL-F to enter the command-line window `:h cmdwin`
---   -- in this window I can use normal mode keybindings
---   local cmdId
---   cmdId = vim.api.nvim_create_autocmd({ "CmdlineEnter" }, {
---     callback = function()
---       local key = vim.api.nvim_replace_termcodes("<C-f>", true, false, true)
---       vim.api.nvim_feedkeys(key, "c", false)
---       vim.api.nvim_feedkeys("0", "n", false)
---       -- autocmd was triggered and so we can remove the ID and return true to delete the autocmd
---       cmdId = nil
---       return true
---     end,
---   })
---   vim.lsp.buf.rename()
---   -- if LPS couldn't trigger rename on the symbol, clear the autocmd
---   vim.defer_fn(function()
---     -- the cmdId is not nil only if the LSP failed to rename
---     if cmdId then
---       vim.api.nvim_del_autocmd(cmdId)
---     end
---   end, 500)
--- end, bufoptsWithDesc("Rename symbol"))
---
-
 vim.api.nvim_set_hl(0, "ExtraWhitespace", { ctermbg = "darkred", bg = "darkred" })
 vim.api.nvim_create_autocmd("BufWinEnter", {
   pattern = "*",
@@ -151,8 +124,6 @@ vim.keymap.set('n', '<leader>nu', function()
   vim.fn.system(string.format("touch '%s'", file_path))
 
   vim.cmd("edit " .. file_path)
-
-  -- print("File created: " .. file_path)
 end, { noremap = true, silent = true })
 
 
@@ -236,8 +207,6 @@ local function update_md_preamble()
         value = file_name
       elseif key == "lastmod" then
         value = current_time
-        -- elseif key == "summary" then
-        --   summary = value
       elseif key == "url" then
         value = "/" .. string.lower(file_name):gsub("%s+", "-") .. "/"
       end
@@ -253,17 +222,6 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*.md",
   callback = update_md_preamble
 })
-
--- vim.api.nvim_create_autocmd("FileType", {
---   pattern = "markdown",
---   callback = function()
---     vim.opt_local.textwidth = 0
---     vim.opt_local.wrapmargin = 0
---     vim.opt_local.wrap = true
---     vim.opt_local.linebreak = true
---     vim.opt_local.columns = 80
---   end
--- })
 
 vim.keymap.set('n', '<leader>tod', function()
   local current_year = os.date("%Y")
@@ -284,20 +242,7 @@ vim.keymap.set('n', '<leader>df', function()
   end
 end)
 
-vim.keymap.set('n', '<leader>S', '<cmd>lua require("spectre").toggle()<CR>', {
-  desc = "Toggle Spectre"
-})
--- vim.keymap.set('n', '<leader>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
---     desc = "Search current word"
--- })
--- vim.keymap.set('v', '<leader>sw', '<esc><cmd>lua require("spectre").open_visual()<CR>', {
---     desc = "Search current word"
--- })
--- vim.keymap.set('n', '<leader>sp', '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
---     desc = "Search on current file"
--- })
---
---
+
 vim.keymap.set("n", "<leader>ct", function()
   local ts_utils = require("nvim-treesitter.ts_utils")
   local node = ts_utils.get_node_at_cursor()
