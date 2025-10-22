@@ -1,12 +1,12 @@
 local lga_actions = require("telescope-live-grep-args.actions")
 local file_ignore_patterns = {
-  "-g", "!node_modules",
-  "-g", "!.venv",
-  "-g", "!.git",
-  "-g", "!.trash",
   "-g", "!*.egg-info",
   "-g", "!*.pyc",
+  "-g", "!.git",
+  "-g", "!.trash",
+  "-g", "!.venv",
   "-g", "!__pycache__",
+  "-g", "!node_modules",
   "-g", "!.dvc"
 }
 
@@ -36,25 +36,6 @@ require('telescope').setup {
       additional_args = vim.list_extend({ "--hidden", "--smart-case" }, file_ignore_patterns)
     },
   },
-  -- TODO: find out why the mappings don't work
-  -- extensions = {
-  --   live_grep_args = {
-  --     auto_quoting = true, -- enable/disable auto-quoting
-  --     -- define mappings, e.g.
-  --     mappings = {         -- extend mappings
-  --       i = {
-  --         ["<C-k>"] = lga_actions.quote_prompt(),
-  --         ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
-  --         -- freeze the current list and start a fuzzy search in the frozen list
-  --         ["<C-space>"] = lga_actions.to_fuzzy_refine,
-  --       },
-  --     },
-  --     -- ... also accepts theme settings, for example:
-  --     -- theme = "dropdown", -- use dropdown theme
-  --     -- theme = { }, -- use own theme spec
-  --     -- layout_config = { mirror=true }, -- mirror preview pane
-  --   }
-  -- }
 }
 
 local builtin = require('telescope.builtin')
