@@ -142,3 +142,7 @@ vim.keymap.set("n", "<leader>ct", function()
   local cmd = string.format("DEBUG=1 ENV_FILE=.env.test go test -run ^%s$ ./%s/...", func_name, pkg)
   vim.fn.setreg("+", cmd)
 end, { desc = "Copy go test command for current Test function" })
+
+vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, { desc = "vim.lsp.buf.definition()" })
+-- nowait needed because of neovim's 0.11's gr* defaults
+vim.keymap.set("n", "gr", function() vim.lsp.buf.references() end, { desc = "vim.lsp.buf.references()", nowait = true })
