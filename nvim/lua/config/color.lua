@@ -1,8 +1,6 @@
-function ColorMyPencils(color)
-  color = color or "rose-pine"
-  vim.cmd.colorscheme(color)
+function SetColors(color)
+  vim.cmd.colorscheme(color or "rose-pine")
 
-  -- 0 global space, every window
   vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
   vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 
@@ -14,8 +12,7 @@ function ColorMyPencils(color)
 
   vim.api.nvim_set_hl(0, "LspInlayHint", { fg = "#ff0000" })
 
-
   vim.api.nvim_set_hl(0, "DiagnosticVirtualTextWarn", { fg = "#cf8619", bg = "#2e1c00" })
 end
 
-ColorMyPencils()
+SetColors()

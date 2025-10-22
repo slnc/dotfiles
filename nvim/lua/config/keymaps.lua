@@ -1,4 +1,4 @@
-vim.g.mapleader = " "
+-- vim.g.mapleader set in lua/config/lazy.lua
 
 -- TODO: decide if I keep using nerdtree or move back to netrw
 -- vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
@@ -74,6 +74,8 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
   end,
 })
 
+vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
+
 
 vim.api.nvim_create_autocmd('FileType', {
   group = vim.api.nvim_create_augroup('trim_whitespaces', { clear = true }),
@@ -106,57 +108,6 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.wrap = true
   end
 })
-
-
-vim.keymap.set('n', '<leader>nu', function()
-  local title = vim.fn.input("Title: ")
-
-  if title == "" then
-    print("No title entered. Exiting.")
-    return
-  end
-
-  local file_path = string.format("_unsorted/%s.md", title)
-  vim.fn.system(string.format("touch '%s'", file_path))
-
-  vim.cmd("edit " .. file_path)
-end, { noremap = true, silent = true })
-
-
-vim.keymap.set('n', '<leader>nn', function()
-  local blogs = os.getenv("MY_BLOGS")
-  local options = {}
-
-  for i in blogs:gmatch("%S+") do
-    table.insert(options, string.format("%d. %s", #options + 1, i))
-  end
-
-  -- TODO: migrate to floating windows https://neovim.io/doc/user/api.html
-  local selected = vim.fn.inputlist(vim.list_extend({ "Select a domain:" }, options))
-
-  if selected == 0 then
-    print("No option selected. Exiting.")
-    return
-  end
-
-  local domain = options[selected]:match("%d+%.%s(.+)")
-
-  local title = vim.fn.input("Title: ")
-  if title == "" then
-    print("No title entered. Exiting.")
-    return
-  end
-
-  local file_path = string.format("Projects/%s/Notes/%s.md", domain, title)
-  vim.fn.system(string.format("touch '%s'", file_path))
-
-  vim.cmd("edit " .. file_path)
-
-  -- print("File created: " .. file_path)
-end, { noremap = true, silent = true })
-
-local function confirm_and_delete_buffer()
-end
 
 vim.keymap.set('n', '<leader>df', function()
   local confirm = vim.fn.confirm("Delete buffer and file?", "&Yes\n&No", 2)
