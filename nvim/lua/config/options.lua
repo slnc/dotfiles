@@ -36,6 +36,10 @@ vim.opt.listchars        = {
   tab = '>·',
   trail = '󱁐',
 }
+
+vim.opt.fillchars        = {
+  diff = ' ',
+}
 vim.opt.showmatch        = true -- when inserting a bracket, briefly jump to matching one
 vim.opt.matchtime        = 1    -- tenths of a sec
 
