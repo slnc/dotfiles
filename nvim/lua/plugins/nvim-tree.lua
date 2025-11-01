@@ -17,7 +17,7 @@ return {
 
       require("nvim-tree").setup({
         on_attach = my_on_attach,
-        git = { enable = false },
+        git = { enable = true },
         filesystem_watchers = {
           enable = true,
           debounce_delay = 50,

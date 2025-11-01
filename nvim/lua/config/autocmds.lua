@@ -24,3 +24,10 @@ end
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter", "WinEnter" }, {
   callback = flicker_current_line,
 })
+
+-- Restore cursor to last position when reopening a file
+vim.api.nvim_create_autocmd("BufReadPost", {
+  callback = function()
+    vim.cmd('silent! normal! g`"zv')
+  end,
+})
