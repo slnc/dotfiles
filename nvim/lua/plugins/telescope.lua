@@ -59,10 +59,11 @@ return {
     vim.keymap.set('n', '<leader>f', function()
       builtin.find_files()
     end, {})
-    vim.keymap.set("n", "<leader>of", builtin.oldfiles, {})
+    vim.keymap.set("n", "<leader>gf", builtin.git_status, {})
     -- https://github.com/nvim-telescope/telescope-live-grep-args.nvim
     vim.keymap.set("n", "<leader>lg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
-    vim.keymap.set("n", "<leader>rlg", require("telescope.builtin").resume,
+    vim.keymap.set("n", "<leader>of", builtin.oldfiles, {})
+    vim.keymap.set("n", "<leader>rl", require("telescope.builtin").resume,
       { noremap = true, silent = true, desc = "Resume" })
     vim.keymap.set('n', '<C-p>', builtin.git_files, {})
     vim.keymap.set("x", "<leader>p", [["_dP]])
