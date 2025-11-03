@@ -1,89 +1,103 @@
+[advice]
+  statusHints = false
+
 [alias]
-	br = for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:short) %(refname:short)'
-  # br = branch -vv --sort=-committerdate
-	ca = commit -amf
-	ci = commit
-	co = checkout
-	d = diff --ignore-space-at-eol
-	ls = log --pretty=format:\"%h %ad | %s%d %as [%an]\" --graph --date=format:\"%Y-%m-%d %H:%M\"
-	lp = log -p
+  ac = !git add -A && git commit
+  br = for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:short) %(refname:short)'
+  ca = commit -amf
+  ci = commit
+  co = checkout
+  d = diff --ignore-space-at-eol
   ; team
-  l = log --graph --pretty=format:'%C(blue)%h%Creset %Cgreen%ad -%C(yellow)%d%Creset %s %C(bold blue)<%an>%Creset %C(cyan)%p%Creset' --abbrev-commit --date=format:\"%Y-%m-%d %H:%M\"
+  l = log --graph --pretty=format:'%C(blue)%h%Creset %Cgreen%ad -%C(yellow)%d%Creset %s %C(bold blue)<%an>%Creset %C(cyan)%p%Creset' --abbrev-commit --date=format:"%Y-%m-%d %H:%M"
   ; solo
-  ; l = log --graph --pretty=format:'%C(blue)%h%Creset %Cgreen%ad%C(yellow)%d%Creset %s' --abbrev-commit --date=format:\"%Y-%m-%d %H:%M\"
-	s = status
-	pushfwl = push --force-with-lease
-	unstage = reset HEAD --
-	staged = diff --cached
+  ; l = log --graph --pretty=format:'%C(blue)%h%Creset %Cgreen%ad%C(yellow)%d%Creset %s' --abbrev-commit --date=format:"%Y-%m-%d %H:%M"
+  lp = log -p
+  ls = log --pretty=format:"%h %ad | %s%d %as [%an]" --graph --date=format:"%Y-%m-%d %H:%M"
+  pushfwl = push --force-with-lease
+  s = status
 
 [branch]
-	sort = -committerdate
+  sort = -committerdate
 
 [color]
-	branch = auto
-	diff = auto
-	status = auto
-	ui = auto
-
-[core]
-	autocrlf = input
-	excludesfile = ~/.dotfiles/.gitignore
-	commitGraph = true
-	precomposeunicode = true
-	quotepath = false
-  ; pager = delta
-
-;[interactive]
-;    diffFilter = delta --color-only
-
-;[delta]
-;    navigate = true  # use n and N to move between diff sections
-;    dark = true      # or light = true, or omit for auto-detection
-;    side-by-side = true
-
-[credential]
-	helper = store
-	helper = /usr/local/share/gcm-core/git-credential-manager
-
-[credential "https://dev.azure.com"]
-	useHttpPath = true
+  branch = auto
+  diff = auto
+  status = auto
+  ui = auto
 
 [commit]
-	gpgsign = true
+  gpgsign = true
+  verbose = true
+
+[core]
+  autocrlf = input
+  commitGraph = true
+  excludesfile = ~/.dotfiles/.gitignore
+  ignorecase = false
+  precomposeunicode = true
+  quotepath = false
+
+[credential]
+  helper = store
+  helper = /usr/local/share/gcm-core/git-credential-manager
+
+[credential "https://dev.azure.com"]
+  useHttpPath = true
 
 [diff]
-	tool = vimdiff
-	algorithm = patience
-	compactionheuristic = true
-	wsErrorHighlight = all
-	colorMoved = default
+  algorithm = patience
+  colorMoved = default
+  compactionheuristic = true
+  submodule = log
+  tool = vimdiff
+  wsErrorHighlight = all
 
 [difftool]
-	prompt = false
+  prompt = false
 
 [gpg]
-	format = ssh
+  format = ssh
+
+[help]
+  autocorrect = prompt
 
 [init]
-	defaultBranch = main
+  defaultBranch = main
 
-[pull]
-	rebase = true
-
-[protocol]
-	version = 2
-
-[push]
-	default = current
-
-# [rerere]
-# 	enabled = true
-# 	autoUpdate = true
+[maintenance]
+  auto = true
+  strategy = incremental
 
 [merge]
-    conflictStyle = zdiff3
-    tool = nvimdiff
+  conflictStyle = zdiff3
+  tool = nvimdiff
+
 [mergetool]
-    prompt = true
-# [mergetool "nvimdiff"]
-#     cmd = "nvim -d \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c 'wincmd w' -c 'wincmd J'"
+  prompt = true
+
+[protocol]
+  version = 2
+
+[pull]
+  rebase = true
+
+[push]
+  autoSetupRemote = true
+  default = current
+  recurseSubmodules = on-demand
+
+[rerere]
+  autoUpdate = true
+  enabled = true
+
+[status]
+  branch = true
+  short = true
+  submodulesummary = 1
+
+[submodule]
+  recurse = true
+
+[tag]
+  sort = -version:refname
