@@ -6,6 +6,11 @@ vim.api.nvim_create_autocmd("User", {
       remap = true,
       desc = "Show vertical diff view on Enter"
     })
+    -- Override default commit mapping to use --quiet flag
+    vim.keymap.set('n', 'cc', ':Git commit --quiet<CR>', {
+      buffer = true,
+      desc = "Commit (quiet)"
+    })
   end,
   group = vim.api.nvim_create_augroup("CustomFugitiveMappings", { clear = true })
 })

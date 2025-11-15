@@ -35,10 +35,10 @@ for i = 1, 9 do
 end
 
 -- Window resizing
-vim.keymap.set('n', '<C-Up>', ':resize +3<CR>', { silent = true })
-vim.keymap.set('n', '<C-Down>', ':resize -3<CR>', { silent = true })
-vim.keymap.set('n', '<C-Left>', ':vertical resize +5<CR>', { silent = true })
-vim.keymap.set('n', '<C-Right>', ':vertical resize -5<CR>', { silent = true })
+vim.keymap.set('n', '<C-Up>', ':resize -3<CR>', { silent = true })
+vim.keymap.set('n', '<C-Down>', ':resize +3<CR>', { silent = true })
+vim.keymap.set('n', '<C-Left>', ':vertical resize -5<CR>', { silent = true })
+vim.keymap.set('n', '<C-Right>', ':vertical resize +5<CR>', { silent = true })
 
 vim.keymap.set('n', "<C-j>", '<cmd>cnext<CR>')
 vim.keymap.set('n', "<C-k>", '<cmd>cprev<CR>')
