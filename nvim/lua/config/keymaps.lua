@@ -34,11 +34,46 @@ for i = 1, 9 do
   end, { noremap = true, silent = true })
 end
 
--- Window resizing
-vim.keymap.set('n', '<C-Up>', ':resize -3<CR>', { silent = true })
-vim.keymap.set('n', '<C-Down>', ':resize +3<CR>', { silent = true })
-vim.keymap.set('n', '<C-Left>', ':vertical resize -5<CR>', { silent = true })
-vim.keymap.set('n', '<C-Right>', ':vertical resize +5<CR>', { silent = true })
+-- Window resizing (smart resize based on window position)
+-- resize commands are absolute: they always increase or decrease window size in same dir.
+-- I want semantics: C-Up always makes window smaller, C-Down regardless of which
+--   window you're in.
+
+--  Here's what's happening:
+--  - Top window: C-Up (:resize -3) makes it smaller ✓
+--  - Bottom window: C-Up (:resize -3) still makes the bottom window smaller (which means making the top window bigger) ✗
+
+vim.keymap.set('n', '<C-Up>', function()
+  if vim.fn.winnr() == vim.fn.winnr('k') then
+    vim.cmd('resize -3')
+  else
+    vim.cmd('resize +3')
+  end
+end, { silent = true })
+
+vim.keymap.set('n', '<C-Down>', function()
+  if vim.fn.winnr() == vim.fn.winnr('k') then
+    vim.cmd('resize +3')
+  else
+    vim.cmd('resize -3')
+  end
+end, { silent = true })
+
+vim.keymap.set('n', '<C-Left>', function()
+  if vim.fn.winnr() == vim.fn.winnr('h') then
+    vim.cmd('vertical resize -5')
+  else
+    vim.cmd('vertical resize +5')
+  end
+end, { silent = true })
+
+vim.keymap.set('n', '<C-Right>', function()
+  if vim.fn.winnr() == vim.fn.winnr('h') then
+    vim.cmd('vertical resize +5')
+  else
+    vim.cmd('vertical resize -5')
+  end
+end, { silent = true })
 
 vim.keymap.set('n', "<C-j>", '<cmd>cnext<CR>')
 vim.keymap.set('n', "<C-k>", '<cmd>cprev<CR>')
