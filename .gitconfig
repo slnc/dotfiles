@@ -3,7 +3,7 @@
 
 [alias]
   ac = !git add -A && git commit
-  br = for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:short) %(refname:short)'
+  br = !~/.dotfiles/scripts/git-branches.sh
   ca = commit -amf
   ci = commit
   co = checkout
