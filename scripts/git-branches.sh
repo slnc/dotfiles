@@ -24,6 +24,22 @@ width5=12
 width6=11
 width7=11
 
+# Check if 'gh' argument is provided
+USE_GH=false
+if [ "$1" = "gh" ]; then
+    USE_GH=true
+fi
+
+# Build a map of merged PR branches if gh is enabled
+declare -A merged_prs
+if [ "$USE_GH" = true ]; then
+    if command -v gh &> /dev/null; then
+        while IFS= read -r branch; do
+            merged_prs["$branch"]=1
+        done < <(gh pr list --author @me --state merged --limit 30 --json headRefName --jq '.[].headRefName' 2>/dev/null)
+    fi
+fi
+
 # Function to count commits
 count_commits() {
     local branch="$1"
@@ -79,12 +95,21 @@ for branchdata in $(git for-each-ref --sort=-authordate --format="$format_string
         worktree_path=$(basename "${worktree_map[$branch]}")
     fi
 
-    # Truncate branch name to 30 chars
+    # Build branch display with indicators
     if [ "$branch" = "$current_branch" ]; then
-        branch_display="* $branch"
+        branch_display="* "
     else
-        branch_display="$branch"
+        branch_display=""
     fi
+
+    # Add merged indicator if this branch has a merged PR
+    if [ "$USE_GH" = true ] && [ -n "${merged_prs[$branch]}" ]; then
+        branch_display="${branch_display} "
+    fi
+
+    branch_display="${branch_display}${branch}"
+
+    # Truncate branch name to 30 chars
     if [ ${#branch_display} -gt 30 ]; then
         branch_display="${branch_display:0:27}..."
     fi
