@@ -24,11 +24,20 @@ width5=12
 width6=11
 width7=11
 
-# Check if 'gh' argument is provided
+# Check arguments
 USE_GH=false
-if [ "$1" = "gh" ]; then
-    USE_GH=true
-fi
+SHOW_MERGED=false
+
+for arg in "$@"; do
+    case "$arg" in
+        gh)
+            USE_GH=true
+            ;;
+        --merged|merged)
+            SHOW_MERGED=true
+            ;;
+    esac
+done
 
 # Build a map of merged PR branches if gh is enabled
 declare -A merged_prs
@@ -75,11 +84,23 @@ printf "${CYAN}%-${width1}s ${GREEN}%-${width2}s ${RED}%-${width3}s ${BLUE}%-${w
 format_string="%(authordate:short)@%(objectname:short)@%(refname:short)@%(committerdate:relative)"
 IFS=$'\n'
 
-for branchdata in $(git for-each-ref --sort=-authordate --format="$format_string" refs/heads/ --no-merged "$main_branch_name"); do
+# Determine whether to show merged branches
+if [ "$SHOW_MERGED" = true ]; then
+    branch_list=$(git for-each-ref --sort=-authordate --format="$format_string" refs/heads/)
+else
+    branch_list=$(git for-each-ref --sort=-authordate --format="$format_string" refs/heads/ --no-merged "$main_branch_name")
+fi
+
+for branchdata in $branch_list; do
     author_date=$(echo "$branchdata" | cut -d '@' -f1)
     sha=$(echo "$branchdata" | cut -d '@' -f2)
     branch=$(echo "$branchdata" | cut -d '@' -f3)
     time=$(echo "$branchdata" | cut -d '@' -f4)
+
+    # Skip the main branch itself
+    if [ "$branch" = "$main_branch_name" ]; then
+        continue
+    fi
 
     # Get branch description
     description=$(git config branch."$branch".description)
