@@ -79,7 +79,8 @@ return {
           ['lua_ls'] = { 'lua' },
           ['pylsp'] = { 'python' },
           -- ['gopls'] = { 'go' },
-          ['ts_ls'] = { 'javascript', 'typescript' },
+          -- ts_ls formatting disabled, using ESLint instead
+          -- ['ts_ls'] = { 'javascript', 'typescript' },
         }
       })
 
@@ -144,6 +145,34 @@ return {
         filetypes = {
           "javascript", "javascript.jsx", "javascriptreact",
           "typescript", "typescript.tsx", "typescriptreact",
+        }
+      })
+
+      -- Create autocmd group for ESLint
+      local eslint_group = vim.api.nvim_create_augroup("EslintAutoFix", { clear = true })
+
+      lspconfig.eslint.setup({
+        on_attach = function(client, bufnr)
+          vim.api.nvim_create_autocmd("BufWritePre", {
+            group = eslint_group,
+            buffer = bufnr,
+            callback = function()
+              vim.cmd('EslintFixAll')
+            end,
+          })
+        end,
+        settings = {
+          workingDirectories = { mode = "auto" },
+          format = { enable = true },
+          codeAction = {
+            disableRuleComment = {
+              enable = true,
+              location = "separateLine"
+            },
+            showDocumentation = {
+              enable = true,
+            }
+          }
         }
       })
 
