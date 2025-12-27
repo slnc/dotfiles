@@ -13,7 +13,20 @@ return {
   config = function()
     local telescope = require("telescope")
 
+    -- Lua patterns for filtering results (applied by Telescope)
     local file_ignore_patterns = {
+      "%.egg%-info",
+      "%.pyc$",
+      "%.git/",
+      "%.trash/",
+      "%.venv/",
+      "__pycache__/",
+      "node_modules/",
+      "%.dvc/"
+    }
+
+    -- Ripgrep glob args for find_files command
+    local rg_glob_args = {
       "-g", "!*.egg-info",
       "-g", "!*.pyc",
       "-g", "!.git",
@@ -23,6 +36,7 @@ return {
       "-g", "!node_modules",
       "-g", "!.dvc"
     }
+
     -- first setup telescope
     telescope.setup({
       defaults = {
@@ -41,13 +55,13 @@ return {
       pickers = {
         find_files = {
           hidden = true,
-          find_command = vim.list_extend({ 'rg', '--files', '--hidden' }, file_ignore_patterns)
+          find_command = vim.list_extend({ 'rg', '--files', '--hidden' }, rg_glob_args)
         },
         grep_string = {
-          additional_args = vim.list_extend({ "--hidden", "--smart-case" }, file_ignore_patterns)
+          additional_args = vim.list_extend({ "--hidden", "--smart-case" }, rg_glob_args)
         },
         live_grep = {
-          additional_args = vim.list_extend({ "--hidden", "--smart-case" }, file_ignore_patterns)
+          additional_args = vim.list_extend({ "--hidden", "--smart-case" }, rg_glob_args)
         },
       },
     })

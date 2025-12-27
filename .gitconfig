@@ -18,6 +18,7 @@
   ls = log --pretty=format:"%h %ad | %s%d %as [%an]" --graph --date=format:"%Y-%m-%d %H:%M"
   pushfwl = push --force-with-lease
   s = status
+  sw = switch
 
 [branch]
   sort = -committerdate
