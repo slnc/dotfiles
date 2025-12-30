@@ -126,6 +126,7 @@ for branchdata in $branch_list; do
     # Add merged indicator if this branch has a merged PR
     if [ "$USE_GH" = true ] && [ -n "${merged_prs[$branch]}" ]; then
         branch_display="${branch_display} "
+        worktree_path="  ${worktree_path} "
     fi
 
     branch_display="${branch_display}${branch}"
@@ -135,8 +136,8 @@ for branchdata in $branch_list; do
         branch_display="${branch_display:0:27}..."
     fi
 
-    # Shorten time format (e.g. "18 minutes ago" -> "18m ago")
-    time_short=$(echo "$time" | sed 's/ minutes/m/g; s/ minute/m/g; s/ hours/h/g; s/ hour/h/g; s/ days/d/g; s/ day/d/g; s/ weeks/w/g; s/ week/w/g; s/ months/M/g; s/ month/M/g; s/ years/y/g; s/ year/y/g; s/ / /g')
+    # Shorten time format (e.g. "18 minutes ago" -> "18m ago", "32 seconds ago" -> "32s ago")
+    time_short=$(echo "$time" | sed 's/ seconds/s/g; s/ second/s/g; s/ minutes/m/g; s/ minute/m/g; s/ hours/h/g; s/ hour/h/g; s/ days/d/g; s/ day/d/g; s/ weeks/w/g; s/ week/w/g; s/ months/M/g; s/ month/M/g; s/ years/y/g; s/ year/y/g; s/ / /g')
 
     # Check if this is the current branch and use bright colors
     if [ "$branch" = "$current_branch" ]; then
