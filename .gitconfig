@@ -3,8 +3,8 @@
 
 [alias]
   ac = !git add -A && git commit
-  br = !~/.dotfiles/scripts/git-branches.sh
-  brgh = !~/.dotfiles/scripts/git-branches.sh gh
+  b = !~/.dotfiles/scripts/git-branches.sh gh
+  ; brgh = !~/.dotfiles/scripts/git-branches.sh gh
   ca = commit -amf
   ci = commit
   co = checkout
@@ -16,6 +16,7 @@
   ; l = log --graph --pretty=format:'%C(blue)%h%Creset %Cgreen%ad%C(yellow)%d%Creset %s' --abbrev-commit --date=format:"%Y-%m-%d %H:%M"
   lp = log -p
   ls = log --pretty=format:"%h %ad | %s%d %as [%an]" --graph --date=format:"%Y-%m-%d %H:%M"
+  park = "!git checkout --detach HEAD~0"
   pushfwl = push --force-with-lease
   s = status
   sw = switch

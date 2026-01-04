@@ -39,13 +39,18 @@ for arg in "$@"; do
     esac
 done
 
-# Build a map of merged PR branches if gh is enabled
+# Build a map of merged PR branches and open PR branches if gh is enabled
 declare -A merged_prs
+declare -A open_prs
 if [ "$USE_GH" = true ]; then
     if command -v gh &> /dev/null; then
-        while IFS= read -r branch; do
-            merged_prs["$branch"]=1
-        done < <(gh pr list --author @me --state merged --limit 30 --json headRefName --jq '.[].headRefName' 2>/dev/null)
+        while IFS=$'\t' read -r branch state; do
+            if [ "$state" = "MERGED" ]; then
+                merged_prs["$branch"]=1
+            elif [ "$state" = "OPEN" ]; then
+                open_prs["$branch"]=1
+            fi
+        done < <(gh pr list --author @me --state all --limit 50 --json headRefName,state --jq '.[] | "\(.headRefName)\t\(.state)"' 2>/dev/null)
     fi
 fi
 
@@ -118,15 +123,26 @@ for branchdata in $branch_list; do
 
     # Build branch display with indicators
     if [ "$branch" = "$current_branch" ]; then
-        branch_display="* "
+        branch_display=""
     else
         branch_display=""
     fi
 
-    # Add merged indicator if this branch has a merged PR
-    if [ "$USE_GH" = true ] && [ -n "${merged_prs[$branch]}" ]; then
-        branch_display="${branch_display} "
-        worktree_path="  ${worktree_path} "
+    # Add PR status indicator
+    if [ "$USE_GH" = true ]; then
+        if [ -n "${merged_prs[$branch]}" ]; then
+            branch_display="${branch_display} "
+            worktree_path="  ${worktree_path} "
+        elif [ -n "${open_prs[$branch]}" ]; then
+            # Claude, you're going to programmer's hell
+            branch_display="${branch_display}󰅠 "
+            if [ -z "$worktree_path" ]; then
+              worktree_path="               "
+            else
+              worktree_path="   ${worktree_path} "
+            fi
+
+        fi
     fi
 
     branch_display="${branch_display}${branch}"
