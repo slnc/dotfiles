@@ -2,6 +2,11 @@ general.import = [
   "~/.config/alacritty/hosts/current.toml"
 ]
 
+[bell]
+animation = "EaseOutExpo"
+duration = 100
+color = "#ffa000"
+
 [font]
   normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
   # set per-host
