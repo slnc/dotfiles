@@ -7,7 +7,7 @@
   ; brgh = !~/.dotfiles/scripts/git-branches.sh gh
   ca = commit -amf
   ci = commit
-  co = checkout
+  f = fetch
   d = diff --ignore-space-at-eol
   ; team
   l = log --graph --pretty=format:'%C(blue)%h%Creset %Cgreen%ad -%C(yellow)%d%Creset %s %C(bold blue)<%an>%Creset %C(cyan)%p%Creset' --abbrev-commit --date=format:'%Y-%m-%d %H:%M'
