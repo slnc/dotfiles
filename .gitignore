@@ -1,4 +1,6 @@
 .DS_Store
+claude-tasks/
+.claude/
 
 .env
 .venv
