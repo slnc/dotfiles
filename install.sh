@@ -41,7 +41,7 @@ echo "Remember to ln -s ~/.config/polybar/`hostname`.ini ~/.config/alacritty/con
 ln -s ~/.dotfiles/polybar ~/.config
 ln -s ~/.dotfiles/.pylintrc ~/.config/pylintrc
 ln -s ~/.dotfiles/pycodestyle ~/.config
-ln -s ~/.dotfiles/nvim ~/.config
+# ln -s ~/.dotfiles/nvim ~/.config
 ln -s ~/.dotfiles/picom ~/.config
 ln -s ~/.dotfiles/flake8 ~/.config
 ln -s ~/.dotfiles/rofi ~/.config
