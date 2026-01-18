@@ -36,3 +36,14 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     vim.cmd('silent! normal! g`"zv')
   end,
 })
+
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+--   pattern = "*",
+--   callback = function()
+--     if vim.bo.buftype == "" and not vim.bo.binary then
+--       local n = vim.api.nvim_buf_line_count(0)
+--       local last = vim.api.nvim_buf_get_lines(0, n - 1, n, false)[1]
+--       if last ~= "" then vim.api.nvim_buf_set_lines(0, n, n, false, { "" }) end
+--     end
+--   end,
+-- })
