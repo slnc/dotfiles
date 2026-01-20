@@ -3,8 +3,7 @@
 
 [alias]
   ac = !git add -A && git commit
-  b = !~/.dotfiles/scripts/git-branches.sh gh
-  ; brgh = !~/.dotfiles/scripts/git-branches.sh gh
+  b = !~/.dotfiles/scripts/git-branches.py --gh
   ca = commit -amf
   ci = commit
   f = fetch
