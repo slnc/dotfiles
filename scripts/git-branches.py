@@ -2,11 +2,13 @@
 """Git branches viewer."""
 
 import argparse
+import json
 import os
 import re
 import subprocess
 
-ICONS = {"merged": "", "open_pr": ""}
+ICONS = {"merged": "", "open_pr": "", "review": ""}
+
 
 # Column config: (header, width, align, color) - width=0 means no padding
 COLUMNS = [
@@ -112,20 +114,62 @@ def count_ahead_behind(sha: str, main_branch: str) -> tuple[int, int]:
     return 0, 0
 
 
-def get_pr_status(use_gh: bool) -> tuple[set[str], set[str]]:
-    """Get sets of merged and open PR branches."""
-    merged_prs, open_prs = set(), set()
+def get_pr_status(use_gh: bool) -> tuple[set[str], set[str], set[str]]:
+    """Get sets of merged, open, and branches with unresolved PR comments."""
+    merged_prs, open_prs, unresolved_prs = set(), set(), set()
     if not use_gh:
-        return merged_prs, open_prs
-    output = run_cmd([
-        "gh", "pr", "list", "--author", "@me", "--state", "all", "--limit", "50",
-        "--json", "headRefName,state", "--jq", '.[] | "\\(.headRefName)\\t\\(.state)"',
-    ])
-    for line in output.split("\n"):
-        if parts := line.split("\t"):
-            if len(parts) == 2:
-                (merged_prs if parts[1] == "MERGED" else open_prs if parts[1] == "OPEN" else set()).add(parts[0])
-    return merged_prs, open_prs
+        return merged_prs, open_prs, unresolved_prs
+
+    # Get current repo
+    repo = run_cmd(["gh", "repo", "view", "--json", "nameWithOwner", "-q", ".nameWithOwner"])
+    if not repo:
+        return merged_prs, open_prs, unresolved_prs
+
+    # GraphQL query - gets all PR data in one call
+    query = """
+    query($q: String!) {
+      search(query: $q, type: ISSUE, first: 50) {
+        nodes {
+          ... on PullRequest {
+            headRefName
+            state
+            reviewThreads(first: 100) {
+              nodes { isResolved }
+            }
+          }
+        }
+      }
+    }
+    """
+
+    result = subprocess.run(
+        ["gh", "api", "graphql", "-f", f"query={query}", "-f", f"q=is:pr author:@me repo:{repo}"],
+        capture_output=True, text=True
+    )
+
+    if result.returncode != 0:
+        return merged_prs, open_prs, unresolved_prs
+
+    try:
+        data = json.loads(result.stdout)
+        for pr in data.get("data", {}).get("search", {}).get("nodes", []):
+            branch = pr.get("headRefName")
+            if not branch:
+                continue
+
+            state = pr.get("state")
+            if state == "MERGED":
+                merged_prs.add(branch)
+            elif state == "OPEN":
+                open_prs.add(branch)
+                # Check for unresolved comments
+                threads = pr.get("reviewThreads", {}).get("nodes", [])
+                if any(not t.get("isResolved", True) for t in threads):
+                    unresolved_prs.add(branch)
+    except json.JSONDecodeError:
+        pass
+
+    return merged_prs, open_prs, unresolved_prs
 
 
 def shorten_time(s: str) -> str:
@@ -155,7 +199,7 @@ def main():
     main_branch = get_main_branch()
     current_branch = get_current_branch()
     worktree_map = get_worktree_map()
-    merged_prs, open_prs = get_pr_status(args.gh)
+    merged_prs, open_prs, unresolved_prs = get_pr_status(args.gh)
 
     print_row([col[0] for col in COLUMNS])
     print_row(["-" * (col[1] or 11) for col in COLUMNS], is_separator=True)
@@ -179,10 +223,14 @@ def main():
 
         branch_display = ""
         if args.gh:
-            if branch in merged_prs:
+            # Only show merged icon if PR is merged AND branch has no new commits
+            if branch in merged_prs and ahead == 0:
                 branch_display = f"{ICONS['merged']} "
             elif branch in open_prs:
-                branch_display = f"{ICONS['open_pr']} "
+                if branch in unresolved_prs:
+                    branch_display = f"{ICONS['review']} "
+                else:
+                    branch_display = f"{ICONS['open_pr']} "
 
         branch_display += branch
 
