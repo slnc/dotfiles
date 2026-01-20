@@ -114,18 +114,38 @@ def count_ahead_behind(sha: str, main_branch: str) -> tuple[int, int]:
     return 0, 0
 
 
-def get_pr_status(use_gh: bool) -> tuple[set[str], set[str], set[str]]:
+def get_pr_status(use_gh: bool, main_branch: str) -> tuple[set[str], set[str], set[str]]:
     """Get sets of merged, open, and branches with unresolved PR comments."""
     merged_prs, open_prs, unresolved_prs = set(), set(), set()
     if not use_gh:
         return merged_prs, open_prs, unresolved_prs
 
-    # Get current repo
+    # Get merged PRs with their head commit SHA at merge time
+    result = subprocess.run(
+        ["gh", "pr", "list", "--author", "@me", "--state", "merged", "--limit", "100",
+         "--json", "headRefName,headRefOid"],
+        capture_output=True, text=True
+    )
+    if result.returncode == 0:
+        try:
+            for pr in json.loads(result.stdout):
+                branch = pr.get("headRefName")
+                merged_sha = pr.get("headRefOid", "")
+                if not branch:
+                    continue
+                # Get current local branch SHA
+                local_sha = run_git("rev-parse", branch)
+                # Only mark as merged if local branch points to same commit that was merged
+                if local_sha and local_sha == merged_sha:
+                    merged_prs.add(branch)
+        except json.JSONDecodeError:
+            pass
+
+    # Get open PRs with review thread info via GraphQL
     repo = run_cmd(["gh", "repo", "view", "--json", "nameWithOwner", "-q", ".nameWithOwner"])
     if not repo:
         return merged_prs, open_prs, unresolved_prs
 
-    # GraphQL query - gets all PR data in one call
     query = """
     query($q: String!) {
       search(query: $q, type: ISSUE, first: 50) {
@@ -143,31 +163,24 @@ def get_pr_status(use_gh: bool) -> tuple[set[str], set[str], set[str]]:
     """
 
     result = subprocess.run(
-        ["gh", "api", "graphql", "-f", f"query={query}", "-f", f"q=is:pr author:@me repo:{repo}"],
+        ["gh", "api", "graphql", "-f", f"query={query}", "-f", f"q=is:pr is:open author:@me repo:{repo}"],
         capture_output=True, text=True
     )
 
-    if result.returncode != 0:
-        return merged_prs, open_prs, unresolved_prs
-
-    try:
-        data = json.loads(result.stdout)
-        for pr in data.get("data", {}).get("search", {}).get("nodes", []):
-            branch = pr.get("headRefName")
-            if not branch:
-                continue
-
-            state = pr.get("state")
-            if state == "MERGED":
-                merged_prs.add(branch)
-            elif state == "OPEN":
-                open_prs.add(branch)
-                # Check for unresolved comments
-                threads = pr.get("reviewThreads", {}).get("nodes", [])
-                if any(not t.get("isResolved", True) for t in threads):
-                    unresolved_prs.add(branch)
-    except json.JSONDecodeError:
-        pass
+    if result.returncode == 0:
+        try:
+            data = json.loads(result.stdout)
+            for pr in data.get("data", {}).get("search", {}).get("nodes", []):
+                branch = pr.get("headRefName")
+                if not branch:
+                    continue
+                if pr.get("state") == "OPEN":
+                    open_prs.add(branch)
+                    threads = pr.get("reviewThreads", {}).get("nodes", [])
+                    if any(not t.get("isResolved", True) for t in threads):
+                        unresolved_prs.add(branch)
+        except json.JSONDecodeError:
+            pass
 
     return merged_prs, open_prs, unresolved_prs
 
@@ -199,7 +212,7 @@ def main():
     main_branch = get_main_branch()
     current_branch = get_current_branch()
     worktree_map = get_worktree_map()
-    merged_prs, open_prs, unresolved_prs = get_pr_status(args.gh)
+    merged_prs, open_prs, unresolved_prs = get_pr_status(args.gh, main_branch)
 
     print_row([col[0] for col in COLUMNS])
     print_row(["-" * (col[1] or 11) for col in COLUMNS], is_separator=True)
@@ -223,8 +236,7 @@ def main():
 
         branch_display = ""
         if args.gh:
-            # Only show merged icon if PR is merged AND branch has no new commits
-            if branch in merged_prs and ahead == 0:
+            if branch in merged_prs:
                 branch_display = f"{ICONS['merged']} "
             elif branch in open_prs:
                 if branch in unresolved_prs:
