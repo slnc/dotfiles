@@ -18,7 +18,9 @@
   park = "!git checkout --detach HEAD~0"
   pushfwl = push --force-with-lease
   s = status
+  sc = "!f(){ \\\n  git fetch -p origin && \\\n  git switch -c \"$1\" origin/main; \\\n}; f"
   sw = switch
+	upm = !git fetch -p origin && git update-ref refs/heads/main refs/remotes/origin/main
 
 [branch]
   sort = -committerdate
