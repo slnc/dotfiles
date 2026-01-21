@@ -4,8 +4,9 @@
 [alias]
   ac = !git add -A && git commit
   b = !~/.dotfiles/scripts/git-branches.py --gh
-  ca = commit -amf
+  ca = commit -am
   ci = commit
+  br = branch
   f = fetch
   d = diff --ignore-space-at-eol
   ; team
