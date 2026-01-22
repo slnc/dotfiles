@@ -91,17 +91,30 @@ def get_worktree_map() -> dict[str, str]:
     return worktree_map
 
 
-def get_branches(main_branch: str, show_merged: bool) -> list[dict]:
+def get_branches(main_branch: str, show_merged: bool, worktree_branches: set[str]) -> list[dict]:
     """Get list of branches with metadata."""
     fmt = "%(authordate:short)@%(objectname:short)@%(refname:short)@%(committerdate:relative)"
     args = ["for-each-ref", "--sort=-authordate", f"--format={fmt}", "refs/heads/"]
     if not show_merged:
         args.extend(["--no-merged", main_branch])
     branches = []
+    seen_branches = set()
     for line in run_git(*args).split("\n"):
         if parts := line.split("@"):
             if len(parts) >= 4:
-                branches.append({"date": parts[0], "sha": parts[1], "name": parts[2], "time": parts[3]})
+                branch = {"date": parts[0], "sha": parts[1], "name": parts[2], "time": parts[3]}
+                branches.append(branch)
+                seen_branches.add(branch["name"])
+
+    # Always include branches with worktrees even if merged
+    for worktree_branch in worktree_branches:
+        if worktree_branch not in seen_branches and worktree_branch != "HEAD":
+            branch_args = ["for-each-ref", f"--format={fmt}", f"refs/heads/{worktree_branch}"]
+            if output := run_git(*branch_args):
+                if parts := output.split("@"):
+                    if len(parts) >= 4:
+                        branches.append({"date": parts[0], "sha": parts[1], "name": parts[2], "time": parts[3]})
+
     return branches
 
 
@@ -217,7 +230,7 @@ def main():
     print_row([col[0] for col in COLUMNS])
     print_row(["-" * (col[1] or 11) for col in COLUMNS], is_separator=True)
 
-    branches = get_branches(main_branch, args.merged)
+    branches = get_branches(main_branch, args.merged, set(worktree_map.keys()))
     for branch_data in branches:
         branch = branch_data["name"]
 
