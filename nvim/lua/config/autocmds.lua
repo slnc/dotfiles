@@ -37,6 +37,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   end,
 })
 
+<<<<<<< HEAD
 -- vim.api.nvim_create_autocmd("BufWritePre", {
 --   pattern = "*",
 --   callback = function()
@@ -47,3 +48,16 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 --     end
 --   end,
 -- })
+||||||| parent of fcc6235 (backup)
+=======
+-- Autocreate dirs on write
+vim.api.nvim_create_autocmd("BufWritePre", {
+  group = vim.api.nvim_create_augroup("Mkdir", { clear = true }),
+  callback = function(args)
+    local file = vim.fn.expand("<afile>:p:h")
+    if vim.fn.isdirectory(file) == 0 then
+      vim.fn.mkdir(file, "p")
+    end
+  end,
+})
+>>>>>>> fcc6235 (backup)

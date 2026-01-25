@@ -21,11 +21,13 @@ public/storage-dev
 public/storage-test
 tmp
 
-zsh/.zsh_history
 zsh/.zcompdump
+zsh/.zcompdump.*
+zsh/.zsh_history
 zsh/.zsh_sessions
 
 rofi/config.rasi
 .zcompcache/
 
 .claude/settings.json
+
