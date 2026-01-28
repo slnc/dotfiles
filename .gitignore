@@ -2,6 +2,7 @@
 claude-tasks/
 .claude/
 
+.linear.toml
 .env
 .venv
 
